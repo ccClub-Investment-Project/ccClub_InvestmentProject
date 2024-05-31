@@ -1,0 +1,8 @@
+jupyterlab
+jupyter
+jupyterlab-lsp
+numpy
+pandas
+matplotlib
+selenium
+openpyxl

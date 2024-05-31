@@ -5,9 +5,6 @@ FROM seleniarm/standalone-chromium:latest
 # This can be done by setting runtime options when you run the container,
 # because Dockerfile doesn't support shm_size configuration directly.
 
-# Expose the necessary ports
-EXPOSE 4444 7900
-
 # Set environment variables
 ENV SE_VNC_NO_PASSWORD=1 \
     SE_NODE_OVERRIDE_MAX_SESSIONS=true \
