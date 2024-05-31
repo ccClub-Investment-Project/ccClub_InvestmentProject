@@ -10,7 +10,7 @@ if docker ps -q --filter "name=$CONTAINER_NAME" | grep -q .; then
     echo "container is running"
 else
     echo "container($CONTAINER_NAME) is not running"
-    docker start anaconda
+    docker start $CONTAINER_NAME
     echo "Starting container($CONTAINER_NAME)..."
     sleep 10
 fi

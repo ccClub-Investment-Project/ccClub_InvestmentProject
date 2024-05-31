@@ -16,22 +16,9 @@ COPY requirements.txt .
 # Install any needed packages specified in requirements.txt
 RUN conda install -c conda-forge --yes --file requirements.txt
 
-# Generate Jupyter config and disable token
-# RUN conda run -n ccclub jupyter notebook --generate-config && \
-# echo "c.NotebookApp.token = ''" >> ~/.jupyter/jupyter_notebook_config.py
-
 # Expose the Jupyter port
 EXPOSE 8888
 
-# Start Jupyter Lab
-RUN mkdir /opt/sh
+# Run all necessary commands to start Jupyter Lab and keep the container running
+CMD ["/bin/bash", "-c", "source activate ccclub && jupyter-lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root && jupyter server list && sleep infinity"]
 
-# Copy the start script into the container
-COPY start_jupyter.sh /opt/sh
-
-# Make the script executable
-RUN chmod +x /opt/sh/start_jupyter.sh
-
-# Start Jupyter Lab and list servers
-CMD ["/opt/sh/start_jupyter.sh"]
-# CMD ["sleep", "infinity"]
