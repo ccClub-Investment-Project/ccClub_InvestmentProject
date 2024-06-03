@@ -5,3 +5,6 @@ __pycache__
 
 # os
 .DS_Store
+
+# I don't know
+.Trash*
