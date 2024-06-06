@@ -8,3 +8,5 @@ selenium
 openpyxl
 lxml
 seaborn
+twstock
+plotly
