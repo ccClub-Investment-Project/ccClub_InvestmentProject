@@ -2,3 +2,9 @@
 __pycache__
 .ipynb_checkpoints
 .jupyter
+
+# os
+.DS_Store
+
+# I don't know
+.Trash*
