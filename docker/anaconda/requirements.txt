@@ -6,3 +6,6 @@ pandas
 matplotlib
 selenium
 openpyxl
+plotly 
+dash
+nbformat
