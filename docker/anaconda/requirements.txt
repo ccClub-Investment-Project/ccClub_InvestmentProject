@@ -8,4 +8,8 @@ selenium
 openpyxl
 plotly 
 dash
+dash
+dash-core-components
+dash-html-components
+dash-bootstrap-components
 nbformat
