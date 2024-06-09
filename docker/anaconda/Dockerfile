@@ -4,6 +4,13 @@ FROM continuumio/miniconda3:latest
 # Set the working directory
 WORKDIR /opt/ccclub/
 
+# Install fonts-noto-cjk package for Noto CJK fonts
+RUN apt update && \
+    apt install -y \
+    fonts-noto-cjk \
+    fontconfig && \
+    fc-cache -f -v
+
 # Create a new environment with the specific Python version
 RUN conda create -n ccclub python=3.10.14 -y
 
