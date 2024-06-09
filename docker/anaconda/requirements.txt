@@ -12,3 +12,10 @@ twstock
 plotly
 python-dotenv
 psycopg2-binary
+plotly 
+dash
+dash
+dash-core-components
+dash-html-components
+dash-bootstrap-components
+nbformat
