@@ -8,3 +8,6 @@ __pycache__
 
 # I don't know
 .Trash*
+
+# host name, port, password
+.env
