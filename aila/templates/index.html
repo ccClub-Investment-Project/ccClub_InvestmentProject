@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>個人看盤頁面</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Taiwan Stock Index 10 Years</h1>
+      </div>
+      <div class="content">
+        <div class="stock-info">
+          <h2>股票資訊</h2>
+          <p>股價：$100</p>
+          <p>成交量：200,000</p>
+          <p>市值：$1,000,000,000</p>
+          <p>PE比率：15</p>
+          <p>EPS：$5</p>
+        </div>
+
+        <div class="chart">
+          <h2>Taiwan Stock Index Over Time</h2>
+          <canvas id="kChart"></canvas>
+        </div>
+      </div>
+      <div class="footer">
+        <p>&copy; 2024 個人看盤頁面</p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      var ctx = document.getElementById("kChart").getContext("2d");
+      var kChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: [
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+          ],
+          datasets: [
+            {
+              label: "Taiwan Stock Index",
+              data: [
+                8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500,
+                13000, 13500,
+              ],
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              fill: true,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              type: "time",
+              time: {
+                unit: "year",
+              },
+            },
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
