@@ -17,3 +17,4 @@ dash-core-components
 dash-html-components
 dash-bootstrap-components
 nbformat
+sqlalchemy
