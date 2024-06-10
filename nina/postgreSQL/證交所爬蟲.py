@@ -51,4 +51,3 @@ conn.commit()
 
     # Close the connection
 conn.close()
-
