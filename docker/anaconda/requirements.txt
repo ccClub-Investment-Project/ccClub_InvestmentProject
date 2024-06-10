@@ -6,6 +6,12 @@ pandas
 matplotlib
 selenium
 openpyxl
+lxml
+seaborn
+twstock
+plotly
+python-dotenv
+psycopg2-binary
 plotly 
 dash
 dash

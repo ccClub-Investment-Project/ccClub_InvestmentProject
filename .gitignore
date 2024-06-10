@@ -9,5 +9,5 @@ __pycache__
 # I don't know
 .Trash*
 
-# Ignore environment variables file
+# host name, port, password
 .env
