@@ -25,10 +25,10 @@
           <p>EPS：$5</p>
         </div>
         <div class="chart">
-          <div id="graph"></div>
+          <div id="graph" class="chart-container"></div>
           <script type="text/javascript">
             var graphs = {{ graphJSON | safe }};
-            Plotly.newPlot('graph', graphs.data, graphs.layout);
+            Plotly.newPlot('graph', graphs.data, graphs.layout, {responsive: true});
           </script>
         </div>
       </div>

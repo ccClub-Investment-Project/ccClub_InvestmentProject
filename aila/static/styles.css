@@ -1,9 +1,10 @@
 body {
+  background-color: #1e1e2d;
+  color: #fff;
   font-family: Arial, sans-serif;
-  background-color: #1e1e1e;
-  color: #ffffff;
+  margin: 0;
+  padding: 0;
 }
-
 .container {
   width: 80%;
   margin: 0 auto;
@@ -30,12 +31,12 @@ body {
 
 .stock-info,
 .chart {
-  width: 80%;
+  width: 50%;
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 10px;
   margin: 20px 0;
-  background-color: #2e2e2e;
+  background-color: #4b4ba8;
 }
 
 .chart canvas {
