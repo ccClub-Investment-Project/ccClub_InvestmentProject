@@ -12,6 +12,13 @@ def log_in_pgSQL():
     host = os.getenv("pgSQL_host")
     port = os.getenv("pgSQL_port")
 
+    # # 打印環境變量來確認它們是否正確加載
+    # print(f"dbname: {dbname}")
+    # print(f"user: {user}")
+    # print(f"password: {password}")
+    # print(f"host: {host}")
+    # print(f"port: {port}")
+
     if not all([dbname, user, password, host, port]):
         raise ValueError("One or more environment variables are missing.")
 

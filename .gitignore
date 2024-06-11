@@ -10,4 +10,7 @@ __pycache__
 .Trash*
 
 # host name, port, password
+.env
+
+# host name, port, password
 Samantha/.env
