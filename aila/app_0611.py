@@ -14,12 +14,21 @@ df = getdata.fetch_data_from_db(table)
 # 確保日期列被識別為日期類型
 df["Date"] = pd.to_datetime(df["Date"])
 
+# 打印數據來檢查
+print(df.head())
+print(df.describe())
+
+# 刪除包含NaN的行和異常值
+df.dropna(subset=["Date", "Close"], inplace=True)
+df = df[(df['Close'] > 0) & (df['Close'] < 100000)]  # 根據合理範圍篩選數據
+
 
 @app.route('/')
 def index():
-    # 生成 Plotly 圖表
-    fig = px.line(df, x='Date', y='Close',
-                  title='Taiwan Stock Index Over Time')
+    # 生成 Plotly 圖表並設置顏色
+    fig = px.line(df, x='Date', y='Close', title='Taiwan Stock Index Over Time',
+                  line_shape='linear', render_mode='svg')
+    fig.update_traces(line=dict(color='#2d2d44'), connectgaps=True)  # 這裡設置顏色
     fig.update_layout(
         xaxis=dict(
             rangeselector=dict(
@@ -33,7 +42,8 @@ def index():
             ),
             rangeslider=dict(visible=True),
             type="date"
-        )
+        ),
+        autosize=True  # 確保圖表自適應
     )
 
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)

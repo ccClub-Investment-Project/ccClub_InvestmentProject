@@ -1,5 +1,5 @@
 import pandas as pd
-import log_in
+from use_pg_SQL import log_in
 
 
 def fetch_data_from_db(table):
