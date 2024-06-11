@@ -1,0 +1,35 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stock-info {
+  width: 30%;
+}
+
+.chart {
+  width: 70%;
+}
+
+.chart-container {
+  height: 500px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+}
