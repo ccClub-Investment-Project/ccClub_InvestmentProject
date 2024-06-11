@@ -6,14 +6,14 @@
     <title>個人看盤頁面</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/styles.css') }}"
+      href="{{ url_for('static', filename='app_styles.css') }}"
     />
-    {%metas%} {%favicon%} {%css%}
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <h1>Taiwan Stock Index 10 Years</h1>
+        <h1>台股 10 年指數</h1>
       </div>
       <div class="content">
         <div class="stock-info">
@@ -25,15 +25,16 @@
           <p>EPS：$5</p>
         </div>
         <div class="chart">
-          <h2>Taiwan Stock Index Over Time</h2>
-          <div id="dash-app"></div>
-          <!-- 這裡是 Dash 應用插入點 -->
+          <div id="graph"></div>
+          <script type="text/javascript">
+            var graphs = {{ graphJSON | safe }};
+            Plotly.newPlot('graph', graphs.data, graphs.layout);
+          </script>
         </div>
       </div>
       <div class="footer">
         <p>&copy; 2024 個人看盤頁面</p>
       </div>
     </div>
-    <footer>{%config%} {%scripts%} {%renderer%}</footer>
   </body>
 </html>
