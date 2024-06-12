@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 import os
 from dotenv import load_dotenv
+os.chdir('C:/python-training/ccClub_InvestmentProject/aila/use_pg_SQL')
 
 
 def log_in_pgSQL():
@@ -12,12 +13,20 @@ def log_in_pgSQL():
     host = os.getenv("pgSQL_host")
     port = os.getenv("pgSQL_port")
 
+<<<<<<< HEAD
     # # 打印環境變量來確認它們是否正確加載
     # print(f"dbname: {dbname}")
     # print(f"user: {user}")
     # print(f"password: {password}")
     # print(f"host: {host}")
     # print(f"port: {port}")
+=======
+    # print(f'pgSQL_dbname: {dbname}')
+    # print(f'pgSQL_user: {user}')
+    # print(f'pgSQL_password: {password}')
+    # print(f'pgSQL_host: {host}')
+    # print(f'pgSQL_port: {port}')
+>>>>>>> aila
 
     if not all([dbname, user, password, host, port]):
         raise ValueError("One or more environment variables are missing.")
