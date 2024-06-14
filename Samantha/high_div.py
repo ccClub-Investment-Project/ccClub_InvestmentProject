@@ -1,9 +1,48 @@
 # Date: 06/13/2024
 # Description: find the high dividend yield stocks listed in TWSE and OTC
 
+import csv
 
-def stock_pool_selection(ticker):
-    '''select the stock to be included into the stock pool'''
+
+# def stock_pool_selection(ticker):
+# '''select the stock to be included into the stock pool'''
+# csv path
+input_csv_file = 'web_scraping_raw_data/StockList.csv'
+output_csv_file = 'web_scraping_raw_data/top_300_companies.csv'
+
+# selected columns in header
+selected_columns = [0,1,2,10,11]
+
+# open CSV file
+companies = []
+with open(input_csv_file, mode='r', encoding='utf-8-sig') as file:
+    reader = csv.reader(file)
+    headers = next(reader)
+
+    # selected header
+    selected_headers = [headers[i] for i in selected_columns]
+    print(selected_headers)
+
+
+    # read every line
+    for line in reader:
+        selected_line = [line[i] for i in selected_columns]
+        companies.append(selected_line)
+
+    # sort by market cap
+    top_300_companies = sorted(companies, key=lambda x: x[1], reverse=True)[:300]
+
+    # write into new csv
+    with open(output_csv_file, mode='w', newline='', encoding='utf-8-sig') as file:
+        writer = csv.writer(file)
+        writer.writerow(selected_headers)
+        writer.writerows(top_300_companies)
+
+    print(f"top 300 companies by market cap were written into {output_csv_file}")
+
+
+
+
 
 def top_mar_cap_check(ticker):
     '''Market cap check: top 300 by market cap 市值前300大'''
