@@ -11,3 +11,6 @@ __pycache__
 
 # host name, port, password
 .env
+
+# host name, port, password
+Samantha/.env
