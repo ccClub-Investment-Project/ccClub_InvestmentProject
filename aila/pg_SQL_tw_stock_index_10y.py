@@ -1,14 +1,20 @@
 # import os
 # os.chdir('C:/python-training/ccClub_InvestmentProject/aila')
 # print(os.getcwd())
-import pandas as pd
-from dash import dcc, html, Dash
+
+from flask import Flask, render_template
+from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
+import pandas as pd
 import plotly.express as px
 import getdata
 
+
+# 創建 Flask 應用
+server = Flask(__name__)
+
 # 創建 Dash 應用
-app = Dash(__name__)
+app = Dash(__name__, server=server, url_base_pathname='/dash/')
 
 # 從資料庫讀取數據
 table = 'taiwan_stock_index_10y'
@@ -94,6 +100,12 @@ def update_line_chart(selected_indices, start_date, end_date):
     )
 
     return fig
+
+
+# 定義 Flask 路由來渲染主頁
+@server.route('/')
+def index():
+    return render_template('index.html')
 
 
 # 運行應用
