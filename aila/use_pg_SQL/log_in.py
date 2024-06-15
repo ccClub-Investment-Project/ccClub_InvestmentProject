@@ -24,6 +24,7 @@ load_dotenv()
 
 # 獲取環境變量
 project_dir = os.getenv('PROJECT_DIR')
+# print(f'PROJECT_DIR: {project_dir}')
 
 # 切換到項目目錄
 if project_dir:
@@ -41,7 +42,7 @@ def log_in_pgSQL():
     host = os.getenv("pgSQL_host")
     port = os.getenv("pgSQL_port")
 
-   # print(f'pgSQL_dbname: {dbname}')
+    # print(f'pgSQL_dbname: {dbname}')
    # print(f'pgSQL_user: {user}')
    # print(f'pgSQL_password: {password}')
    # print(f'pgSQL_host: {host}')
