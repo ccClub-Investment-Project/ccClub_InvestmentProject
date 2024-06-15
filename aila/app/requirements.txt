@@ -1,4 +1,0 @@
-Flask
-pandas
-plotly
-json

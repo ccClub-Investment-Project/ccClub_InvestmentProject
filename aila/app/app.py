@@ -2,7 +2,6 @@
 # os.chdir('C:/python-training/ccClub_InvestmentProject')  # noqa: E402
 # print(os.getcwd())  # noqa: E402
 
-# == == == =
 import os
 import sys
 
@@ -26,9 +25,6 @@ import plotly
 # from use_pg_SQL import getdata
 import json
 
-
-# == == == =
-# import os
 
 # 获取上一级目录路径
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -76,5 +72,9 @@ def index():
     return render_template('app_index.html', graphJSON=graphJSON)
 
 
+# if __name__ == '__main__':
+#     app.run(debug=True)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    from waitress import serve
+    serve(app, host='0.0.0.0', port=8000)
