@@ -5,3 +5,5 @@ plotly
 gunicorn
 waitress
 sqlalchemy
+tqdm
+dotenv
