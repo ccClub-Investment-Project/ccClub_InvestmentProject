@@ -3,13 +3,26 @@ import pandas as pd
 import plotly.express as px
 import plotly
 import json
-from use_pg_SQL import getdata
+import sys
+import os
+
+# 获取上一级目录路径
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+# 将上一级目录添加到 sys.path
+sys.path.insert(0, parent_dir)
+
+# 打印调试信息，确保路径正确
+# print(f"Parent directory: {parent_dir}")
+# print(f"Files in parent directory: {os.listdir(parent_dir)}")
+
+# 现在可以导入上一级目录中的模块
+from use_pg_SQL.getdata import fetch_data_from_db
 
 app = Flask(__name__)
 
 # 從資料庫讀取數據
 table = 'taiwan_stock_index_10y'
-df = getdata.fetch_data_from_db(table)
+df = fetch_data_from_db(table)
 
 # 確保日期列被識別為日期類型
 df["Date"] = pd.to_datetime(df["Date"])
