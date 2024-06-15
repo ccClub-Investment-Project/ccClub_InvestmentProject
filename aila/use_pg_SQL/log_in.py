@@ -22,15 +22,15 @@ from dotenv import load_dotenv
 # 加載 .env 文件中的環境變量
 load_dotenv()
 
-# 獲取環境變量
-project_dir = os.getenv('PROJECT_DIR')
-# print(f'PROJECT_DIR: {project_dir}')
+# # 獲取環境變量
+# project_dir = os.getenv('PROJECT_DIR')
+# # print(f'PROJECT_DIR: {project_dir}')
 
-# 切換到項目目錄
-if project_dir:
-    os.chdir(project_dir)
-else:
-    raise FileNotFoundError("PROJECT_DIR environment variable not set")
+# # 切換到項目目錄
+# if project_dir:
+#     os.chdir(project_dir)
+# else:
+#     raise FileNotFoundError("PROJECT_DIR environment variable not set")
 
 
 def log_in_pgSQL():

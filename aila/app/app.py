@@ -11,9 +11,8 @@ parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))  # n
 sys.path.insert(0, parent_dir)  # noqa: E402
 
 # 打印调试信息，确保路径正确
-print(f"Parent directory: {parent_dir}")  # noqa: E402
-print(f"Files in parent directory: {os.listdir(parent_dir)}")  # noqa: E402
-
+# print(f"Parent directory: {parent_dir}")  # noqa: E402
+# print(f"Files in parent directory: {os.listdir(parent_dir)}")  # noqa: E402
 
 from use_pg_SQL.getdata import fetch_data_from_db
 
@@ -72,9 +71,9 @@ def index():
     return render_template('app_index.html', graphJSON=graphJSON)
 
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
-
 if __name__ == '__main__':
-    from waitress import serve
-    serve(app, host='0.0.0.0', port=8000, threads=4)
+    app.run(debug=True)
+
+# if __name__ == '__main__':
+#     from waitress import serve
+#     serve(app, host='0.0.0.0', port=8000, threads=4)

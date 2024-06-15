@@ -1,7 +1,8 @@
 import pandas as pd
-from use_pg_SQL import log_in
+# from use_pg_SQL import log_in
+from . import log_in
 import os
-os.chdir('C:/python-training/ccClub_InvestmentProject/aila')
+# os.chdir('C:/python-training/ccClub_InvestmentProject/aila')
 # print(os.getcwd())
 
 
