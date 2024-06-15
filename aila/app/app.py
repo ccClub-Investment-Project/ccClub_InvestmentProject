@@ -1,24 +1,31 @@
-from use_pg_SQL.getdata import fetch_data_from_db
+# import os  # noqa: E402
+# os.chdir('C:/python-training/ccClub_InvestmentProject')  # noqa: E402
+# print(os.getcwd())  # noqa: E402
+
+# == == == =
+import os
 import sys
+
+# 获取上一级目录路径
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))  # noqa: E402
+# 将上一级目录添加到 sys.path
+sys.path.insert(0, parent_dir)  # noqa: E402
+
+# 打印调试信息，确保路径正确
+print(f"Parent directory: {parent_dir}")  # noqa: E402
+print(f"Files in parent directory: {os.listdir(parent_dir)}")  # noqa: E402
+
+
+from use_pg_SQL.getdata import fetch_data_from_db
+
 # import parent_module
 from flask import Flask, render_template
 import pandas as pd
 import plotly.express as px
 import plotly
-import os
-from aila.use_pg_SQL import getdata
+# from use_pg_SQL import getdata
 import json
-import parent_module
 
-# 获取父目录路径
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, parent_dir)
-
-
-parent_module.parent_function()
-
-# os.chdir('C:/python-training/ccClub_InvestmentProject/aila/app')
-print(os.getcwd())
 
 # == == == =
 # import os
