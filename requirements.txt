@@ -1,5 +1,7 @@
+# 網站
 Flask
 pandas
 plotly
 gunicorn
 waitress
+sqlalchemy
