@@ -1,6 +1,5 @@
 Flask
 pandas
 plotly
-json
 gunicorn
 waitress
