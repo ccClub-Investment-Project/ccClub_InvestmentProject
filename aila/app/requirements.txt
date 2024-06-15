@@ -5,3 +5,4 @@ python-dotenv
 flask
 plotly
 psycopg2
+gunicorn
