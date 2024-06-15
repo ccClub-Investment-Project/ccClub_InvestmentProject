@@ -1,9 +1,24 @@
-from flask import Flask, render_template
-import pandas as pd
-import plotly.express as px
-import plotly
+import os
+from aila.use_pg_SQL import getdata
 import json
-from use_pg_SQL import getdata
+import plotly
+import plotly.express as px
+import pandas as pd
+from flask import Flask, render_template
+import parent_module
+import sys
+
+
+# 获取父目录路径
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, parent_dir)
+
+
+parent_module.parent_function()
+
+# os.chdir('C:/python-training/ccClub_InvestmentProject/aila/app')
+print(os.getcwd())
+
 
 app = Flask(__name__)
 
