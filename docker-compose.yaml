@@ -8,7 +8,8 @@ services:
       # 當下的專案資料夾目錄掛載到docker裡頭的/opt/ccclub資料夾底下
       - ./:/opt/ccclub
     ports:
-      - "8887:8888"  # jupyterlab
+      - "8887:8888" # jupyterlab
+    mem_limit: 4g
 
   chrome:
     build: ./docker/selenium
@@ -18,4 +19,3 @@ services:
     ports:
       - "4443:4444"
       - "7901:7900"
-   
