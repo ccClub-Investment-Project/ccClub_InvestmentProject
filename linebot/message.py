@@ -107,7 +107,8 @@ def Confirm_Template():
             ]
         )
     )
-    return message
+    print(message.as_json_string())
+    return message 
 
 def ask_for_keywords(reply_token):
     line_bot_api.reply_message(

@@ -56,9 +56,13 @@ def handle_message(event):
         message = buttons_message()
         line_bot_api.reply_message(event.reply_token, message)
     elif '目錄' in msg:
+        print("Entered '目錄' condition")  # 加入這一行
+        print("Entered '目錄' condition")
         message = Confirm_Template()
-        print(message.as_json_string()) 
-        line_bot_api.reply_message(event.reply_token, message)
+        print(f"Sending message: {message.as_json_string()}")
+        response = line_bot_api.reply_message(event.reply_token, message)
+        print(f"Response: {response.status_code} - {response.text}")
+        
     elif '旋轉木馬' in msg:
         message = Carousel_Template()
         line_bot_api.reply_message(event.reply_token, message)
