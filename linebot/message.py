@@ -79,6 +79,18 @@ from linebot.models import (
     PostbackTemplateAction, URITemplateAction
 )
 
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import LineBotApiError
+from linebot.models import (
+    MessageEvent, TextMessage, PostbackEvent,
+    TemplateSendMessage, CarouselTemplate, CarouselColumn,
+    PostbackTemplateAction, URITemplateAction, TextSendMessage
+)
+
+# 假設你已經正確初始化了這些
+line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
+handler = WebhookHandler('YOUR_CHANNEL_SECRET')
+
 def Carousel_Template():
     message = TemplateSendMessage(
         alt_text='目錄',
@@ -125,39 +137,29 @@ def Carousel_Template():
             ]
         )
     )
-    print(message.as_json_string())
     return message
-
-from linebot import LineBotApi
-from linebot.models import TextSendMessage
-from linebot.exceptions import LineBotApiError
-
-# 假設你已經正確初始化了 line_bot_api
-# line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
-
-def ask_for_keywords(reply_token):
-    try:
-        line_bot_api.reply_message(
-            reply_token,
-            TextSendMessage(text="請輸入新聞關鍵字")
-        )
-    except LineBotApiError as e:
-        print(f"Error in ask_for_keywords: {e}")
 
 def fetch_and_filter_news_message(keywords, limit=10):
     # Simulate fetching and filtering news based on the provided keywords
     news = [f"News related to {keyword}" for keyword in keywords][:limit]
     return "\n".join(news)
 
+@handler.add(PostbackEvent)
 def handle_postback(event):
-    data = event.postback.data
-    if data == "新聞":
-        ask_for_keywords(event.reply_token)
+    if event.postback.data == "新聞":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入新聞關鍵字")
+        )
+    # 處理其他 postback 事件...
     else:
-        # Handle other postback actions here
-        pass
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=f"You clicked: {event.postback.data}")
+        )
 
-def handle_text_message(event):
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
     user_input = event.message.text
     if user_input.startswith("新聞關鍵字:"):
         keywords = user_input.replace("新聞關鍵字:", "").strip().split(",")
@@ -169,18 +171,38 @@ def handle_text_message(event):
                 TextSendMessage(text=message)
             )
         except LineBotApiError as e:
-            print(f"Error in handle_text_message: {e}")
+            print(f"Error in handle_message: {e}")
     else:
-        # Handle other text messages here
-        pass
+        # 處理其他文字消息
+        line_bot_api.reply_message(
+            event.reply_token,
+            Carousel_Template()
+        )
 
-@handler.add(PostbackEvent)
-def handle_postback_event(event):
-    handle_postback(event)
+# 主程序（假設你使用 Flask）
+from flask import Flask, request, abort
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message_event(event):
-    handle_text_message(event)
+app = Flask(__name__)
+
+@app.route("/callback", methods=['POST'])
+def callback():
+    # 獲取 X-Line-Signature 標頭值
+    signature = request.headers['X-Line-Signature']
+
+    # 獲取請求主體作為文本
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    # 處理 webhook body
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+
+    return 'OK'
+
+if __name__ == "__main__":
+    app.run()
 
 # TemplateSendMessage - ImageCarouselTemplate (圖片旋轉木馬)
 def image_carousel_message1():
