@@ -179,30 +179,6 @@ def handle_message(event):
             Carousel_Template()
         )
 
-# 主程序（假設你使用 Flask）
-from flask import Flask, request, abort
-
-app = Flask(__name__)
-
-@app.route("/callback", methods=['POST'])
-def callback():
-    # 獲取 X-Line-Signature 標頭值
-    signature = request.headers['X-Line-Signature']
-
-    # 獲取請求主體作為文本
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-
-    # 處理 webhook body
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
-
-    return 'OK'
-
-if __name__ == "__main__":
-    app.run()
 
 # TemplateSendMessage - ImageCarouselTemplate (圖片旋轉木馬)
 def image_carousel_message1():
