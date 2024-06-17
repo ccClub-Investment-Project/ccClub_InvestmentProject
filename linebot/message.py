@@ -81,7 +81,7 @@ def buttons_message():
 
 #TemplateSendMessage - ConfirmTemplate(確認介面訊息)
 
-def Buttons_Template():
+def Confirm_Template():
     message = TemplateSendMessage(
         alt_text='目錄',
         template=ButtonsTemplate(
