@@ -82,23 +82,23 @@ def Confirm_Template():
             actions=[
                 PostbackTemplateAction(
                     label="輸入財報",
-                    text="輸入財報"
+                    data="輸入財報"
                 ),
                 PostbackTemplateAction(
                     label="基本股票功能",
-                    text="基本股票功能"
+                    data="基本股票功能"
                 ),
                 PostbackTemplateAction(
                     label="個人相關功能",
-                    text="個人相關功能"
+                    data="個人相關功能"
                 ),
                 PostbackTemplateAction(
                     label="新聞",
-                    text="新聞"
+                    data="新聞"
                 ),
                 PostbackTemplateAction(
                     label="換股",
-                    text="換股"
+                    data="換股"
                 ),
                 URITemplateAction(
                     label="回測",
@@ -122,8 +122,8 @@ def fetch_and_filter_news_message(keywords, limit=10):
     return "\n".join(news)
 
 def handle_postback(event):
-    text = event.postback.data
-    if text == "新聞":
+    data = event.postback.data
+    if data == "新聞":
         ask_for_keywords(event.reply_token)
     else:
         # Handle other postback actions here
