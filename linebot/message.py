@@ -128,11 +128,21 @@ def Carousel_Template():
     print(message.as_json_string())
     return message
 
+from linebot import LineBotApi
+from linebot.models import TextSendMessage
+from linebot.exceptions import LineBotApiError
+
+# 假設你已經正確初始化了 line_bot_api
+# line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
+
 def ask_for_keywords(reply_token):
-    line_bot_api.reply_message(
-        reply_token,
-        TextSendMessage(text="請輸入新聞關鍵字")
-    )
+    try:
+        line_bot_api.reply_message(
+            reply_token,
+            TextSendMessage(text="請輸入新聞關鍵字")
+        )
+    except LineBotApiError as e:
+        print(f"Error in ask_for_keywords: {e}")
 
 def fetch_and_filter_news_message(keywords, limit=10):
     # Simulate fetching and filtering news based on the provided keywords
@@ -149,13 +159,17 @@ def handle_postback(event):
 
 def handle_text_message(event):
     user_input = event.message.text
-    if user_input.startswith("新聞關鍵字: "):
-        keywords = user_input.replace("新聞關鍵字: ", "").split(", ")
+    if user_input.startswith("新聞關鍵字:"):
+        keywords = user_input.replace("新聞關鍵字:", "").strip().split(",")
+        keywords = [k.strip() for k in keywords]  # 移除每個關鍵字前後的空格
         message = fetch_and_filter_news_message(keywords, limit=10)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=message)
-        )
+        try:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=message)
+            )
+        except LineBotApiError as e:
+            print(f"Error in handle_text_message: {e}")
     else:
         # Handle other text messages here
         pass
