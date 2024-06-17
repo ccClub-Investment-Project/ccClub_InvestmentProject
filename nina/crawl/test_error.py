@@ -75,7 +75,7 @@ def get_financial_data(year, season, company_name, max_retries=5):
             time.sleep(5)  # Wait 5 seconds before retrying
     return [f'{year} 第{season}季', 'Error', 'Error']
 
-DATABASE_URL = "postgresql://admin:43wQoR8u75QsGMDZymTBnOTi9ce83ySS@dpg-cphhmpe3e1ms73d8lqc0-a.singapore-postgres.render.com:5432/ccclub"
+DATABASE_URL = ""
 engine = create_engine(DATABASE_URL)
 
 def insert_data_to_db(data):

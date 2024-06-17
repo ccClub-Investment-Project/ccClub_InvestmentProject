@@ -105,7 +105,7 @@ def get_financial_data(year, season, company_code, max_retries=3):
     # 如果所有重试均失败
     return [f'{year} 第{season}季', 'Error', 'Error']
 
-DATABASE_URL = "postgresql://admin:43wQoR8u75QsGMDZymTBnOTi9ce83ySS@dpg-cphhmpe3e1ms73d8lqc0-a.singapore-postgres.render.com:5432/ccclub"
+DATABASE_URL = ""
 engine = create_engine(DATABASE_URL)
 
 def create_table_if_not_exists():
