@@ -64,9 +64,7 @@ def handle_message(event):
     elif '目錄' in msg:
         message = Carousel_Template()
         line_bot_api.reply_message(event.reply_token, message)
-    elif '旋轉木馬' in msg:
-        message = Carousel_Template()
-        line_bot_api.reply_message(event.reply_token, message)
+        
     elif 'ETF新聞' in msg:
         keywords = ["ETF", "股票", "殖利率"]
         message = fetch_and_filter_news_message(keywords,limit=10)
