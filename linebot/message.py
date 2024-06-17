@@ -80,26 +80,83 @@ def buttons_message():
     return message
 
 #TemplateSendMessage - ConfirmTemplate(確認介面訊息)
-def Confirm_Template():
 
+def Buttons_Template():
     message = TemplateSendMessage(
-        alt_text='是否註冊成為會員？',
-        template=ConfirmTemplate(
-            text="是否註冊成為會員？",
+        alt_text='目錄',
+        template=ButtonsTemplate(
+            text="想要甚麼功能",
             actions=[
                 PostbackTemplateAction(
-                    label="馬上註冊",
-                    text="現在、立刻、馬上",
-                    data="會員註冊"
+                    label="輸入財報",
+                    data="輸入財報"
                 ),
-                MessageTemplateAction(
-                    label="查詢其他功能",
-                    text="查詢其他功能"
+                PostbackTemplateAction(
+                    label="基本股票功能",
+                    data="基本股票功能"
+                ),
+                PostbackTemplateAction(
+                    label="個人相關功能",
+                    data="個人相關功能"
+                ),
+                PostbackTemplateAction(
+                    label="新聞",
+                    data="新聞"
+                ),
+                PostbackTemplateAction(
+                    label="換股",
+                    data="換股"
+                ),
+                PostbackTemplateAction(
+                    label="回測",
+                    uri="https://tw.shop.com/nbts/create-myaccount.xhtml?returnurl=https%3A%2F%2Ftw.shop.com%2F"
                 )
             ]
         )
     )
     return message
+
+def ask_for_keywords(reply_token):
+    line_bot_api.reply_message(
+        reply_token,
+        TextSendMessage(text="請輸入新聞關鍵字")
+    )
+
+def fetch_and_filter_news_message(keywords, limit=10):
+    # Simulate fetching and filtering news based on the provided keywords
+    news = [f"News related to {keyword}" for keyword in keywords][:limit]
+    return "\n".join(news)
+
+def handle_postback(event):
+    data = event.postback.data
+    if data == "新聞":
+        ask_for_keywords(event.reply_token)
+    else:
+        # Handle other postback actions here
+        pass
+
+def handle_text_message(event):
+    user_input = event.message.text
+    if user_input.startswith("新聞關鍵字: "):
+        keywords = user_input.replace("新聞關鍵字: ", "").split(", ")
+        message = fetch_and_filter_news_message(keywords, limit=10)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=message)
+        )
+    else:
+        # Handle other text messages here
+        pass
+
+# Example of integrating with your LINE bot handler
+@handler.add(PostbackEvent)
+def handle_postback_event(event):
+    handle_postback(event)
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message_event(event):
+    handle_text_message(event)
+
 
 #旋轉木馬按鈕訊息介面
 
