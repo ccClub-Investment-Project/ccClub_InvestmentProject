@@ -1,0 +1,10 @@
+Flask
+pandas
+plotly
+gunicorn
+waitress
+sqlalchemy
+tqdm
+python-dotenv
+setuptools
+psycopg2

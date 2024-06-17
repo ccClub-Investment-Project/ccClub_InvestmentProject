@@ -1,0 +1,9 @@
+# apt-get 是一個命令行工具，用於在基於 Debian 的 Linux 系統（如 Ubuntu）上管理軟件包
+services:
+  - type: web
+    name: ccClub_InvestmentProject
+    env: python
+    buildCommand: |
+      # apt-get update && apt-get install -y build-essential libpq-dev 
+      pip install -r requirements.txt
+    startCommand: gunicorn -w 4 -b 0.0.0.0:8000 aila.app.app:app
