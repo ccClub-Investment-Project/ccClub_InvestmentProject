@@ -74,41 +74,59 @@ def buttons_message():
     return message
 
 # TemplateSendMessage - ConfirmTemplate (確認介面訊息)
-def Confirm_Template():
+from linebot.models import (
+    TemplateSendMessage, CarouselTemplate, CarouselColumn,
+    PostbackTemplateAction, URITemplateAction
+)
+
+def Carousel_Template():
     message = TemplateSendMessage(
         alt_text='目錄',
-        template=ConfirmTemplate(
-            text="想要甚麼功能",
-            actions=[
-                PostbackTemplateAction(
-                    label="輸入財報",
-                    data="輸入財報"
+        template=CarouselTemplate(
+            columns=[
+                CarouselColumn(
+                    thumbnail_image_url='https://example.com/image1.jpg',  # 替換為實際的圖片URL
+                    title='股票功能',
+                    text='請選擇以下功能',
+                    actions=[
+                        PostbackTemplateAction(
+                            label="輸入財報",
+                            data="輸入財報"
+                        ),
+                        PostbackTemplateAction(
+                            label="基本股票功能",
+                            data="基本股票功能"
+                        ),
+                        PostbackTemplateAction(
+                            label="換股",
+                            data="換股"
+                        )
+                    ]
                 ),
-                PostbackTemplateAction(
-                    label="基本股票功能",
-                    data="基本股票功能"
-                ),
-                PostbackTemplateAction(
-                    label="個人相關功能",
-                    data="個人相關功能"
-                ),
-                PostbackTemplateAction(
-                    label="新聞",
-                    data="新聞"
-                ),
-                PostbackTemplateAction(
-                    label="換股",
-                    data="換股"
-                ),
-                URITemplateAction(
-                    label="回測",
-                    uri="https://tw.shop.com/nbts/create-myaccount.xhtml?returnurl=https%3A%2F%2Ftw.shop.com%2F"
+                CarouselColumn(
+                    thumbnail_image_url='https://example.com/image2.jpg',  # 替換為實際的圖片URL
+                    title='其他功能',
+                    text='請選擇以下功能',
+                    actions=[
+                        PostbackTemplateAction(
+                            label="個人相關功能",
+                            data="個人相關功能"
+                        ),
+                        PostbackTemplateAction(
+                            label="新聞",
+                            data="新聞"
+                        ),
+                        URITemplateAction(
+                            label="回測",
+                            uri="https://tw.shop.com/nbts/create-myaccount.xhtml?returnurl=https%3A%2F%2Ftw.shop.com%2F"
+                        )
+                    ]
                 )
             ]
         )
     )
     print(message.as_json_string())
-    return message 
+    return message
 
 def ask_for_keywords(reply_token):
     line_bot_api.reply_message(
