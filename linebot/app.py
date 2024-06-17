@@ -32,16 +32,22 @@ handler = WebhookHandler('e173edcacc6b33a6c041d95bcf1a6198')
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
-    # get X-Line-Signature header value
+    # Get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
-    # get request body as text
+
+    # Get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-    # handle webhook body
+
+    # Handle webhook body
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
+    except Exception as e:
+        app.logger.error(f"Error handling webhook body: {e}")
+        abort(500)
+
     return 'OK'
 
 
@@ -56,13 +62,8 @@ def handle_message(event):
         message = buttons_message()
         line_bot_api.reply_message(event.reply_token, message)
     elif '目錄' in msg:
-        print("Entered '目錄' condition")  # 加入這一行
-        print("Entered '目錄' condition")
         message = Confirm_Template()
-        print(f"Sending message: {message.as_json_string()}")
-        response = line_bot_api.reply_message(event.reply_token, message)
-        print(f"Response: {response.status_code} - {response.text}")
-        
+        line_bot_api.reply_message(event.reply_token, message)
     elif '旋轉木馬' in msg:
         message = Carousel_Template()
         line_bot_api.reply_message(event.reply_token, message)
