@@ -1,6 +1,6 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
-from linebot.exceptions import InvalidSignatureError
+from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import *
 
 app = Flask(__name__)
@@ -73,24 +73,7 @@ def buttons_message():
     )
     return message
 
-# TemplateSendMessage - ConfirmTemplate (確認介面訊息)
-from linebot.models import (
-    TemplateSendMessage, CarouselTemplate, CarouselColumn,
-    PostbackTemplateAction, URITemplateAction
-)
-
-from linebot import LineBotApi, WebhookHandler
-from linebot.exceptions import LineBotApiError
-from linebot.models import (
-    MessageEvent, TextMessage, PostbackEvent,
-    TemplateSendMessage, CarouselTemplate, CarouselColumn,
-    PostbackTemplateAction, URITemplateAction, TextSendMessage
-)
-
-# 假設你已經正確初始化了這些
-line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
-handler = WebhookHandler('YOUR_CHANNEL_SECRET')
-
+# TemplateSendMessage - CarouselTemplate (旋轉木馬模板)
 def Carousel_Template():
     message = TemplateSendMessage(
         alt_text='目錄',
@@ -139,47 +122,6 @@ def Carousel_Template():
     )
     return message
 
-def fetch_and_filter_news_message(keywords, limit=10):
-    # Simulate fetching and filtering news based on the provided keywords
-    news = [f"News related to {keyword}" for keyword in keywords][:limit]
-    return "\n".join(news)
-
-@handler.add(PostbackEvent)
-def handle_postback(event):
-    if event.postback.data == "新聞":
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="請輸入新聞關鍵字")
-        )
-    # 處理其他 postback 事件...
-    else:
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=f"You clicked: {event.postback.data}")
-        )
-
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    user_input = event.message.text
-    if user_input.startswith("新聞關鍵字:"):
-        keywords = user_input.replace("新聞關鍵字:", "").strip().split(",")
-        keywords = [k.strip() for k in keywords]  # 移除每個關鍵字前後的空格
-        message = fetch_and_filter_news_message(keywords, limit=10)
-        try:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=message)
-            )
-        except LineBotApiError as e:
-            print(f"Error in handle_message: {e}")
-    else:
-        # 處理其他文字消息
-        line_bot_api.reply_message(
-            event.reply_token,
-            Carousel_Template()
-        )
-
-
 # TemplateSendMessage - ImageCarouselTemplate (圖片旋轉木馬)
 def image_carousel_message1():
     message = TemplateSendMessage(
@@ -218,6 +160,50 @@ def image_carousel_message1():
         )
     )
     return message
+
+# Function to fetch and filter news
+def fetch_and_filter_news_message(keywords, limit=10):
+    # Simulate fetching and filtering news based on the provided keywords
+    news = [f"News related to {keyword}" for keyword in keywords][:limit]
+    return "\n".join(news)
+
+# Handling postback events
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    print(f"Postback event received: {event.postback.data}")
+    if event.postback.data == "新聞":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入新聞關鍵字")
+        )
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=f"You clicked: {event.postback.data}")
+        )
+
+# Handling message events
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    print(f"Message event received: {event.message.text}")
+    user_input = event.message.text
+    if user_input.startswith("新聞關鍵字:"):
+        keywords = user_input.replace("新聞關鍵字:", "").strip().split(",")
+        keywords = [k.strip() for k in keywords]  # 移除每個關鍵字前後的空格
+        message = fetch_and_filter_news_message(keywords, limit=10)
+        try:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=message)
+            )
+        except LineBotApiError as e:
+            print(f"Error in handle_message: {e}")
+    else:
+        # 處理其他文字消息
+        line_bot_api.reply_message(
+            event.reply_token,
+            Carousel_Template()
+        )
 
 # LineBot server setup
 @app.route("/callback", methods=['POST'])
