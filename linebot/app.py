@@ -65,10 +65,18 @@ def handle_message(event):
         message = Carousel_Template()
         line_bot_api.reply_message(event.reply_token, message)
     elif '新聞' in msg:
-        user_input = input("請輸入關鍵字，用逗號分隔: ")
-        keywords = [keyword.strip() for keyword in user_input.split(',')]
-        message = fetch_and_filter_news_message(keywords, limit=10)
-        line_bot_api.reply_message(event.reply_token, message)
+        prompt_message = TextSendMessage(text="請輸入關鍵字，用逗號分隔:")
+        line_bot_api.reply_message(event.reply_token, prompt_message)
+        @handler.add(MessageEvent, message=TextMessage)
+        def handle_message(event):
+            user_msg = event.message.text
+            if '新聞' in user_msg:
+                prompt_message = TextSendMessage(text="請輸入關鍵字，用逗號分隔:")
+                line_bot_api.reply_message(event.reply_token, prompt_message)
+            elif '請輸入關鍵字' not in user_msg:  # 確保這不是剛剛發送的提示
+                keywords = [keyword.strip() for keyword in user_msg.split(',')]
+                message = fetch_and_filter_news_message(keywords, limit=10)
+                line_bot_api.reply_message(event.reply_token, message)
 
     elif '功能列表' in msg:
         message = function_list()
