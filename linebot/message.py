@@ -71,52 +71,44 @@ def buttons_message():
 
 # TemplateSendMessage - CarouselTemplate (旋轉木馬模板)
 def Carousel_Template():
-    message = TemplateSendMessage(
-        alt_text='目錄',
+    carousel_template_message = TemplateSendMessage(
+        alt_text='Carousel template',
         template=CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='https://example.com/image1.jpg',  # 替換為實際的圖片URL
-                    title='股票功能',
-                    text='請選擇以下功能',
+                    thumbnail_image_url='https://example.com/item1.jpg',
+                    title='Title 1',
+                    text='Description 1',
                     actions=[
-                        MessageTemplateAction(
-                            label="財報",
-                            data="財報"
+                        MessageAction(
+                            label='Action 1',
+                            text='Action 1 text'
                         ),
-                        MessageTemplateAction(
-                            label="基本股票功能",
-                            data="基本股票功能"
-                        ),
-                        MessageTemplateAction(
-                            label="換股",
-                            data="換股"
+                        MessageAction(
+                            label='Action 2',
+                            text='Action 2 text'
                         )
                     ]
                 ),
                 CarouselColumn(
-                    thumbnail_image_url='https://example.com/image2.jpg',  # 替換為實際的圖片URL
-                    title='其他功能',
-                    text='請選擇以下功能',
+                    thumbnail_image_url='https://example.com/item2.jpg',
+                    title='Title 2',
+                    text='Description 2',
                     actions=[
-                        MessageTemplateAction(
-                            label="個人相關功能",
-                            data="個人相關功能"
+                        MessageAction(
+                            label='Action 3',
+                            text='Action 3 text'
                         ),
-                        MessageTemplateAction(  # 使用 MessageTemplateAction 而非 PostbackTemplateAction
-                            label="新聞",
-                            text="新聞"
-                        ),
-                        URITemplateAction(
-                            label="回測",
-                            uri="https://tw.shop.com/nbts/create-myaccount.xhtml?returnurl=https%3A%2F%2Ftw.shop.com%2F"
+                        MessageAction(
+                            label='Action 4',
+                            text='Action 4 text'
                         )
                     ]
                 )
             ]
         )
     )
-    return message
+    return carousel_template_message
 
 
 # Webhook route
