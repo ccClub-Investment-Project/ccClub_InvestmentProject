@@ -122,45 +122,6 @@ def Carousel_Template():
     )
     return message
 
-# TemplateSendMessage - ImageCarouselTemplate (圖片旋轉木馬)
-def image_carousel_message1():
-    message = TemplateSendMessage(
-        alt_text='圖片旋轉木馬',
-        template=ImageCarouselTemplate(
-            columns=[
-                ImageCarouselColumn(
-                    image_url="https://i.imgur.com/uKYgfVs.jpg",
-                    action=URITemplateAction(
-                        label="新鮮水果",
-                        uri="http://img.juimg.com/tuku/yulantu/110709/222-110F91G31375.jpg"
-                    )
-                ),
-                ImageCarouselColumn(
-                    image_url="https://i.imgur.com/QOcAvjt.jpg",
-                    action=URITemplateAction(
-                        label="新鮮蔬菜",
-                        uri="https://cdn.101mediaimage.com/img/file/1410464751urhp5.jpg"
-                    )
-                ),
-                ImageCarouselColumn(
-                    image_url="https://i.imgur.com/Np7eFyj.jpg",
-                    action=URITemplateAction(
-                        label="可愛狗狗",
-                        uri="http://imgm.cnmo-img.com.cn/appimg/screenpic/big/674/673928.JPG"
-                    )
-                ),
-                ImageCarouselColumn(
-                    image_url="https://i.imgur.com/QRIa5Dz.jpg",
-                    action=URITemplateAction(
-                        label="可愛貓咪",
-                        uri="https://m-miya.net/wp-content/uploads/2014/07/0-065-1.min_.jpg"
-                    )
-                )
-            ]
-        )
-    )
-    return message
-
 # Function to fetch and filter news
 def fetch_and_filter_news_message(keywords, limit=10):
     # Simulate fetching and filtering news based on the provided keywords
@@ -171,6 +132,7 @@ def fetch_and_filter_news_message(keywords, limit=10):
 @handler.add(PostbackEvent)
 def handle_postback(event):
     print(f"Postback event received: {event.postback.data}")
+    print(f"Full event data: {event}")
     if event.postback.data == "新聞":
         line_bot_api.reply_message(
             event.reply_token,
@@ -193,11 +155,11 @@ def handle_message(event):
         message = fetch_and_filter_news_message(keywords, limit=10)
         try:
             line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=message)
-            )
+            event.reply_token,
+            TextSendMessage(text="請輸入新聞關鍵字")
+    )
         except LineBotApiError as e:
-            print(f"Error in handle_message: {e}")
+            print(f"Error in handle_postback: {e}")
     else:
         # 處理其他文字消息
         line_bot_api.reply_message(
