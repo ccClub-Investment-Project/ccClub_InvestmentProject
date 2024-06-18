@@ -81,8 +81,8 @@ def Carousel_Template():
                     text='請選擇以下功能',
                     actions=[
                         MessageTemplateAction(
-                            label="輸入財報",
-                            data="輸入財報"
+                            label="財報",
+                            data="財報"
                         ),
                         MessageTemplateAction(
                             label="基本股票功能",

@@ -53,6 +53,7 @@ def callback():
 import logging
 from linebot.exceptions import LineBotApiError
 
+user_states = {}
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
