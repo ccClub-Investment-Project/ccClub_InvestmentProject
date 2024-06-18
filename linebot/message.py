@@ -118,37 +118,6 @@ def Carousel_Template():
     )
     return message
 
-# Function to fetch and filter news
-def fetch_and_filter_news_message(keywords, limit=10):
-    # Simulate fetching and filtering news based on the provided keywords
-    news = [f"News related to {keyword}" for keyword in keywords][:limit]
-    return "\n".join(news)
-
-# Handling message events
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    if event.message.text == "新聞":
-        try:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="請輸入關鍵字")
-            )
-        except LineBotApiError as e:
-            print(f"Error sending message: {e}")
-    else:
-        # 處理用戶輸入關鍵字的邏輯
-        keywords = event.message.text.split()
-        if keywords:
-            news_message = fetch_and_filter_news_message(keywords)
-            try:
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=news_message)
-                )
-            except LineBotApiError as e:
-                print(f"Error sending news message: {e}")
-        else:
-            print(f"Unhandled message: {event.message.text}")
 
 # Webhook route
 @app.route("/callback", methods=['POST'])
