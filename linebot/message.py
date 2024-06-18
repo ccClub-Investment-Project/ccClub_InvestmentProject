@@ -5,8 +5,8 @@ from linebot.models import *
 import os
 
 app = Flask(__name__)
-line_bot_api = LineBotApi(os.getenv('LINE_CHANNEL_ACCESS_TOKEN'))
-handler = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET'))
+line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN'))
+handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
 
 # ImagemapSendMessage (組圖訊息)
 def imagemap_message():
@@ -127,9 +127,9 @@ def fetch_and_filter_news_message(keywords, limit=10):
 # Handling postback events
 @handler.add(PostbackEvent)
 def handle_postback(event):
-    print(f"Handling postback event: {event.postback.data}")
+    
     if event.postback.data == "新聞":
-        print("Received news request, sending response...")
+        
         try:
             line_bot_api.reply_message(
                 event.reply_token,
@@ -144,15 +144,15 @@ def handle_postback(event):
 # Handling message events
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    print(f"Handling message event: {event.message.text}")
+    
     if event.message.text == "新聞":
-        print("Received news keyword, sending carousel template...")
+        
         try:
             line_bot_api.reply_message(
                 event.reply_token,
                 Carousel_Template()
             )
-            print("Carousel template sent successfully")
+           
         except LineBotApiError as e:
             print(f"Error sending carousel template: {e}")
     else:
