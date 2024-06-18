@@ -2,15 +2,11 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import *
+import os
 
 app = Flask(__name__)
-
-# LINE Bot API credentials
-LINE_CHANNEL_ACCESS_TOKEN = 'YOUR_CHANNEL_ACCESS_TOKEN'
-LINE_CHANNEL_SECRET = 'YOUR_CHANNEL_SECRET'
-
-line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
-handler = WebhookHandler(LINE_CHANNEL_SECRET)
+line_bot_api = LineBotApi(os.getenv('LINE_CHANNEL_ACCESS_TOKEN'))
+handler = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET'))
 
 # ImagemapSendMessage (組圖訊息)
 def imagemap_message():
