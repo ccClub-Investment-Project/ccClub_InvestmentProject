@@ -69,7 +69,8 @@ def buttons_message():
     )
     return message
 
-# TemplateSendMessage - CarouselTemplate (旋轉木馬模板)
+from linebot.models import TemplateSendMessage, CarouselTemplate, CarouselColumn, MessageAction, URIAction
+
 def Carousel_Template():
     carousel_template_message = TemplateSendMessage(
         alt_text='Carousel template',
@@ -107,7 +108,7 @@ def Carousel_Template():
                             label='新聞',
                             text='新聞'
                         ),
-                        MessageAction(
+                        URIAction(  # This should be URIAction instead of MessageAction
                             label='回測',
                             uri="https://tw.shop.com/nbts/create-myaccount.xhtml?returnurl=https%3A%2F%2Ftw.shop.com%2F"
                         )
@@ -117,6 +118,7 @@ def Carousel_Template():
         )
     )
     return carousel_template_message
+
 
 
 # Webhook route
