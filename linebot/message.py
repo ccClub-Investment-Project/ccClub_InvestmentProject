@@ -77,31 +77,39 @@ def Carousel_Template():
             columns=[
                 CarouselColumn(
                     thumbnail_image_url='https://example.com/item1.jpg',
-                    title='Title 1',
+                    title='股票相關功能',
                     text='Description 1',
                     actions=[
                         MessageAction(
-                            label='Action 1',
-                            text='Action 1 text'
+                            label='財報',
+                            text='財報'
                         ),
                         MessageAction(
-                            label='Action 2',
-                            text='Action 2 text'
+                            label='基本股票功能',
+                            text='基本股票功能'
+                        ),
+                        MessageAction(
+                            label='換股',
+                            text='換股'
                         )
                     ]
                 ),
                 CarouselColumn(
                     thumbnail_image_url='https://example.com/item2.jpg',
-                    title='Title 2',
+                    title='其他相關功能',
                     text='Description 2',
                     actions=[
                         MessageAction(
-                            label='Action 3',
-                            text='Action 3 text'
+                            label='個人相關功能',
+                            text='個人相關功能'
                         ),
                         MessageAction(
-                            label='Action 4',
-                            text='Action 4 text'
+                            label='新聞',
+                            text='新聞'
+                        ),
+                        MessageAction(
+                            label='回測',
+                            uri="https://tw.shop.com/nbts/create-myaccount.xhtml?returnurl=https%3A%2F%2Ftw.shop.com%2F"
                         )
                     ]
                 )
