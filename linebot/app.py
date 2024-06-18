@@ -64,11 +64,12 @@ def handle_message(event):
     elif '目錄' in msg:
         message = Carousel_Template()
         line_bot_api.reply_message(event.reply_token, message)
-        
     elif '新聞' in msg:
-        keywords = ["ETF", "股票", "殖利率"]
-        message = fetch_and_filter_news_message(keywords,limit=10)
+        user_input = input("請輸入關鍵字，用逗號分隔: ")
+        keywords = [keyword.strip() for keyword in user_input.split(',')]
+        message = fetch_and_filter_news_message(keywords, limit=10)
         line_bot_api.reply_message(event.reply_token, message)
+
     elif '功能列表' in msg:
         message = function_list()
         line_bot_api.reply_message(event.reply_token, message)
