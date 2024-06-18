@@ -127,51 +127,43 @@ def fetch_and_filter_news_message(keywords, limit=10):
 # Handling postback events
 @handler.add(PostbackEvent)
 def handle_postback(event):
-    
     if event.postback.data == "新聞":
-        
         try:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="請輸入新聞關鍵字")
+                TextSendMessage(text="請輸入新聞關鍵字,用空格隔開")
             )
             print("Response sent successfully")
         except LineBotApiError as e:
             print(f"Error sending reply: {e}")
+    elif event.postback.data == "輸入財報" or event.postback.data == "基本股票功能" or event.postback.data == "換股" or event.postback.data == "個人相關功能":
+        # 處理其他 PostbackTemplateAction 的邏輯
+        pass
     else:
         print(f"Unhandled postback data: {event.postback.data}")
 
 # Handling message events
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    
     if event.message.text == "新聞":
-        
         try:
             line_bot_api.reply_message(
                 event.reply_token,
                 Carousel_Template()
             )
-           
         except LineBotApiError as e:
             print(f"Error sending carousel template: {e}")
     else:
-        print(f"Unhandled message: {event.message.text}")
-# LineBot server setup
-@app.route("/callback", methods=['POST'])
-@app.route("/callback", methods=['POST'])
-def callback():
-    signature = request.headers['X-Line-Signature']
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-    print("Received webhook callback")
-    try:
-        handler.handle(body, signature)
-        print("Webhook handled successfully")
-    except InvalidSignatureError:
-        print("Invalid signature")
-        abort(400)
-    return 'OK'
-
-if __name__ == "__main__":
-    app.run(debug=True)
+        # 處理用戶輸入關鍵字的邏輯
+        keywords = event.message.text.split()
+        if keywords:
+            news_message = fetch_and_filter_news_message(keywords)
+            try:
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=news_message)
+                )
+            except LineBotApiError as e:
+                print(f"Error sending news message: {e}")
+        else:
+            print(f"Unhandled message: {event.message.text}")
