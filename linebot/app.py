@@ -50,12 +50,16 @@ def callback():
 
     return 'OK'
 
-user_states={}
+import logging
+from linebot.exceptions import LineBotApiError
+
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_id = event.source.user_id
     msg = event.message.text.strip()
+    
+    logging.info(f"Received message: {msg} from user: {user_id} with reply token: {event.reply_token}")
 
     try:
         # Check user state
@@ -63,42 +67,49 @@ def handle_message(event):
             handle_keywords_input(event, msg, user_id)
         else:
             handle_regular_message(event, msg, user_id)
-    except Exception as e:
-        # Handle unexpected errors
+    except LineBotApiError as e:
+        logging.error(f"Error handling webhook: {e}")
         error_message = TextSendMessage(text="發生錯誤，請稍後再試。")
         line_bot_api.reply_message(event.reply_token, error_message)
         user_states[user_id] = None
 
 def handle_keywords_input(event, msg, user_id):
-    # Process keyword input
-    keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
-    if keywords:
-        message = fetch_and_filter_news_message(keywords, limit=10)
-        line_bot_api.reply_message(event.reply_token, message)
-    else:
-        prompt_message = TextSendMessage(text="請輸入有效的關鍵字，用逗號分隔:")
-        line_bot_api.reply_message(event.reply_token, prompt_message)
-    # Reset user state
-    user_states[user_id] = None
+    try:
+        # Process keyword input
+        keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
+        if keywords:
+            message = fetch_and_filter_news_message(keywords, limit=10)
+            line_bot_api.reply_message(event.reply_token, message)
+        else:
+            prompt_message = TextSendMessage(text="請輸入有效的關鍵字，用逗號分隔:")
+            line_bot_api.reply_message(event.reply_token, prompt_message)
+    except LineBotApiError as e:
+        logging.error(f"Error in handle_keywords_input: {e}")
+    finally:
+        # Reset user state
+        user_states[user_id] = None
 
 def handle_regular_message(event, msg, user_id):
-    if '最新合作廠商' in msg:
-        message = imagemap_message()
-    elif '最新活動訊息' in msg:
-        message = buttons_message()
-    elif '目錄' in msg:
-        message = Carousel_Template()
-    elif '新聞' in msg:
-        prompt_message = TextSendMessage(text="請輸入關鍵字，用逗號分隔:")
-        line_bot_api.reply_message(event.reply_token, prompt_message)
-        # Set user state to waiting for keywords
-        user_states[user_id] = 'waiting_for_keywords'
-        return
-    elif '功能列表' in msg:
-        message = function_list()
-    else:
-        message = TextSendMessage(text=msg)
-    line_bot_api.reply_message(event.reply_token, message)
+    try:
+        if '最新合作廠商' in msg:
+            message = imagemap_message()
+        elif '最新活動訊息' in msg:
+            message = buttons_message()
+        elif '目錄' in msg:
+            message = Carousel_Template()
+        elif '新聞' in msg:
+            prompt_message = TextSendMessage(text="請輸入關鍵字，用逗號分隔:")
+            line_bot_api.reply_message(event.reply_token, prompt_message)
+            # Set user state to waiting for keywords
+            user_states[user_id] = 'waiting_for_keywords'
+            return
+        elif '功能列表' in msg:
+            message = function_list()
+        else:
+            message = TextSendMessage(text=msg)
+        line_bot_api.reply_message(event.reply_token, message)
+    except LineBotApiError as e:
+        logging.error(f"Error in handle_regular_message: {e}")
 
 @handler.add(MemberJoinedEvent)
 def welcome(event):
