@@ -103,9 +103,9 @@ def Carousel_Template():
                             label="個人相關功能",
                             data="個人相關功能"
                         ),
-                        PostbackTemplateAction(
+                        MessageTemplateAction(  # 使用 MessageTemplateAction 而非 PostbackTemplateAction
                             label="新聞",
-                            data="新聞"
+                            text="新聞"
                         ),
                         URITemplateAction(
                             label="回測",
@@ -123,24 +123,6 @@ def fetch_and_filter_news_message(keywords, limit=10):
     # Simulate fetching and filtering news based on the provided keywords
     news = [f"News related to {keyword}" for keyword in keywords][:limit]
     return "\n".join(news)
-
-# Handling postback events
-@handler.add(PostbackEvent)
-def handle_postback(event):
-    if event.postback.data == "新聞":
-        try:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="請輸入新聞關鍵字,用空格隔開")
-            )
-            print("Response sent successfully")
-        except LineBotApiError as e:
-            print(f"Error sending reply: {e}")
-    elif event.postback.data == "輸入財報" or event.postback.data == "基本股票功能" or event.postback.data == "換股" or event.postback.data == "個人相關功能":
-        # 處理其他 PostbackTemplateAction 的邏輯
-        pass
-    else:
-        print(f"Unhandled postback data: {event.postback.data}")
 
 # Handling message events
 @handler.add(MessageEvent, message=TextMessage)
