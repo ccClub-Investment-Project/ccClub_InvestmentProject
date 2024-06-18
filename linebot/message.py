@@ -80,15 +80,15 @@ def Carousel_Template():
                     title='股票功能',
                     text='請選擇以下功能',
                     actions=[
-                        PostbackTemplateAction(
+                        MessageTemplateAction(
                             label="輸入財報",
                             data="輸入財報"
                         ),
-                        PostbackTemplateAction(
+                        MessageTemplateAction(
                             label="基本股票功能",
                             data="基本股票功能"
                         ),
-                        PostbackTemplateAction(
+                        MessageTemplateAction(
                             label="換股",
                             data="換股"
                         )
@@ -99,7 +99,7 @@ def Carousel_Template():
                     title='其他功能',
                     text='請選擇以下功能',
                     actions=[
-                        PostbackTemplateAction(
+                        MessageTemplateAction(
                             label="個人相關功能",
                             data="個人相關功能"
                         ),
