@@ -131,7 +131,7 @@ def fetch_and_filter_news_message(keywords, limit=10):
 # Handling postback events
 @handler.add(PostbackEvent)
 def handle_postback(event):
-    print(f"Postback event received: {event.postback.data}")
+    print(f"Handling postback event: {event.postback.data}")
     print(f"Full event data: {event}")
     if event.postback.data == "新聞":
         line_bot_api.reply_message(
@@ -154,12 +154,9 @@ def handle_message(event):
         keywords = [k.strip() for k in keywords]  # 移除每個關鍵字前後的空格
         message = fetch_and_filter_news_message(keywords, limit=10)
         try:
-            line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="請輸入新聞關鍵字")
-    )
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="回覆消息"))
         except LineBotApiError as e:
-            print(f"Error in handle_postback: {e}")
+            print(f"Error sending reply: {e}")
     else:
         # 處理其他文字消息
         line_bot_api.reply_message(
