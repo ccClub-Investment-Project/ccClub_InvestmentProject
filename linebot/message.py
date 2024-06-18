@@ -131,10 +131,10 @@ def handle_message(event):
         try:
             line_bot_api.reply_message(
                 event.reply_token,
-                Carousel_Template()
+                TextSendMessage(text="請輸入關鍵字")
             )
         except LineBotApiError as e:
-            print(f"Error sending carousel template: {e}")
+            print(f"Error sending message: {e}")
     else:
         # 處理用戶輸入關鍵字的邏輯
         keywords = event.message.text.split()
@@ -149,3 +149,24 @@ def handle_message(event):
                 print(f"Error sending news message: {e}")
         else:
             print(f"Unhandled message: {event.message.text}")
+
+# Webhook route
+@app.route("/callback", methods=['POST'])
+def callback():
+    # get X-Line-Signature header value
+    signature = request.headers['X-Line-Signature']
+
+    # get request body as text
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    # handle webhook body
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+
+    return 'OK'
+
+if __name__ == "__main__":
+    app.run()

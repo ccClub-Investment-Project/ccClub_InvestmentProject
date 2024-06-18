@@ -65,7 +65,7 @@ def handle_message(event):
         message = Carousel_Template()
         line_bot_api.reply_message(event.reply_token, message)
         
-    elif 'ETF新聞' in msg:
+    elif '新聞' in msg:
         keywords = ["ETF", "股票", "殖利率"]
         message = fetch_and_filter_news_message(keywords,limit=10)
         line_bot_api.reply_message(event.reply_token, message)
