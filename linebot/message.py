@@ -5,6 +5,7 @@ from linebot.models import *
 import os
 from dotenv import load_dotenv
 load_dotenv()
+from linebot.models import TemplateSendMessage, CarouselTemplate, CarouselColumn, MessageAction, URIAction
 
 
 app = Flask(__name__)
@@ -43,8 +44,11 @@ def imagemap_message():
     return message
 
 # TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
+from linebot.models import *
+
 def buttons_message1():
     message = TemplateSendMessage(
+        alt_text='Buttons template 1',
         template=ButtonsTemplate(
             actions=[
                 MessageTemplateAction(
@@ -59,8 +63,10 @@ def buttons_message1():
         )
     )
     return message
+
 def buttons_message2():
     message = TemplateSendMessage(
+        alt_text='Buttons template 2',
         template=ButtonsTemplate(
             actions=[
                 MessageTemplateAction(
@@ -75,8 +81,6 @@ def buttons_message2():
         )
     )
     return message
-
-from linebot.models import TemplateSendMessage, CarouselTemplate, CarouselColumn, MessageAction, URIAction
 
 def Carousel_Template():
     carousel_template_message = TemplateSendMessage(
@@ -115,9 +119,9 @@ def Carousel_Template():
                             label='新聞',
                             text='新聞'
                         ),
-                        URIAction(  # This should be URIAction instead of MessageAction
+                        MessageAction(
                             label='回測',
-                            text='回測'
+                            text='新聞'
                         )
                     ]
                 )
@@ -125,6 +129,7 @@ def Carousel_Template():
         )
     )
     return carousel_template_message
+
 
 
 
