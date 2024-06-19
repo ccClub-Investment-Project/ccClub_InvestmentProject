@@ -4,24 +4,27 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import *
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
-from linebot.models import TemplateSendMessage, CarouselTemplate, CarouselColumn, MessageAction, URIAction
 
 app = Flask(__name__)
 line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN'))
 handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
 
+user_states = {}
 
+# Function Definitions
 def buttons_message1():
     message = TemplateSendMessage(
         alt_text='基本股票功能',
         template=ButtonsTemplate(
+            text='請選擇以下功能',
             actions=[
-                MessageTemplateAction(
+                MessageAction(
                     label="查詢股票資訊",
                     text="查詢股票資訊"
                 ),
-                MessageTemplateAction(
+                MessageAction(
                     label="歷史股價查詢",
                     text="歷史股價查詢"
                 )
@@ -34,12 +37,13 @@ def buttons_message2():
     message = TemplateSendMessage(
         alt_text='換股',
         template=ButtonsTemplate(
+            text='請選擇以下功能',
             actions=[
-                MessageTemplateAction(
+                MessageAction(
                     label="換股時間",
                     text="換股時間"
                 ),
-                MessageTemplateAction(
+                MessageAction(
                     label="換了哪些股",
                     text="換了哪些股"
                 )
