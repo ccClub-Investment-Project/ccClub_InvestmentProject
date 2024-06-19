@@ -47,7 +47,7 @@ from linebot.models import *
 
 def buttons_message1():
     message = TemplateSendMessage(
-        alt_text='Buttons template 1',
+        alt_text='基本股票功能',
         template=ButtonsTemplate(
             actions=[
                 MessageTemplateAction(
@@ -65,7 +65,7 @@ def buttons_message1():
 
 def buttons_message2():
     message = TemplateSendMessage(
-        alt_text='Buttons template 2',
+        alt_text='換股',
         template=ButtonsTemplate(
             actions=[
                 MessageTemplateAction(

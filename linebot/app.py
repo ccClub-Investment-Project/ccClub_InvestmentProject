@@ -99,10 +99,12 @@ def handle_keywords_input(event, msg, user_id):
 
 def handle_regular_message(event, msg, user_id):
     try:
-        if '最新合作廠商' in msg:
+        if '財報' in msg:
             message = imagemap_message()
-        elif '最新活動訊息' in msg:
-            message = buttons_message1()  # Use the corrected buttons_message1 function
+        elif '基本股票功能' in msg:
+            message = buttons_message1() 
+        elif '換股' in msg:
+            message = buttons_message2()  
         elif '目錄' in msg:
             message = Carousel_Template()  # Use the corrected Carousel_Template function
         elif '新聞' in msg:
