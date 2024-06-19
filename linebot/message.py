@@ -11,9 +11,6 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN'))
 handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
 
-# ImagemapSendMessage (組圖訊息)
-def imagemap_message():
-    # ... (imagemap_message 函數的定義)
 
 def buttons_message1():
     message = TemplateSendMessage(
