@@ -1,4 +1,6 @@
 from flask import Flask, request, abort
+from dotenv import load_dotenv
+load_dotenv()
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -7,7 +9,6 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-
 
 #======這裡是呼叫的檔案內容=====
 from message import *
@@ -23,11 +24,17 @@ import time
 
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
-# Channel Access Token
-line_bot_api = LineBotApi('yXUDkIIyLEoIuWSiKdrJ7EcgUrq05cpRd/Mh7+xFfznOYE6aNmeiC7SARxkey8fZ3hBOROk8pPMP6c3HBjDRAoQCMF9o3bzAENnOCeQtaB98c4YnE3qVIxEPuRXhTD2pNX1d/J83SwjK/GCEHtMsPwdB04t89/1O/w1cDnyilFU=')
-# Channel Secret
-handler = WebhookHandler('e173edcacc6b33a6c041d95bcf1a6198')
 
+# 來自環境變數
+# 設置您的 Channel Access Token 和 Channel Secret
+channel_access_token = os.getenv('CHANNEL_ACCESS_TOKEN')
+channel_secret = os.getenv('CHANNEL_SECRET')
+line_bot_api = LineBotApi(channel_access_token)
+handler = WebhookHandler(channel_secret)
+
+@app.route("/")
+def home():
+    return "Webhook Running!!!"
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
