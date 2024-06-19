@@ -92,10 +92,12 @@ def handle_keywords_input(event, msg, user_id):
 
 def handle_regular_message(event, msg, user_id):
     try:
-        if '最新合作廠商' in msg:
+        if '財報' in msg:
             message = imagemap_message()
-        elif '最新活動訊息' in msg:
-            message = buttons_message()
+        elif '基本股價資訊' in msg:
+            message = buttons_message1()
+        elif '換股' in msg:
+            message = buttons_message2()
         elif '目錄' in msg:
             message = Carousel_Template()
         elif '新聞' in msg:
@@ -110,7 +112,7 @@ def handle_regular_message(event, msg, user_id):
         line_bot_api.reply_message(event.reply_token, message)
     except LineBotApiError as e:
         logging.error(f"Error in handle_regular_message: {e}")
-        
+
 @handler.add(MemberJoinedEvent)
 def welcome(event):
     uid = event.joined.members[0].user_id

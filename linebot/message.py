@@ -40,29 +40,33 @@ def imagemap_message():
     return message
 
 # TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
-def buttons_message():
+def buttons_message1():
     message = TemplateSendMessage(
-        alt_text='好消息來囉～',
         template=ButtonsTemplate(
-            thumbnail_image_url="https://pic2.zhimg.com/v2-de4b8114e8408d5265503c8b41f59f85_b.jpg",
-            title="是否要進行抽獎活動？",
-            text="輸入生日後即獲得抽獎機會",
             actions=[
-                DatetimePickerTemplateAction(
-                    label="請選擇生日",
-                    data="input_birthday",
-                    mode='date',
-                    initial='1990-01-01',
-                    max='2019-03-10',
-                    min='1930-01-01'
+                MessageTemplateAction(
+                    label="查詢股票資訊",
+                    text="查詢股票資訊"
                 ),
                 MessageTemplateAction(
-                    label="看抽獎品項",
-                    text="有哪些抽獎品項呢？"
+                    label="歷史股價查詢",
+                    text="歷史股價查詢"
+                )
+            ]
+        )
+    )
+    return message
+def buttons_message2():
+    message = TemplateSendMessage(
+        template=ButtonsTemplate(
+            actions=[
+                MessageTemplateAction(
+                    label="換股時間",
+                    text="換股時間"
                 ),
-                URITemplateAction(
-                    label="免費註冊享回饋",
-                    uri="https://tw.shop.com/nbts/create-myaccount.xhtml?returnurl=https%3A%2F%2Ftw.shop.com%2F"
+                MessageTemplateAction(
+                    label="換了哪些股",
+                    text="換了哪些股"
                 )
             ]
         )
@@ -110,7 +114,7 @@ def Carousel_Template():
                         ),
                         URIAction(  # This should be URIAction instead of MessageAction
                             label='回測',
-                            uri="https://tw.shop.com/nbts/create-myaccount.xhtml?returnurl=https%3A%2F%2Ftw.shop.com%2F"
+                            text='回測'
                         )
                     ]
                 )
