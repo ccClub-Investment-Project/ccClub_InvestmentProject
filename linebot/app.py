@@ -99,14 +99,12 @@ def handle_keywords_input(event, msg, user_id):
 
 def handle_regular_message(event, msg, user_id):
     try:
-        if '財報' in msg:
+        if '最新合作廠商' in msg:
             message = imagemap_message()
-        elif '基本股價資訊' in msg:
-            message = buttons_message1()
-        elif '換股' in msg:
-            message = buttons_message2()
+        elif '最新活動訊息' in msg:
+            message = buttons_message1()  # Use the corrected buttons_message1 function
         elif '目錄' in msg:
-            message = Carousel_Template()
+            message = Carousel_Template()  # Use the corrected Carousel_Template function
         elif '新聞' in msg:
             prompt_message = TextSendMessage(text="請輸入關鍵字，用逗號分隔:")
             line_bot_api.reply_message(event.reply_token, prompt_message)
@@ -116,9 +114,14 @@ def handle_regular_message(event, msg, user_id):
             message = function_list()
         else:
             message = TextSendMessage(text=msg)
+        
         line_bot_api.reply_message(event.reply_token, message)
     except LineBotApiError as e:
         logging.error(f"Error in handle_regular_message: {e}")
+        error_message = TextSendMessage(text="發生錯誤，請稍後再試。")
+        line_bot_api.reply_message(event.reply_token, error_message)
+        user_states[user_id] = None
+
 
 @handler.add(MemberJoinedEvent)
 def welcome(event):

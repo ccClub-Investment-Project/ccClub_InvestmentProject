@@ -43,7 +43,6 @@ def imagemap_message():
     )
     return message
 
-# TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
 from linebot.models import *
 
 def buttons_message1():
@@ -119,9 +118,9 @@ def Carousel_Template():
                             label='新聞',
                             text='新聞'
                         ),
-                        MessageAction(
+                        URIAction(
                             label='回測',
-                            text='新聞'
+                            uri='https://example.com/backtest'
                         )
                     ]
                 )
@@ -129,6 +128,7 @@ def Carousel_Template():
         )
     )
     return carousel_template_message
+
 
 
 
