@@ -78,8 +78,17 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
         if keywords:
             logging.info(f"Fetching news for keywords: {keywords}")
             message = fetch_and_filter_news_message(keywords, limit=10)
-            logging.info(f"Fetched news: {message[:100]}...")  # Log first 100 chars
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=message)])
+            
+            # 检查 message 是否为 TextMessage 对象
+            if isinstance(message, TextMessage):
+                logging.info(f"Fetched news: {message.text[:100]}...")  # Log first 100 chars of the text
+                reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+            else:
+                # 如果不是 TextMessage 对象，将其转换为字符串
+                message_str = str(message)
+                logging.info(f"Fetched news: {message_str[:100]}...")  # Log first 100 chars
+                reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=message_str)])
+            
             line_bot_api.reply_message(reply_message)
         else:
             prompt_message = TextMessage(text="請輸入有效的關鍵字，用逗號分隔:")
