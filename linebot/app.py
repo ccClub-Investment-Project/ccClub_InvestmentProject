@@ -106,10 +106,18 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
   
         if '財報' in msg:
             message = buttons_message1()
-        elif '基本股票功能' in msg:
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+            line_bot_api.reply_message(reply_message)
+        if '基本股票功能' in msg:
             message = buttons_message1()
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+            line_bot_api.reply_message(reply_message)
+            return
         elif '換股' in msg:
             message = buttons_message2()
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+            line_bot_api.reply_message(reply_message)
+            return
         elif '目錄' in msg:  
             carousel = Carousel_Template()
             logging.info(f"Carousel_Template 返回的消息: {carousel}")
