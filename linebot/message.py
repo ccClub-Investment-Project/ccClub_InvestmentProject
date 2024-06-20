@@ -1,21 +1,8 @@
-from flask import Flask, request, abort
-from linebot import LineBotApi, WebhookHandler
-from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import *
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-app = Flask(__name__)
-line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN'))
-handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
-
-user_states = {}
+from linebot.v3.messaging.models import *
 
 # Function Definitions
 def buttons_message1():
-    message = TemplateSendMessage(
+    message = TemplateMessage(
         alt_text='基本股票功能',
         template=ButtonsTemplate(
             text='請選擇以下功能',
@@ -34,7 +21,7 @@ def buttons_message1():
     return message
 
 def buttons_message2():
-    message = TemplateSendMessage(
+    message = TemplateMessage(
         alt_text='換股',
         template=ButtonsTemplate(
             text='請選擇以下功能',
@@ -53,7 +40,7 @@ def buttons_message2():
     return message
 
 def Carousel_Template():
-    carousel_template_message = TemplateSendMessage(
+    carousel_template_message = TemplateMessage(
         alt_text='Carousel template',
         template=CarouselTemplate(
             columns=[
@@ -89,38 +76,17 @@ def Carousel_Template():
                             label='新聞',
                             text='新聞'
                         ),
-                        URIAction(
-                            label='回測',
-                            uri='https://example.com/backtest'
-                        )
+                        MessageAction(
+                            label='回測0050,定期定額3000,5年',
+                            text='回測0050,定期定額3000,5年'
+                        ),
+                        # URIAction(
+                        #     label='定期定額 回測API',    
+                        #     uri='https://backtest-kk2m.onrender.com/one_stock?id=0056&amount=3000&date=5&duration=1'
+                        # )
                     ]
                 )
             ]
         )
     )
     return carousel_template_message
-
-
-
-
-
-# Webhook route
-@app.route("/callback", methods=['POST'])
-def callback():
-    # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
-
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-
-    # handle webhook body
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
-
-    return 'OK'
-
-if __name__ == "__main__":
-    app.run()

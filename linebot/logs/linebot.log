@@ -1,0 +1,1407 @@
+2024-06-20 01:53:47,000 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 01:53:47,001 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 01:54:09,773 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513411574908584646","quoteToken":"N_JXoCFhEXKKYKWJVdAv1UzrVuxgCD4vXEgqv1HkhUGta1LAeVW5-lk9IRVe5XvSQFIG9OOD6amVEBQZ3uIzRXbBILodClA00db9qDtHSub7kRSJPaRfH_U-TnUSrqo6T-mGNFNlFM9IW8jYWppZeg","text":"測試"},"webhookEventId":"01J0SNKV16VRJG00VM15MWWB2X","deliveryContext":{"isRedelivery":false},"timestamp":1718848449481,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"d7616c4368c7450381b087c844a6cbbe","mode":"active"}]}
+2024-06-20 01:54:09,779 - root - INFO - Received message: 測試 from user: U320d9bac5a0be464137325d6585b81ff with reply token: d7616c4368c7450381b087c844a6cbbe
+2024-06-20 01:54:09,780 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 01:54:09] "POST /callback HTTP/1.1" 200 -
+2024-06-20 02:08:10,334 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:9999
+ * Running on http://172.21.0.2:9999
+2024-06-20 02:08:10,334 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:08:40,422 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:08:40,422 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:09:01,136 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513413069976633379","quoteToken":"SArraBMo22hKH6YaISRUm6AZGbQDS3UwDzLWW-TqbYDkHmis342RK6i8zylY-gs8VdELGMI_cEf84PJQjoj3r1M2SNofTnLyiwpZ-XQKNx9UZIcQuYDw17iqBMi0Fb9dH5fWj7rnNPAr17uITR2fQQ","text":"啥"},"webhookEventId":"01J0SPF1HF6D7TE6JXV1693PQA","deliveryContext":{"isRedelivery":false},"timestamp":1718849340602,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"29539a07132942f2b254f3033e82b95a","mode":"active"}]}
+2024-06-20 02:09:01,141 - root - INFO - Received message: 啥 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 29539a07132942f2b254f3033e82b95a
+2024-06-20 02:09:01,142 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:09:01] "POST /callback HTTP/1.1" 200 -
+2024-06-20 02:22:04,225 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:22:04,225 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:22:20,767 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513414411802116184","quoteToken":"IA3quIDBXBP0h1A9W6BoZSrYPmzm04QRsJKRW0cPV10-8Y2QEBbtUfNXyk42kwCWKN5Av3heVwSX39J1ChA6C5Qb8NiZS_ps6RIgQ8sBpnt9uUDSvocvES_lma5ZsMRPvxKhCvcRNz7XvkhQ2D9Y_A","text":"測試"},"webhookEventId":"01J0SQ7EE29ZR0TKN1WG9RZG84","deliveryContext":{"isRedelivery":false},"timestamp":1718850140573,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"a673fe85b8914ed5a2fe7d87b4ab030b","mode":"active"}]}
+2024-06-20 02:22:20,772 - root - INFO - Received message: 測試 from user: U320d9bac5a0be464137325d6585b81ff with reply token: a673fe85b8914ed5a2fe7d87b4ab030b
+2024-06-20 02:22:20,773 - root - ERROR - Error in handle_regular_message: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:22:20,774 - root - ERROR - Error handling webhook: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:22:20,774 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 133, in handle_regular_message
+    line_bot_api.reply_message(event.reply_token, message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 137, in handle_regular_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:22:20,778 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:22:20] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 02:33:00,818 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513415485745266897","quoteToken":"-62eTzKbH7DboleERN92q248IH-YYIn6a0NoJ3hJBkwWnrinJsXlmcg21ce3pcr6rN61N5fCSyNi1IAU8Oy8T6irkGHqbRlKMu7KWU1dkIq-17tJ1Wog6TLLGBao2sTncewcBFiwl5l3s1OA1VlscA","text":"財報"},"webhookEventId":"01J0SQTZDGW7KHNB5XE2YFRKR9","deliveryContext":{"isRedelivery":false},"timestamp":1718850780510,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"f7b2848fe0a942318d55db1443963796","mode":"active"}]}
+2024-06-20 02:33:00,825 - root - INFO - Received message: 財報 from user: U320d9bac5a0be464137325d6585b81ff with reply token: f7b2848fe0a942318d55db1443963796
+2024-06-20 02:33:00,826 - root - ERROR - Error in handle_regular_message: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:33:00,826 - root - ERROR - Error handling webhook: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:33:00,827 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 133, in handle_regular_message
+    line_bot_api.reply_message(event.reply_token, message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 137, in handle_regular_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:33:00,830 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:33:00] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 02:34:03,515 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:34:03,515 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:34:12,823 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513415605936717826","quoteToken":"qc_5M1ZVo0c6G-jGz2kDZmcCtFjebieXZVrGiH99_NoSYA4Z_PPNcve8C5CDGqwjXJ-03SK2R6dTuQ-QUIUe18LA-91rB4KOBtA76uZxYVspNcSgkJS74_Y8XRQZqWs6UkjBs9NXUgJLaRI_FeXkHA","text":"目錄"},"webhookEventId":"01J0SQX5SHRXNQ0PVR5H3J5WTB","deliveryContext":{"isRedelivery":false},"timestamp":1718850852149,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"7114b21d8a9349498dffc2b6bdd2f0ce","mode":"active"}]}
+2024-06-20 02:34:12,827 - root - INFO - Received message: 目錄 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 7114b21d8a9349498dffc2b6bdd2f0ce
+2024-06-20 02:34:12,829 - root - ERROR - Error in handle_regular_message: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:34:12,829 - root - ERROR - Error handling webhook: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:34:12,830 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 133, in handle_regular_message
+    line_bot_api.reply_message(event.reply_token, message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 137, in handle_regular_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:34:12,838 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:34:12] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 02:38:01,560 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:38:01,560 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:38:11,152 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513416006258393142","quoteToken":"7oFIMckeo2kObnBLprzISpr8Coxt6JWD5bq2FX9q5bIqh3Rfiq35DanQdSmNWgz3iGoPLcQFR9wochcoCLVJfGk93WGksPaZGSNkZkX2uZYw7ZrTTz9ERF3hSYA6-5fxn7-Aw3ICMr_9SAArmF9PdA","text":"目錄"},"webhookEventId":"01J0SR4EGWZH85Z48Z7TXHPE3F","deliveryContext":{"isRedelivery":false},"timestamp":1718851090823,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"038f7e8f8e8b450b9b4219cd2e2c0a76","mode":"active"}]}
+2024-06-20 02:38:11,158 - root - INFO - Received message: 目錄 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 038f7e8f8e8b450b9b4219cd2e2c0a76
+2024-06-20 02:38:11,160 - root - ERROR - Error in handle_regular_message: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+2024-06-20 02:38:11,160 - root - ERROR - Error handling webhook: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+2024-06-20 02:38:11,161 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 134, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 143, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:38:11,164 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:38:11] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 02:38:34,435 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:38:34,435 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:38:40,997 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513416055868883618","quoteToken":"hbH-NeyDRsRJEl0BPOSHk2ZcRrBYSP__g9EV6-X9vWMVvumCOtTzzSjG9GVqZrAoErXPJP53ovKo2yBlWTrw2XTjQzWqRsvOt6OjqPN7-iivPRweB1e0kvtXhg-1zYnmwIzXanprI5kMRIocAjDkgQ","text":"目錄"},"webhookEventId":"01J0SR5BQ164B0ZEMEBNZWJ1JK","deliveryContext":{"isRedelivery":false},"timestamp":1718851120357,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"262e64e1b5214b26a83947e227cea3aa","mode":"active"}]}
+2024-06-20 02:38:41,000 - root - INFO - Received message: 目錄 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 262e64e1b5214b26a83947e227cea3aa
+2024-06-20 02:38:41,001 - root - ERROR - Error in handle_regular_message: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+2024-06-20 02:38:41,001 - root - ERROR - Error handling webhook: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+2024-06-20 02:38:41,001 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 134, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 143, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:38:41,005 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:38:41] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 02:44:47,021 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:44:47,021 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:44:52,341 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513416679611433411","quoteToken":"vAa372vCd0tqj9QL1OcUAQLfJykpBjvWKtKUTHwfqS3sULbsnquOLdoi1OZAHrEN9o1fWXT7qXNveHxAh50y4peGNaIChOs4qyiVwaXmGRviCgEMuj9GUr-81OmuIoI4ssXErdvD1sY8HK70kc4UyQ","text":"為啥"},"webhookEventId":"01J0SRGPD9C6PH2V687WSP3RDD","deliveryContext":{"isRedelivery":false},"timestamp":1718851492156,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"1471b1a29a3e4cf0a52396b281087f02","mode":"active"}]}
+2024-06-20 02:44:52,345 - root - INFO - Received message: 為啥 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 1471b1a29a3e4cf0a52396b281087f02
+2024-06-20 02:44:52,346 - root - ERROR - Error in handle_regular_message: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+2024-06-20 02:44:52,346 - root - ERROR - Error handling webhook: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+2024-06-20 02:44:52,347 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 134, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 143, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:44:52,351 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:44:52] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 02:49:14,192 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:49:14,192 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:49:24,351 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513417135734129205","quoteToken":"ToGZ7Jhp01boMW6EJjraCd2mFPrDPRMA8N6v5XIp-6A4jrH5JwDGojeBXnwFJbKOgs5P-vkqCgl2H6mGZ15qV4VwkPdeuWD6xJ3Elr4pH2GdbDjSOllAlgKleYyhDm0BYI26oc6I8knKFi__F99Mig","text":"為啥"},"webhookEventId":"01J0SRRZYV56S94SMF1S2KE3V0","deliveryContext":{"isRedelivery":false},"timestamp":1718851764139,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"c2657bf280e64b24ac97e1c1d5d2dc05","mode":"active"}]}
+2024-06-20 02:49:24,355 - root - INFO - Received message: 為啥 from user: U320d9bac5a0be464137325d6585b81ff with reply token: c2657bf280e64b24ac97e1c1d5d2dc05
+2024-06-20 02:49:24,528 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:49:24] "POST /callback HTTP/1.1" 200 -
+2024-06-20 02:49:44,777 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513417169472848068","quoteToken":"ukMxk8Lxlm-sXgJlpcuJmUn7A1v0H8G9N-tfzSdBxpX9tes-gPEPLrsAHT_iqnRNrnXCQ0OevA58EVJpurifLxlSWkG7GWC-CULMCWeJkwRK6SgUW0I5K2PXDwFIXhogw4XWNsV-0O6XT0tOz-g2Rw","text":"目錄"},"webhookEventId":"01J0SRSKY0HRSCGSW7EQB5Q9QJ","deliveryContext":{"isRedelivery":false},"timestamp":1718851784166,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"4ed1e4c228634d46894595c0869a9ff0","mode":"active"}]}
+2024-06-20 02:49:44,784 - root - INFO - Received message: 目錄 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 4ed1e4c228634d46894595c0869a9ff0
+2024-06-20 02:49:44,786 - root - ERROR - Error in handle_regular_message: 1 validation error for ReplyMessageRequest
+messages -> 0
+  value is not a valid dict (type=type_error.dict)
+2024-06-20 02:49:44,786 - root - ERROR - Error handling webhook: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+2024-06-20 02:49:44,787 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 134, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages -> 0
+  value is not a valid dict (type=type_error.dict)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 143, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:49:44,790 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:49:44] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 02:50:13,271 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:50:13,272 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:50:20,896 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513417230156038646","quoteToken":"KhbV3cpCwQQUFZnlsvZrpgYh3rpXDcH-1qmugdEnhdPkkj3Njh3v8Nbu_Apcl1KEbtTPTVLkhjr-VtCKUC8n_cyt2h-FfUQf-02SHs0TfKHUBmVVZNPeZ7apHH1DNqSnm06DX5cFh11LccWyaAnGFw","text":"目錄"},"webhookEventId":"01J0SRTQ7WBB5AEVXTP67NXCBY","deliveryContext":{"isRedelivery":false},"timestamp":1718851820302,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"18d571d0f8e548e8ab9cc70612da100b","mode":"active"}]}
+2024-06-20 02:50:20,897 - root - INFO - Received message: 目錄 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 18d571d0f8e548e8ab9cc70612da100b
+2024-06-20 02:50:20,897 - root - ERROR - Error in handle_regular_message: 1 validation error for ReplyMessageRequest
+messages -> 0
+  value is not a valid dict (type=type_error.dict)
+2024-06-20 02:50:20,898 - root - ERROR - Error handling webhook: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+2024-06-20 02:50:20,898 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 134, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages -> 0
+  value is not a valid dict (type=type_error.dict)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 143, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:50:20,900 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:50:20] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 02:52:05,745 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513417405830004803","quoteToken":"RhCU4yARrgyh7CAIVdvFtsJbZNCBUk6E-v5j2mDDgud34G4cI-v3ZlDxr3HrVdyhTfrizmRWa7pZyQzDvVN_F6N9aNoIurw3hE_o3M2QI_iUrIIfu4nfcNDG6ljzfEzk1qSt71SbcF2StiN9p3pV-Q","text":"新聞"},"webhookEventId":"01J0SRXXJ1EYKWSJCBYSSG8Y1B","deliveryContext":{"isRedelivery":false},"timestamp":1718851925059,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"06702d8ec63440f1b5a258b05d470681","mode":"active"}]}
+2024-06-20 02:52:05,754 - root - INFO - Received message: 新聞 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 06702d8ec63440f1b5a258b05d470681
+2024-06-20 02:52:05,756 - root - ERROR - Error in handle_regular_message: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:52:05,757 - root - ERROR - Error handling webhook: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+2024-06-20 02:52:05,758 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 125, in handle_regular_message
+    line_bot_api.reply_message(event.reply_token, prompt_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 143, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages
+  value is not a valid list (type=type_error.list)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:52:05,761 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:52:05] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 02:54:29,992 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:54:29,992 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:54:42,350 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513417668729241881","quoteToken":"-gF3KtA-j0yI-2UxE-zTcY164oXCrWxQ6Pb8g_5-lcLQpjuoLpoAAXOo-g0ik9wwgnX-7psmj8kJoXQ-9C5yr4-cXYN1ctDwk8cQEGA3JFlIR5tNtqtaftRtdWKXWSyEi8jCX2B-Uow8LJiOmR2zUQ","text":"新聞"},"webhookEventId":"01J0SS2PKRDXME5QFJCANDTV8T","deliveryContext":{"isRedelivery":false},"timestamp":1718852081788,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"978e8dce2a6d475996f28dd1ff4ea8e5","mode":"active"}]}
+2024-06-20 02:54:42,354 - root - INFO - Received message: 新聞 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 978e8dce2a6d475996f28dd1ff4ea8e5
+2024-06-20 02:54:42,355 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:54:42] "POST /callback HTTP/1.1" 200 -
+2024-06-20 02:55:40,631 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:55:40,631 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 02:55:48,850 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513417780263911642","quoteToken":"rO-yLoNEWZ2dQVWvWnTFqkKOQ_XlSVvquz4SQmxbpucF_61CtF1szNMZkhM4-5S4WTBjkqYB9uVvPF-Jt_J87ZgXFuLhAJSfL_mP4BLCtJApmn4kFQz9CIZ7MdD-iWOxdCdR_wgAov-om11YWcvTPg","text":"新聞"},"webhookEventId":"01J0SS4QF5RP6MEAE6RVAXNMZ4","deliveryContext":{"isRedelivery":false},"timestamp":1718852148202,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"b1ecbce304924dcbae0a92617f64efb7","mode":"active"}]}
+2024-06-20 02:55:48,855 - root - INFO - Received message: 新聞 from user: U320d9bac5a0be464137325d6585b81ff with reply token: b1ecbce304924dcbae0a92617f64efb7
+2024-06-20 02:55:49,062 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:55:49] "POST /callback HTTP/1.1" 200 -
+2024-06-20 02:56:02,004 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513417803148558417","quoteToken":"CDfTJfmYaRjQhsWd4y8hSKbcMZd8J5euwGxp-SjWPYhxY5iIJdp5_GghqkyQx3BNV2M4k3-oFvJIpEhcOhkBpUbDAfiSaiJfnrmO-jNXLrT1IpPmAtuNQQmLklEFttf5endmJs0PtSOcmjdqTEr-Fw","text":"黃仁勳"},"webhookEventId":"01J0SS548ZGVX874EP8R59H49C","deliveryContext":{"isRedelivery":false},"timestamp":1718852161788,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"b40a0520ff874541836a32eb869a05d4","mode":"active"}]}
+2024-06-20 02:56:02,006 - root - INFO - Received message: 黃仁勳 from user: U320d9bac5a0be464137325d6585b81ff with reply token: b40a0520ff874541836a32eb869a05d4
+2024-06-20 02:56:03,936 - root - ERROR - Error in handle_keywords_input: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 02:56:03,939 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 02:56:03] "POST /callback HTTP/1.1" 200 -
+2024-06-20 02:59:24,818 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 02:59:24,818 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 03:03:09,370 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 03:03:09,371 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 03:03:13,595 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513418526632182024","quoteToken":"jv5eYKZ-iN3r8RZCqdP5UHrGY0TkIlMaawcTUJfgp5H5Adj9I5WzPV3cf6I-NRMOaZCUdXdppciid7o080W5a2m7fKp9i-v5Rzz-XuLReRqS0VT20UnfCw-XzuspDEUvPmQldAu7IsQlraANMufeLQ","text":"新聞"},"webhookEventId":"01J0SSJ9K9QY596KHFGBG1E3T9","deliveryContext":{"isRedelivery":false},"timestamp":1718852593191,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"c05a03602a3e4dcd98007729686779b4","mode":"active"}]}
+2024-06-20 03:03:13,597 - root - INFO - Received message: 新聞 from user: U320d9bac5a0be464137325d6585b81ff with reply token: c05a03602a3e4dcd98007729686779b4
+2024-06-20 03:03:14,071 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:03:14] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:03:27,595 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513418549583413413","quoteToken":"sUJMAzJA0Ok9p5mRAYXxwwYAUE7eqBxumrH22KC87Hk4JI63h6fWahJ_ecWyEYZiQy_jyD6cG-3moPt2DmGvMukSqUTjfgAzNB1AsYKNdk0F4o_8fanwy3J3Xkb-Lw22lOOleFxyBvHt0ouVOsPLsg","text":"黃仁勳"},"webhookEventId":"01J0SSJQ844J98QSVQKMTZ7YX9","deliveryContext":{"isRedelivery":false},"timestamp":1718852606816,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"05b87401541a4c3680874801eda58b53","mode":"active"}]}
+2024-06-20 03:03:27,601 - root - INFO - Received message: 黃仁勳 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 05b87401541a4c3680874801eda58b53
+2024-06-20 03:03:30,877 - root - ERROR - Error in handle_keywords_input: 1 validation error for ReplyMessageRequest
+messages -> 0
+  value is not a valid dict (type=type_error.dict)
+2024-06-20 03:03:30,880 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:03:30] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:07:04,207 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 03:07:04,207 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 03:08:19,634 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513419039562006568","quoteToken":"YqV3T9k4QzFiHC5IVb6EjJDO0YmymtmIqnNBxXthcv-iINeqACZjIvpbVl3hXq50yxFhDp5Mby9yXBRFnWC5waM8xTbPiMDrk69TpX5cJKs1C7sjZst5A75DtGP0xufTWTPphyrF2y1i100UYE_vZA","text":"新聞"},"webhookEventId":"01J0SSVMHYG8KWMN789YK2DFKE","deliveryContext":{"isRedelivery":false},"timestamp":1718852898892,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"adc6d1b804f0408580b43138639f02fc","mode":"active"}]}
+2024-06-20 03:08:19,642 - root - INFO - Received message: 新聞 from user: U320d9bac5a0be464137325d6585b81ff with reply token: adc6d1b804f0408580b43138639f02fc
+2024-06-20 03:08:19,887 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:08:19] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:08:31,786 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513419060886372946","quoteToken":"JMmY-gRADckmaSjnjCu28YLXVzlOI6BrBvC3s54G3zQX4gJIEmHEoR3ytVXis2pHnywfOmTZQDeIa1SuhzzUp_zdtMM4z6QCqeBjDd0WcldmDI4FJKSq0RYxuLWSdyulMZoNpNj9ehgI0ppb6hQc8w","text":"黃仁勳"},"webhookEventId":"01J0SSW0K7F1673NY92BGQNNJW","deliveryContext":{"isRedelivery":false},"timestamp":1718852911648,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"2433f310f71947f49c31086aa6a044bf","mode":"active"}]}
+2024-06-20 03:08:31,787 - root - INFO - Received message: 黃仁勳 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 2433f310f71947f49c31086aa6a044bf
+2024-06-20 03:08:33,978 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:08:33] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:08:38,932 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513419072965181554","quoteToken":"-DUDHaop4NzKvzTzStDfL-dSZuZa7CeEb9zgy2hpVD10n6AZNz9tF4BULp9DWPrEZHTRjiY2lXCMSO-ZWoRECaMjW2BbFjjCdxz7tqz6gf88j627LdcRc5CYX2tfncBBDzNiHOFd5QuAyk7jlZbsYA","text":"新聞"},"webhookEventId":"01J0SSW7H3GVJDPF5K9H8AGQ4S","deliveryContext":{"isRedelivery":false},"timestamp":1718852918695,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"cbd0ea5e02ce4958a5691fd9d370c06b","mode":"active"}]}
+2024-06-20 03:08:38,936 - root - INFO - Received message: 新聞 from user: U320d9bac5a0be464137325d6585b81ff with reply token: cbd0ea5e02ce4958a5691fd9d370c06b
+2024-06-20 03:08:39,158 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:08:39] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:08:50,905 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513419092359905285","quoteToken":"TPp7sLKjNa-pX7GmrYsH3K9DqzATiZP1hYmuz17mFr7pLuUXpC4Z9XbHWBgHZAv7woQ0afTyvQ2-IlJOwlJnTcLteERY6AE9nnghBDBX83Q4JeohRs1Wz3iwWURiS2iBd5y2oqFGwfdq25H15fV2HQ","text":"ETF,日本"},"webhookEventId":"01J0SSWK5Q0SMR1XMMR43F5E9G","deliveryContext":{"isRedelivery":false},"timestamp":1718852930326,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"96678b37d99945e6b4f3afb56ac89dd7","mode":"active"}]}
+2024-06-20 03:08:50,909 - root - INFO - Received message: ETF,日本 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 96678b37d99945e6b4f3afb56ac89dd7
+2024-06-20 03:08:52,375 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:08:52] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:13:20,004 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513419543935713319","quoteToken":"ug8k2t9CeIrzIOBjjsYQqrNpREZx-YK2CaDzxtP7_Z3M_3BfhJBweFJuHqSp_2rTU9lbPR044wPWE7FzD2ndUOJfzkjLhB1Hozp1x2VI6hzBW0oHoyh7gAqn67mCOpir8Baui9Fu52mwQr2FTZRrHA","text":"功能列表"},"webhookEventId":"01J0ST4T0Y1WMZVGZJVM0THCFW","deliveryContext":{"isRedelivery":false},"timestamp":1718853199480,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"b70151651f1042d29aef231089642996","mode":"active"}]}
+2024-06-20 03:13:20,012 - root - INFO - Received message: 功能列表 from user: U320d9bac5a0be464137325d6585b81ff with reply token: b70151651f1042d29aef231089642996
+2024-06-20 03:13:20,014 - root - ERROR - Error in handle_regular_message: 1 validation error for ReplyMessageRequest
+messages -> 0
+  value is not a valid dict (type=type_error.dict)
+2024-06-20 03:13:20,014 - root - ERROR - Error handling webhook: 1 validation error for ReplyMessageRequest
+messages -> 0
+  value is not a valid dict (type=type_error.dict)
+2024-06-20 03:13:20,016 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 146, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages -> 0
+  value is not a valid dict (type=type_error.dict)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 155, in handle_regular_message
+    ReplyMessageRequest(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 1 validation error for ReplyMessageRequest
+messages -> 0
+  value is not a valid dict (type=type_error.dict)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 03:13:20,021 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:13:20] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 03:14:44,306 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 03:14:44,307 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 03:14:51,031 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513419696860037410","quoteToken":"glm9SkGXAdcW8rWlNcPud1jcJRBx1PyBItoXKOVQqxgC61cvzib8hT3afEq478Zubx7eIW1Wn9-IHvWhiALdqj2kFlbTQ8SzZnT7rUp5BbiTB68bjWzcpVoCvPoHHapWeHGT3dTJlt3ql0SFuImN5A","text":"功能列表"},"webhookEventId":"01J0ST7JXV1NZZKJEANB640MXA","deliveryContext":{"isRedelivery":false},"timestamp":1718853290546,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"d9e7d5dc4f7d4705917da6bf505c4eab","mode":"active"}]}
+2024-06-20 03:14:51,034 - root - INFO - Received message: 功能列表 from user: U320d9bac5a0be464137325d6585b81ff with reply token: d9e7d5dc4f7d4705917da6bf505c4eab
+2024-06-20 03:14:51,035 - root - ERROR - Error in handle_regular_message: 1 validation error for ReplyMessageRequest
+messages -> 0
+  value is not a valid dict (type=type_error.dict)
+2024-06-20 03:14:51,219 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:14:51] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:30:31,440 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 03:30:31,441 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 03:30:54,215 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513421313109655943","quoteToken":"S6oyHaEwLQwChhNEeSxd8jucD9Z3O0UUItD3dUSTF3xvW1udXLUBY-RGQl46Jb3iGuEoR6N1AD3l1l-q_JmXS8bOX9cj0v1ZR5zlDohoSmuy6N7yGGVgRDyiqjpm6ZieIvF4DpDpOKZ3UMThB83CQg","text":"功能列表"},"webhookEventId":"01J0SV4ZJCVJV5BCJFD8Z3AVWN","deliveryContext":{"isRedelivery":false},"timestamp":1718854253911,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"216c767bc7d84c5cba6052135fdbd5d4","mode":"active"}]}
+2024-06-20 03:30:54,219 - root - INFO - Received message: 功能列表 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 216c767bc7d84c5cba6052135fdbd5d4
+2024-06-20 03:30:54,220 - root - ERROR - Error in handle_regular_message: name 'MessageTemplateAction' is not defined
+2024-06-20 03:30:54,410 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:30:54] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:35:40,927 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 03:35:40,928 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 03:35:53,807 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513421821878731299","quoteToken":"wnmh47XktNaEH9mn6QwgQA4txaAZtjDHKEKzQKvdJWKbcx_JlfoNYlw96vnc_c4xg-ApJurFnoKztj9g0639_bY68YSvOKbJxkOL7vfsMMZvORH1pIawSTLcaapfbptjf5DfoGBk5Fa-CDmS43DjFw","text":"功能列表"},"webhookEventId":"01J0SVE7Z2C418YBW3Z018FKY4","deliveryContext":{"isRedelivery":false},"timestamp":1718854557159,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"4d10299a6c9d4745ac032d14d806077a","mode":"active"}]}
+2024-06-20 03:35:53,809 - root - INFO - Received message: 功能列表 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 4d10299a6c9d4745ac032d14d806077a
+2024-06-20 03:35:54,023 - root - ERROR - Error in handle_regular_message: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': 'b680df6a-f8b3-4e8f-8584-a0609fe361d9', 'x-xss-protection': '1; mode=block', 'Content-Length': '164', 'Expires': 'Thu, 20 Jun 2024 03:35:58 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 03:35:58 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"A message (messages[0]) in the request body is invalid","details":[{"message":"invalid uri scheme","property":"template/columns/5/thumbnailImageUrl"}]}
+
+2024-06-20 03:35:54,233 - root - ERROR - Error handling webhook: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': 'e08e6327-ebc5-4074-b4f7-3fd8044841e5', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 20 Jun 2024 03:35:58 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 03:35:58 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+2024-06-20 03:35:54,236 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 145, in handle_regular_message
+    line_bot_api.reply_message(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6944, in reply_message
+    return self.reply_message_with_http_info(reply_message_request, **kwargs)  # noqa: E501
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 7049, in reply_message_with_http_info
+    return self.api_client.call_api(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 407, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 222, in __call_api
+    raise e
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 212, in __call_api
+    response_data = self.request(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 451, in request
+    return self.rest_client.post_request(url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 270, in post_request
+    return self.request("POST", url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 229, in request
+    raise ApiException(http_resp=r)
+linebot.v3.messaging.exceptions.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': 'b680df6a-f8b3-4e8f-8584-a0609fe361d9', 'x-xss-protection': '1; mode=block', 'Content-Length': '164', 'Expires': 'Thu, 20 Jun 2024 03:35:58 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 03:35:58 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"A message (messages[0]) in the request body is invalid","details":[{"message":"invalid uri scheme","property":"template/columns/5/thumbnailImageUrl"}]}
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 154, in handle_regular_message
+    line_bot_api.reply_message(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6944, in reply_message
+    return self.reply_message_with_http_info(reply_message_request, **kwargs)  # noqa: E501
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 7049, in reply_message_with_http_info
+    return self.api_client.call_api(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 407, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 222, in __call_api
+    raise e
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 212, in __call_api
+    response_data = self.request(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 451, in request
+    return self.rest_client.post_request(url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 270, in post_request
+    return self.request("POST", url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 229, in request
+    raise ApiException(http_resp=r)
+linebot.v3.messaging.exceptions.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': 'e08e6327-ebc5-4074-b4f7-3fd8044841e5', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 20 Jun 2024 03:35:58 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 03:35:58 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 03:35:54,252 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:35:54] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 03:37:02,106 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 03:37:02,106 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 03:37:10,178 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513421950560502210","quoteToken":"seoMLl5TxYbx2Ka0rNOaiRT20FoWUChEkO-bYp1l67GcKLl6UA8Vm9UBisBCP67dr4RYiPvsOmNPxLYcZIaC0ItPZiarN89ndNvbyIIibmRYuTOMtE4yK6Fc0wE1yo_fKu1Oh1NDMmfi7XkMM8hz6w","text":"新聞"},"webhookEventId":"01J0SVGJJ5HF360XY7TNKW1VZ8","deliveryContext":{"isRedelivery":false},"timestamp":1718854633848,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"4114e19d28d3456580c1a134652e5257","mode":"active"}]}
+2024-06-20 03:37:10,183 - root - INFO - Received message: 新聞 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 4114e19d28d3456580c1a134652e5257
+2024-06-20 03:37:10,352 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:37:10] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:37:13,422 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513421955878092851","quoteToken":"_NJJRNgb-hzxBVEu7R6dHYSJ1-s-HV06-H551zxA-fYdH9aOvFVRufibGElmnJUKBfv-uw_YciqcS_aUIjpUx6mrhqiUrT5U_yt4TtiND4yFRRqifJPjW6zU2EU_tMiTEcHqSS1A3vqzm-VtZdAG7w","text":"你"},"webhookEventId":"01J0SVGNTBWCDVAAT3SQM1X9T0","deliveryContext":{"isRedelivery":false},"timestamp":1718854637155,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"34405089201c4e5a9cc14941edbd958e","mode":"active"}]}
+2024-06-20 03:37:13,423 - root - INFO - Received message: 你 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 34405089201c4e5a9cc14941edbd958e
+2024-06-20 03:37:15,228 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:37:15] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:37:23,112 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513421971716309491","quoteToken":"K6t4EuDkwAiQ68F8aERL6EhvPzumWy60SIMRwLqGvioS2tMWQEh22zoFszOJ_hZteGyqFMsQcHDA0siR3k2opwYfXnCWuvn1QtLkTLnm1i6yadMhKfo_4czuS8-s4t9q8NILMu0Wyy81zyddC9ouFw","text":"功能列表"},"webhookEventId":"01J0SVGZ68Y35ZMW0547Z71RPR","deliveryContext":{"isRedelivery":false},"timestamp":1718854646547,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"6880eea6b5b64e52b2a59a24e015595d","mode":"active"}]}
+2024-06-20 03:37:23,115 - root - INFO - Received message: 功能列表 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 6880eea6b5b64e52b2a59a24e015595d
+2024-06-20 03:37:23,333 - root - ERROR - Error in handle_regular_message: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '36df126d-42c4-4622-8add-97eed4b701bf', 'x-xss-protection': '1; mode=block', 'Content-Length': '164', 'Expires': 'Thu, 20 Jun 2024 03:37:27 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 03:37:27 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"A message (messages[0]) in the request body is invalid","details":[{"message":"invalid uri scheme","property":"template/columns/5/thumbnailImageUrl"}]}
+
+2024-06-20 03:37:23,481 - root - ERROR - Error handling webhook: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '6fa0bb0f-8f3e-4946-8647-614901158022', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 20 Jun 2024 03:37:27 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 03:37:27 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+2024-06-20 03:37:23,484 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 145, in handle_regular_message
+    line_bot_api.reply_message(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6944, in reply_message
+    return self.reply_message_with_http_info(reply_message_request, **kwargs)  # noqa: E501
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 7049, in reply_message_with_http_info
+    return self.api_client.call_api(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 407, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 222, in __call_api
+    raise e
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 212, in __call_api
+    response_data = self.request(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 451, in request
+    return self.rest_client.post_request(url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 270, in post_request
+    return self.request("POST", url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 229, in request
+    raise ApiException(http_resp=r)
+linebot.v3.messaging.exceptions.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '36df126d-42c4-4622-8add-97eed4b701bf', 'x-xss-protection': '1; mode=block', 'Content-Length': '164', 'Expires': 'Thu, 20 Jun 2024 03:37:27 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 03:37:27 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"A message (messages[0]) in the request body is invalid","details":[{"message":"invalid uri scheme","property":"template/columns/5/thumbnailImageUrl"}]}
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+    handle_regular_message(line_bot_api, event, msg, user_id)
+  File "/opt/ccclub/linebot/app.py", line 154, in handle_regular_message
+    line_bot_api.reply_message(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6944, in reply_message
+    return self.reply_message_with_http_info(reply_message_request, **kwargs)  # noqa: E501
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 7049, in reply_message_with_http_info
+    return self.api_client.call_api(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 407, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 222, in __call_api
+    raise e
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 212, in __call_api
+    response_data = self.request(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 451, in request
+    return self.rest_client.post_request(url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 270, in post_request
+    return self.request("POST", url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 229, in request
+    raise ApiException(http_resp=r)
+linebot.v3.messaging.exceptions.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '6fa0bb0f-8f3e-4946-8647-614901158022', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 20 Jun 2024 03:37:27 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 03:37:27 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    line_bot_api.reply_message(event.reply_token, error_message)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 03:37:23,499 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:37:23] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 03:51:50,618 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 03:51:50,619 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 03:51:57,968 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423440158392466","quoteToken":"7hxIdNVFj-7M8N3UztLWy5Z4Bz5bFVuDQr_n3KgElY_aBIrfqipKedPF817xgnHdlhHMZMZfKDOOeSnDv8-bKkZ7-15Ojv9K_RT8AguzUUOzjYPPvc7BkzVgYwMHsKqFoMiyrYRXDyYRKvODJCNQvQ","text":"目錄"},"webhookEventId":"01J0SWBNH6GNA1N5D25DE9FTS9","deliveryContext":{"isRedelivery":false},"timestamp":1718855521753,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"f40187487ad94f168a6d479c74767b99","mode":"active"}]}
+2024-06-20 03:51:57,971 - root - INFO - Received message: 目錄 from user: U320d9bac5a0be464137325d6585b81ff with reply token: f40187487ad94f168a6d479c74767b99
+2024-06-20 03:51:58,150 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:51:58] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:06,716 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423454973198705","quoteToken":"buw6wb_jn--duvwdqRraCOpxTnT27bv9yhXhIUCFWya-2-GPJ-Ni3yLw-hsku4lpAPgV2ccNHmfHfkubncXWGB4OUfcP1B6gQS0Wdh2z3_R3d2H1ZZhL6_v22HfTeujSwiGsAl2cbfwaNU7CJCYmjQ","text":"財報"},"webhookEventId":"01J0SWBY44C3MSKTGTHX7BER9H","deliveryContext":{"isRedelivery":false},"timestamp":1718855530542,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"36ca7232ee8f4007b4a248472d78c9ec","mode":"active"}]}
+2024-06-20 03:52:06,720 - root - INFO - Received message: 財報 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 36ca7232ee8f4007b4a248472d78c9ec
+2024-06-20 03:52:06,877 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:06] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:11,595 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423462875005076","quoteToken":"6g9J5Xz7wdAxImUiLZp7qkvaNq2kVAX8QXwwD3FD5iiqXkwnw0Ml0Zz5whDm1DtKMyMcCSVSJDM_sUz9Mbsk7tZNiyfBG-ZxQaDuNFvpsBXUdGO93n6VH61d8E_gnCdE4hzRfP6B-ELTdJaCN-VAqQ","text":"查詢股票資訊"},"webhookEventId":"01J0SWC2Z26537M9FR4QZER06T","deliveryContext":{"isRedelivery":false},"timestamp":1718855535344,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"f67457d0ae9f4b78b37f336e208b6d13","mode":"active"}]}
+2024-06-20 03:52:11,596 - root - INFO - Received message: 查詢股票資訊 from user: U320d9bac5a0be464137325d6585b81ff with reply token: f67457d0ae9f4b78b37f336e208b6d13
+2024-06-20 03:52:11,757 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:11] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:13,870 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423466146824323","quoteToken":"Hc5h4LAh98HmWwBoCr71JSKhGT5yPvUgT9j0KhSIPpvfhHr53-d454ukpI2h9IqVBS-nTa5fu7dfvUrmSv8eir39f9slYSLIxnJ1KJlZpY0ZvA4YYxfVUX2cr2yZaDN9I1F73lQ7RR0mnvCIYExEyg","text":"歷史股價查詢"},"webhookEventId":"01J0SWC54MASZC5JR30WZKKNT5","deliveryContext":{"isRedelivery":false},"timestamp":1718855537327,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"322e2481198c4369994ac55f6623227e","mode":"active"}]}
+2024-06-20 03:52:13,871 - root - INFO - Received message: 歷史股價查詢 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 322e2481198c4369994ac55f6623227e
+2024-06-20 03:52:14,043 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:14] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:16,337 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423470593048791","quoteToken":"naDoPzuUiTg_96WGia2I6WrzckGJUhLiEc4FgRIMz58HvqgGL8wdYkA0tVnlSPaI--G5lbdFbQ8Z3FnFYVpqZz85o6rTpY4hdblA6sZmXAwxrwF78dEBdD_EYYHZ37D7E_7i7d7k0Sq9uo3PTginBQ","text":"基本股票功能"},"webhookEventId":"01J0SWC7FDNP3B8Q232E02P80D","deliveryContext":{"isRedelivery":false},"timestamp":1718855539975,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"610c6f6aa2ae434a9bbaf3ce11fc733d","mode":"active"}]}
+2024-06-20 03:52:16,338 - root - INFO - Received message: 基本股票功能 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 610c6f6aa2ae434a9bbaf3ce11fc733d
+2024-06-20 03:52:16,486 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:16] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:22,198 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423480021319895","quoteToken":"du2GDVlF6agPi7A2ke75Z4KeciBz97bxtPd0YN3hQVgZAc1sWLg7mWNfN6AxMSGfyXt0Bd0o9rugVrpQMMEWQmVIFaOrmEfPdt_JPQ4Ka--DwhEzh4x6rtZM6dnjjcqehvgFIc2bONvULMsMOUo-Bg","text":"查詢股票資訊"},"webhookEventId":"01J0SWCD7SD2NQTKDED3X2HDVQ","deliveryContext":{"isRedelivery":false},"timestamp":1718855545658,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"5f024c12b6254a578dcdd07ff8dde886","mode":"active"}]}
+2024-06-20 03:52:22,200 - root - INFO - Received message: 查詢股票資訊 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 5f024c12b6254a578dcdd07ff8dde886
+2024-06-20 03:52:22,369 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:22] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:25,311 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423485792944241","quoteToken":"LQXUZjZtg4bRy5SoiPtpplopluRdmnfZlQyP2dVSh3Y5vSGRFS7g3FAO1NOs2rOCIsicbwXYXu9md2ezSc0imyDvWzatWbwr7srmSRspzy0R6OLp7WTdUrBM7bK5URRkPwveYgOfAWHyTjTaMcy0MQ","text":"換股"},"webhookEventId":"01J0SWCGBJSMF8BAJ8JP2T5XD8","deliveryContext":{"isRedelivery":false},"timestamp":1718855548906,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"1b3b41d026134521b98523a02ee48c23","mode":"active"}]}
+2024-06-20 03:52:25,312 - root - INFO - Received message: 換股 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 1b3b41d026134521b98523a02ee48c23
+2024-06-20 03:52:25,464 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:25] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:27,670 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423489366491553","quoteToken":"rD2x8VvDezElju8OEXnwmdr6AhPmx0H8oeUh_vWonKSycYyUiIcXjBuctJYc0Ad_X-UY7ZsG_s4LHJ3fWH9_rK4pV3O6PlnSspeGMC_32YadJBXC_-e4TAh5urKkf5AqMPGGjaKT8ZsZdl1M2tCjEA","text":"換股時間"},"webhookEventId":"01J0SWCJHY9THY1RS4DKMS1S20","deliveryContext":{"isRedelivery":false},"timestamp":1718855551044,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"28010bbc26834ec99b6636a21fd7b0f1","mode":"active"}]}
+2024-06-20 03:52:27,672 - root - INFO - Received message: 換股時間 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 28010bbc26834ec99b6636a21fd7b0f1
+2024-06-20 03:52:27,833 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:27] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:29,259 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423492134731969","quoteToken":"-L8mm_1wZS1g4BOo1iptgPMeMNGHAQNuTXjVRRfrPpaH-6TZPePbD4_aAonR0oRadfkjAf4fb2VrqVt2YNPlV9JADlIJ9kjeBtkhVhjIk40rtq3NWNbuMTUr_Ged7PKNi19NWf9D6sgQul63se632g","text":"換股時間"},"webhookEventId":"01J0SWCM37ZSDDNK5YG9G0JDE1","deliveryContext":{"isRedelivery":false},"timestamp":1718855552688,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"74a7cb6bba0d422c9997f3f845659e31","mode":"active"}]}
+2024-06-20 03:52:29,260 - root - INFO - Received message: 換股時間 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 74a7cb6bba0d422c9997f3f845659e31
+2024-06-20 03:52:29,422 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:29] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:31,742 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423496899461409","quoteToken":"kMYJArh3pS6dK9POdNA922TJlSOY_OiPkL6sP7pC0fxFSuidiVp8mOoshUWrdAFFwd1_diyvKVD7-8QSVhTO4PUMF2IqbxtV2B2C62WDTa6AYln57mqgbTy-h6tvBpOKQzaK11PO7rNNzngBYK91ew","text":"換了哪些股"},"webhookEventId":"01J0SWCPHKM4MZ15K6C2912Z1S","deliveryContext":{"isRedelivery":false},"timestamp":1718855555529,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"3031d4a6d1414433a676b338b2779a36","mode":"active"}]}
+2024-06-20 03:52:31,743 - root - INFO - Received message: 換了哪些股 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 3031d4a6d1414433a676b338b2779a36
+2024-06-20 03:52:31,889 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:31] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:42,294 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423514482245954","quoteToken":"boeW-zc8pxHjyIuGCijh4VMsTHATU6eKFTWc-1wZWOoup5uEwaR9ZIxfyEgtj3SlJnyt9Uu3frdXOehA8UeV1XUH_6pL8V86UF0WP_LPSB5dWnJzYbl3R53D9xWNCyLdPfpfrR5g71CthCrX-6-vAQ","text":"個人相關功能"},"webhookEventId":"01J0SWD0XKV57E7FG4W0E32N0X","deliveryContext":{"isRedelivery":false},"timestamp":1718855566095,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"f1f98b71ddc94ab5ad309906cce6f41f","mode":"active"}]}
+2024-06-20 03:52:42,297 - root - INFO - Received message: 個人相關功能 from user: U320d9bac5a0be464137325d6585b81ff with reply token: f1f98b71ddc94ab5ad309906cce6f41f
+2024-06-20 03:52:42,439 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:42] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:46,988 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423522283388961","quoteToken":"KhxHA3RfkEqiEImMD-LUQq7V6l6q2tsKrEZLsPMjrMSID4gN4mMXYQln4cohyof6mwCsPuBFQre9uTqAipgkB1_4D2HGnAdHbu90-OMqC-UCL9jSWU2iA-yX4BY6ZjCYhQn7dxlz_rO-lHjjQuoSyw","text":"新聞"},"webhookEventId":"01J0SWD5GF860XJYJ509C8KGW1","deliveryContext":{"isRedelivery":false},"timestamp":1718855570655,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"253d1cb689844086824d3bb5270ca1d3","mode":"active"}]}
+2024-06-20 03:52:46,989 - root - INFO - Received message: 新聞 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 253d1cb689844086824d3bb5270ca1d3
+2024-06-20 03:52:47,251 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:47] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:52:57,328 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423539093897602","quoteToken":"MlULd8uTk1MAinxFNEJcGoDo0zSvkmtE9r9yjRaQy6VHnqTHFSobNKCS6lT5vpmd7HkWm6e1mgcH1twEjkIveV01g7OgbQfUmy8b4MnY1lilSOD_1sZHnlf-rGL2VVt8qwDUyjt9tH43KBgHe3cwUQ","text":"Etf"},"webhookEventId":"01J0SWDFH6X5C7F9M35F8QK7H0","deliveryContext":{"isRedelivery":false},"timestamp":1718855580714,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"dc1ee7c8449a431d817a70cf7dc912f5","mode":"active"}]}
+2024-06-20 03:52:57,332 - root - INFO - Received message: Etf from user: U320d9bac5a0be464137325d6585b81ff with reply token: dc1ee7c8449a431d817a70cf7dc912f5
+2024-06-20 03:52:59,297 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:52:59] "POST /callback HTTP/1.1" 200 -
+2024-06-20 03:53:06,798 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513423555250880582","quoteToken":"KKg2EXVkbLcGF-y4qxmXmQR44YcQsXWt8SsplCrSxv_ZdkIcUV3e7nwLSYWqJbzpkbgL6dJ3ojfUzEt92tv1IgVK5Yy2E3fiYizIKpYeSj_ocLvVYSunYzclBZZAsE1Fa-w0b7pD8PJsCRpvwci9Vw","text":"目錄"},"webhookEventId":"01J0SWDRSRDTEFVTJQEZJ4KB8H","deliveryContext":{"isRedelivery":false},"timestamp":1718855590438,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"e8b241229f2542d88eb4c4b6baa0371b","mode":"active"}]}
+2024-06-20 03:53:06,802 - root - INFO - Received message: 目錄 from user: U320d9bac5a0be464137325d6585b81ff with reply token: e8b241229f2542d88eb4c4b6baa0371b
+2024-06-20 03:53:06,952 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 03:53:06] "POST /callback HTTP/1.1" 200 -
+2024-06-20 04:03:57,260 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513424646541672772","quoteToken":"NsrVWSueRR3si_PzrhRkZl58J2P46h8u10fzhNJ0a-nTjnEAMFdKUiXk7L1tDTdHAk0SCtqpjVc_yjTEL_T9V59efia2j9cMJeWB_h7m91_RN85fF9R3Gztkoac9r3-cr0G_ZlHzVxyqxGcwcFPyjg","text":"功能列表"},"webhookEventId":"01J0SX1KYZH2FNR5T5NBNZR9QF","deliveryContext":{"isRedelivery":false},"timestamp":1718856240947,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"1c2bd00ea5be4d0d80665e65c74c2d0f","mode":"active"}]}
+2024-06-20 04:03:57,270 - root - INFO - Received message: 功能列表 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 1c2bd00ea5be4d0d80665e65c74c2d0f
+2024-06-20 04:03:57,503 - root - ERROR - Error in handle_regular_message: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': 'fdc750d8-17cc-4ee7-9e3f-0bdf996eb753', 'x-xss-protection': '1; mode=block', 'Content-Length': '164', 'Expires': 'Thu, 20 Jun 2024 04:04:01 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 04:04:01 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"A message (messages[0]) in the request body is invalid","details":[{"message":"invalid uri scheme","property":"template/columns/5/thumbnailImageUrl"}]}
+
+2024-06-20 04:03:57,651 - root - ERROR - Error handling webhook: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': 'b369af5f-277d-41ea-a4b7-dc19f95c23c6', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 20 Jun 2024 04:04:01 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 04:04:01 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+2024-06-20 04:03:57,652 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 145, in handle_regular_message
+    error_message = TextMessage(text="發生錯誤，請稍後再試。")
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6944, in reply_message
+    return self.reply_message_with_http_info(reply_message_request, **kwargs)  # noqa: E501
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 7049, in reply_message_with_http_info
+    return self.api_client.call_api(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 407, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 222, in __call_api
+    raise e
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 212, in __call_api
+    response_data = self.request(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 451, in request
+    return self.rest_client.post_request(url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 270, in post_request
+    return self.request("POST", url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 229, in request
+    raise ApiException(http_resp=r)
+linebot.v3.messaging.exceptions.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': 'fdc750d8-17cc-4ee7-9e3f-0bdf996eb753', 'x-xss-protection': '1; mode=block', 'Content-Length': '164', 'Expires': 'Thu, 20 Jun 2024 04:04:01 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 04:04:01 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"A message (messages[0]) in the request body is invalid","details":[{"message":"invalid uri scheme","property":"template/columns/5/thumbnailImageUrl"}]}
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+  File "/opt/ccclub/linebot/app.py", line 154, in handle_regular_message
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6944, in reply_message
+    return self.reply_message_with_http_info(reply_message_request, **kwargs)  # noqa: E501
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 7049, in reply_message_with_http_info
+    return self.api_client.call_api(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 407, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 222, in __call_api
+    raise e
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 212, in __call_api
+    response_data = self.request(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 451, in request
+    return self.rest_client.post_request(url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 270, in post_request
+    return self.request("POST", url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 229, in request
+    raise ApiException(http_resp=r)
+linebot.v3.messaging.exceptions.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': 'b369af5f-277d-41ea-a4b7-dc19f95c23c6', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 20 Jun 2024 04:04:01 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 04:04:01 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    if keywords:
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 04:03:57,672 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 04:03:57] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -
+2024-06-20 04:04:31,553 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513424696705286450","quoteToken":"mtROTfTsE0cnL0mo4k6cxLhD1uXjz_mDYFIlQf-7mBRdF2AV0HqkGoIMT-Auvt2nPQ8hC8UJHkV0jiebUXzqpuODC-4mTnUulkNu59QYuATJZLAlII5x-EYS2YiiFCjwUTVBPRLk1fFp5mxXUQ08xw","text":"目錄"},"webhookEventId":"01J0SX2HB6B7282NZD0TBBS48N","deliveryContext":{"isRedelivery":false},"timestamp":1718856270697,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"98fe492872b94f1cbda00f60ac496f6c","mode":"active"}]}
+2024-06-20 04:04:31,559 - root - INFO - Received message: 目錄 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 98fe492872b94f1cbda00f60ac496f6c
+2024-06-20 04:04:31,811 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 04:04:31] "POST /callback HTTP/1.1" 200 -
+2024-06-20 04:11:03,713 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513425354674405459","quoteToken":"HvOkrPc_a4QSKMT_9vd-1Cxiic1bBRQNmKiCe9w4q3WH5bswH654vX1fVKWlENgwNLUdf4hi_IHR_0oPbV4A5jv9FpdP0nGz-xs-Ri2mD_pSrIHpmfN-AUN1PQi31rh755CyYVz563DqKhmWXdADgQ","text":"功能列表"},"webhookEventId":"01J0SXEGB1CMYR0S3B4SFN1EJT","deliveryContext":{"isRedelivery":false},"timestamp":1718856662943,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"ac28aef9fca548ecaf8b14202e49605d","mode":"active"}]}
+2024-06-20 04:11:03,719 - root - INFO - Received message: 功能列表 from user: U320d9bac5a0be464137325d6585b81ff with reply token: ac28aef9fca548ecaf8b14202e49605d
+2024-06-20 04:11:04,001 - root - ERROR - Error in handle_regular_message: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '1911a45c-4f15-4bb5-90af-68c8e35015a1', 'x-xss-protection': '1; mode=block', 'Content-Length': '164', 'Expires': 'Thu, 20 Jun 2024 04:11:04 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 04:11:04 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"A message (messages[0]) in the request body is invalid","details":[{"message":"invalid uri scheme","property":"template/columns/5/thumbnailImageUrl"}]}
+
+2024-06-20 04:11:04,127 - root - ERROR - Error handling webhook: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '6561777c-010d-4168-bebb-a851fe1ebbfb', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 20 Jun 2024 04:11:04 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 04:11:04 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+2024-06-20 04:11:04,128 - app - ERROR - Exception on /callback [POST]
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 145, in handle_regular_message
+    error_message = TextMessage(text="發生錯誤，請稍後再試。")
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6944, in reply_message
+    return self.reply_message_with_http_info(reply_message_request, **kwargs)  # noqa: E501
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 7049, in reply_message_with_http_info
+    return self.api_client.call_api(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 407, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 222, in __call_api
+    raise e
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 212, in __call_api
+    response_data = self.request(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 451, in request
+    return self.rest_client.post_request(url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 270, in post_request
+    return self.request("POST", url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 229, in request
+    raise ApiException(http_resp=r)
+linebot.v3.messaging.exceptions.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '1911a45c-4f15-4bb5-90af-68c8e35015a1', 'x-xss-protection': '1; mode=block', 'Content-Length': '164', 'Expires': 'Thu, 20 Jun 2024 04:11:04 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 04:11:04 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"A message (messages[0]) in the request body is invalid","details":[{"message":"invalid uri scheme","property":"template/columns/5/thumbnailImageUrl"}]}
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/ccclub/linebot/app.py", line 90, in handle_message
+  File "/opt/ccclub/linebot/app.py", line 154, in handle_regular_message
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6944, in reply_message
+    return self.reply_message_with_http_info(reply_message_request, **kwargs)  # noqa: E501
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 134, in call
+    return self.execute(m)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 206, in execute
+    return self.raw_function(**d, **var_kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api/messaging_api.py", line 7049, in reply_message_with_http_info
+    return self.api_client.call_api(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 407, in call_api
+    return self.__call_api(resource_path, method,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 222, in __call_api
+    raise e
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 212, in __call_api
+    response_data = self.request(
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/api_client.py", line 451, in request
+    return self.rest_client.post_request(url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 270, in post_request
+    return self.request("POST", url,
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/messaging/rest.py", line 229, in request
+    raise ApiException(http_resp=r)
+linebot.v3.messaging.exceptions.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '6561777c-010d-4168-bebb-a851fe1ebbfb', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 20 Jun 2024 04:11:04 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 20 Jun 2024 04:11:04 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/opt/ccclub/linebot/app.py", line 63, in callback
+    handler.handle(body, signature)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 227, in handle
+    self.__invoke_func(func, event, payload)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/linebot/v3/webhook.py", line 239, in __invoke_func
+    func(event)
+  File "/opt/ccclub/linebot/app.py", line 94, in handle_message
+    if keywords:
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 40, in wrapper_function
+    return vd.call(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 133, in call
+    m = self.init_model_instance(*args, **kwargs)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/decorator.py", line 130, in init_model_instance
+    return self.model(**values)
+  File "/opt/conda/envs/ccclub/lib/python3.10/site-packages/pydantic/v1/main.py", line 341, in __init__
+    raise validation_error
+pydantic.v1.error_wrappers.ValidationError: 2 validation errors for ReplyMessage
+reply_message_request
+  value is not a valid dict (type=type_error.dict)
+args
+  2 positional arguments expected but 3 given (type=type_error)
+2024-06-20 04:11:04,135 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 04:11:04] "[35m[1mPOST /callback HTTP/1.1[0m" 500 -

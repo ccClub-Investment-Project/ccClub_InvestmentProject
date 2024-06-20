@@ -1,5 +1,5 @@
 import requests
-from linebot.models import TextSendMessage
+from linebot.v3.messaging import TextMessage
 
 class CnyesNewsSpider:
     def get_latest_news(self, pages=10, limit=10):
@@ -45,10 +45,10 @@ def fetch_and_filter_news_message(keywords, pages=10, limit=10):
             news_list_text += f"   連結: https://news.cnyes.com/news/id/{news['newsId']}\n\n"
 
         if filtered_news:
-            message = TextSendMessage(text=news_list_text.strip())
+            message = TextMessage(text=news_list_text.strip())
         else:
-            message = TextSendMessage(text="最新新聞中沒有找到相關內容。")
+            message = TextMessage(text="最新新聞中沒有找到相關內容。")
     else:
-        message = TextSendMessage(text="無法獲取最新新聞，請稍後再試。")
+        message = TextMessage(text="無法獲取最新新聞，請稍後再試。")
     
     return message

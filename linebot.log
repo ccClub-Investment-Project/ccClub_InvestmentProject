@@ -1,0 +1,11 @@
+2024-06-20 01:47:33,413 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.21.0.2:5000
+2024-06-20 01:47:33,413 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-06-20 01:47:43,652 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513410926754922951","quoteToken":"2Opo775Qr22CRWZ7wVphvzTVv4HvrIbzE_iVS89Lz94vxZIF2esm1q1WaK7iMc3tKlkvZnYu7GJWpAIbwWmOpRudumGXiz6HTeVjx2XpB7eIL4JVnG9gn-bPipVMJJt0LiswKFXfQYuWqnZ9p8RjcQ","text":"測試"},"webhookEventId":"01J0SN81VT64WXZF72JQF6ZDV1","deliveryContext":{"isRedelivery":false},"timestamp":1718848063329,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"5c511cce2d3e4a3dab3c51003c0ac4a9","mode":"active"}]}
+2024-06-20 01:47:43,657 - root - INFO - Received message: 測試 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 5c511cce2d3e4a3dab3c51003c0ac4a9
+2024-06-20 01:47:43,658 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 01:47:43] "POST /callback HTTP/1.1" 200 -
+2024-06-20 01:48:05,066 - app - INFO - Request body: {"destination":"U207253da1df377c8ad7a96ba31c0c7af","events":[{"type":"message","message":{"type":"text","id":"513410962406244759","quoteToken":"kCH7JokKUrGygrESgZGaJtgFD1XMoBqPphPX5JPbbQ0UekNJfYFysLN5GpUGtH4F-AGotVcIomV6NpKiOFVgwJ61uqFv4StxdS2PCmgePy5u1req_Je2v8G0DO_Q7t9WOYzm1qcQM32nUdG6c2xXnQ","text":"存到那"},"webhookEventId":"01J0SN8PVPE7EGZ1G49JKNFA4X","deliveryContext":{"isRedelivery":false},"timestamp":1718848084545,"source":{"type":"user","userId":"U320d9bac5a0be464137325d6585b81ff"},"replyToken":"42bf2b2ed87d4f7d87674ab703c4edbc","mode":"active"}]}
+2024-06-20 01:48:05,077 - root - INFO - Received message: 存到那 from user: U320d9bac5a0be464137325d6585b81ff with reply token: 42bf2b2ed87d4f7d87674ab703c4edbc
+2024-06-20 01:48:05,081 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2024 01:48:05] "POST /callback HTTP/1.1" 200 -
