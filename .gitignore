@@ -17,3 +17,7 @@ Samantha/.env
 
 # 虛擬環境
 venv/
+
+linebot.log
+path.env
+
