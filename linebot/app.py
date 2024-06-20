@@ -300,21 +300,6 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
             )
         )
 
-@handler.add(MemberJoinedEvent)
-def welcome(event):
-    with ApiClient(configuration) as api_client:
-        line_bot_api = MessagingApi(api_client)
-        uid = event.joined.members[0].user_id
-        gid = event.source.group_id
-        profile = line_bot_api.get_group_member_profile(gid, uid)
-        name = profile.display_name
-        message = TextMessage(text=f'{name}歡迎加入')
-        line_bot_api.reply_message(
-            ReplyMessageRequest(
-                reply_token=event.reply_token,
-                messages=[message]  # Ensure messages is passed as a list
-            )
-        )
 
 def handle_regular_message(line_bot_api, event, msg, user_id):
     try:
