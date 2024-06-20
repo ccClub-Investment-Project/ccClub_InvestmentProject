@@ -68,17 +68,17 @@ def Carousel_Template():
                     title='其他相關功能',
                     text='Description 2',
                     actions=[
-                        MessageAction(
-                            label='個人相關功能',
-                            text='個人相關功能'
+                        URIAction(
+                            label='互動式網站',
+                            uri='https://backtest-kk2m.onrender.com/one_stock?id=0056&amount=3000&date=5&duration=1'
                         ),
                         MessageAction(
                             label='新聞',
                             text='新聞'
                         ),
                         MessageAction(
-                            label='回測0050,定期定額3000,5年',
-                            text='回測0050,定期定額3000,5年'
+                            label='回測',
+                            text='回測'
                         ),
                         # URIAction(
                         #     label='定期定額 回測API',    

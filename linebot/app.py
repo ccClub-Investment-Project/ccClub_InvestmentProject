@@ -119,59 +119,70 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
     finally:
         user_states[user_id] = None
 
+import re
+from linebot.models import TextMessage, ReplyMessageRequest
+
+user_states = {}  # 用来存储用户状态的字典
+
 def handle_regular_message(line_bot_api, event, msg, user_id):
-    try:
-        if '財報' in msg:
-            message = buttons_message1()
-        elif '基本股票功能' in msg:
-            message = buttons_message1()
-        elif '換股' in msg:
-            message = buttons_message2()
-        elif '目錄' in msg:
-            message = Carousel_Template()
-        elif '新聞' in msg:
-            message = TextMessage(text="請輸入關鍵字，用逗號分隔:")
-            line_bot_api.reply_message(
-                ReplyMessageRequest(
-                    replyToken=event.reply_token,
-                    messages=[message]
-                )
+    if '財報' in msg:
+        message = buttons_message1()
+    elif '基本股票功能' in msg:
+        message = buttons_message1()
+    elif '換股' in msg:
+        message = buttons_message2()
+    elif '目錄' in msg:
+        message = Carousel_Template()
+    elif '新聞' in msg:
+        message = TextMessage(text="請輸入關鍵字，用逗號分隔:")
+        line_bot_api.reply_message(
+            ReplyMessageRequest(
+                replyToken=event.reply_token,
+                messages=[message]
             )
-            user_states[user_id] = 'waiting_for_keywords'
-            return
-        elif '功能列表' in msg:
-            message = function_list()
-        elif '回測' in msg:
-            message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用逗號隔開):")
-            line_bot_api.reply_message(
-                ReplyMessageRequest(
-                    replyToken=event.reply_token,
-                    messages=[message]
-                )
+        )
+        user_states[user_id] = 'waiting_for_keywords'
+        return
+    elif '功能列表' in msg:
+        message = function_list()
+    elif '回測' in msg:
+        message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用逗號隔開):")
+        line_bot_api.reply_message(
+            ReplyMessageRequest(
+                replyToken=event.reply_token,
+                messages=[message]
             )
-            user_states[user_id] = 'waiting_for_backtest'
-            return
+        )
+        user_states[user_id] = 'waiting_for_backtest'
+        return
 
-        elif user_states.get(user_id) == 'waiting_for_backtest':
-            try:
-                stock, amount, years = msg.split(',')
-                message = f"回測標的: {stock}, 定期定額價目: {amount}, 幾年: {years}"
-                # 這裡可以插入回測的具體實現邏輯
-            except ValueError:
-                message = "輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入"
-            finally:
-                user_states[user_id] = None  # 重置狀態
-            
-            line_bot_api.reply_message(
-                ReplyMessageRequest(
-                    replyToken=event.reply_token,
-                    messages=[TextMessage(text=message)]
-                )
+    elif user_states.get(user_id) == 'waiting_for_backtest':
+        try:
+            message = backtest(msg)
+        except ValueError:
+            message = "輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入"
+        finally:
+            user_states[user_id] = None  # 重置狀態
+        
+        line_bot_api.reply_message(
+            ReplyMessageRequest(
+                replyToken=event.reply_token,
+                messages=[TextMessage(text=message)]
             )
+        )
+        return
 
-    except Exception as e:
-        # 如果有需要的話，可以在這裡添加錯誤處理邏輯
-        print(f"Exception: {e}")
+    # 如果没有命中任何条件，提供默认回复
+    else:
+        message = TextMessage(text="未知的指令，請輸入有效的指令")
+
+    # 默认情况下回复消息
+    line_bot_api.reply_message(
+        ReplyMessageRequest(
+            replyToken=event.reply_token,
+            messages=[message]
+        )
+    )
 
 
 @handler.add(MemberJoinedEvent)
