@@ -137,6 +137,12 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
                 result = backtest(msg)
                 logging.info(f"回測結果: {result}")
                 result_str = str(result)
+                def format_backtest_result(result_str):
+                    start = result_str.find("text='") + 6
+                    end = result_str.rfind("'")
+                    content = result_str[start:end]
+                    formatted_result = content.replace("\\n", "\n")
+                    return formatted_result
                 message = TextMessage(text=result_str)
                 reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
                 line_bot_api.reply_message(reply_message)
