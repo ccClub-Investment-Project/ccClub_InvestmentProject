@@ -4,3 +4,4 @@ python-dotenv
 backtrader
 yfinance
 matplotlib
+flasgger

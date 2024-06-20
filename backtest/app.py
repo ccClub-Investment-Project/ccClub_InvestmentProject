@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flasgger import Swagger, swag_from
 from dotenv import load_dotenv
 load_dotenv()
 import os
@@ -6,12 +7,15 @@ import os
 from backtest_manager import BacktestManager
 
 app = Flask(__name__)
+swagger = Swagger(app)
 
 @app.route("/")
+@swag_from('swagger.yaml', methods=['GET'])
 def home():
     return "Backtest Running!!!"
 
 @app.route('/one_stock', methods=['GET'])
+@swag_from('swagger.yaml', methods=['GET'], endpoint='one_stock')
 def one_stock():
     backtest = BacktestManager()
     # Default values
@@ -34,15 +38,13 @@ def one_stock():
     buy_date = date
     duration_year = duration
 
-    
     try:
-        # Assuming `backtest` is defined somewhere and imported properly
         backtest.load_data_yahoo(stock_ids=stock_ids, duration_year=duration_year)
         info = backtest.buy_period(buy_amount, buy_date)
         log = backtest.run()
         analysis = backtest.analysis()
-    except:
-        print("error")
+    except Exception as e:
+        print(f"Error: {e}")
         info = "error"
         analysis = "error"
         log = "error"
@@ -54,14 +56,7 @@ def one_stock():
         'analysis': analysis,
         'log': log
     }
-
     return jsonify(response)
-
-# example
-# one_stock_result = one_stock("0050",3000)
-# print(one_stock_result[0])
-# print(one_stock_result[1])
-
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5555))
