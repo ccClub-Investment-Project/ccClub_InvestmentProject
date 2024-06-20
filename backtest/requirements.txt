@@ -5,3 +5,4 @@ backtrader
 yfinance
 matplotlib
 flasgger
+sqlalchemy
