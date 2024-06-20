@@ -136,16 +136,20 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
                 logging.info(f"收到回測輸入: {msg}")
                 result = backtest(msg)
                 logging.info(f"回測結果: {result}")
-                result_str = str(result)
-                def format_backtest_result(result_str):
+
+                def format_backtest_result(result):
+                    result_str = str(result)
                     start = result_str.find("text='") + 6
                     end = result_str.rfind("'")
                     content = result_str[start:end]
                     formatted_result = content.replace("\\n", "\n")
                     return formatted_result
-                message = TextMessage(text=result_str)
+
+                formatted_result = format_backtest_result(result)
+                message = TextMessage(text=formatted_result)
                 reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
                 line_bot_api.reply_message(reply_message)
+
             except ValueError as e:
                 logging.error(f"解析輸入時發生錯誤: {e}")
                 message = TextMessage(text="輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入")
