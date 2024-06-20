@@ -90,7 +90,7 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
         user_states[user_id] = None
 
 def handle_regular_message(line_bot_api, event, msg, user_id):
-    try:
+  
         if '財報' in msg:
             message = buttons_message1()
         elif '基本股票功能' in msg:
@@ -98,7 +98,9 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         elif '換股' in msg:
             message = buttons_message2()
         elif '目錄' in msg:
+            logging.info("用戶請求目錄")
             message = Carousel_Template()
+            logging.info(f"Carousel_Template 返回的消息: {message}")
         elif '新聞' in msg:
             message = TextMessage(text="請輸入關鍵字，用逗號分隔:")
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
@@ -119,27 +121,20 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
                 logging.info(f"收到回測輸入: {msg}")
                 result = backtest(msg)
                 logging.info(f"回測結果: {result}")
-                message = TextMessage(text=result)
+                result_str = str(result) if not isinstance(result, str) else result
+                message = TextMessage(text=result_str)
             except ValueError as e:
                 logging.error(f"解析輸入時發生錯誤: {e}")
                 message = TextMessage(text="輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入")
+            except Exception as e:
+                logging.error(f"回測過程中發生錯誤: {e}")
+                message = TextMessage(text="回測過程中發生錯誤，請稍後再試")
             finally:
                 user_states[user_id] = None
 
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
             line_bot_api.reply_message(reply_message)
             return
-
-        else:
-            message = TextMessage(text="未知的指令，請輸入有效的指令")
-
-        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-        line_bot_api.reply_message(reply_message)
-    except Exception as e:
-        logging.error(f"處理訊息時發生錯誤: {e}")
-        message = TextMessage(text="發生錯誤，請稍後再試")
-        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-        line_bot_api.reply_message(reply_message)
 
 @handler.add(MemberJoinedEvent)
 def welcome(event):
