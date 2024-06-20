@@ -77,7 +77,9 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
     try:
         keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
         if keywords:
+            logging.info(f"Fetching news for keywords: {keywords}")
             message = fetch_and_filter_news_message(keywords, limit=10)
+            logging.info(f"Fetched news: {message[:100]}...")  # Log first 100 chars
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=message)])
             line_bot_api.reply_message(reply_message)
         else:
@@ -86,6 +88,9 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
             line_bot_api.reply_message(reply_message)
     except Exception as e:
         logging.error(f"Error in handle_keywords_input: {e}")
+        error_message = TextMessage(text="獲取新聞時發生錯誤，請稍後再試。")
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[error_message])
+        line_bot_api.reply_message(reply_message)
     finally:
         user_states[user_id] = None
 
@@ -99,8 +104,11 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
             message = buttons_message2()
         elif '目錄' in msg:
             logging.info("用戶請求目錄")
-            message = Carousel_Template()
-            logging.info(f"Carousel_Template 返回的消息: {message}")
+            carousel = Carousel_Template()
+            logging.info(f"Carousel_Template 返回的消息: {carousel}")
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[carousel])
+            line_bot_api.reply_message(reply_message)
+            return
         elif '新聞' in msg:
             message = TextMessage(text="請輸入關鍵字，用逗號分隔:")
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
@@ -123,17 +131,20 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
                 logging.info(f"回測結果: {result}")
                 result_str = str(result) if not isinstance(result, str) else result
                 message = TextMessage(text=result_str)
+                reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+                line_bot_api.reply_message(reply_message)
             except ValueError as e:
                 logging.error(f"解析輸入時發生錯誤: {e}")
                 message = TextMessage(text="輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入")
+                reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+                line_bot_api.reply_message(reply_message)
             except Exception as e:
                 logging.error(f"回測過程中發生錯誤: {e}")
                 message = TextMessage(text="回測過程中發生錯誤，請稍後再試")
+                reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+                line_bot_api.reply_message(reply_message)
             finally:
                 user_states[user_id] = None
-
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-            line_bot_api.reply_message(reply_message)
             return
 
 @handler.add(MemberJoinedEvent)
