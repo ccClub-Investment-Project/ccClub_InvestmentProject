@@ -20,7 +20,6 @@ from message import *
 from news import *
 from Function import *
 
-
 app = Flask(__name__)
 
 # Load environment variables
@@ -67,11 +66,8 @@ def handle_message(event):
     except Exception as e:
         logging.error(f"Error handling webhook: {e}")
         error_message = TextMessage(text="發生錯誤，請稍後再試。")
-        reply_message = ReplyMessageRequest(messages=[error_message])
-        line_bot_api.reply_message(
-            event.reply_token,
-            reply_message
-        )
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[error_message])
+        line_bot_api.reply_message(reply_message)
         user_states[user_id] = None
 
 def handle_keywords_input(line_bot_api, event, msg, user_id):
@@ -79,18 +75,12 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
         keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
         if keywords:
             message = fetch_and_filter_news_message(keywords, limit=10)
-            reply_message = ReplyMessageRequest(messages=[TextMessage(text=message)])
-            line_bot_api.reply_message(
-                event.reply_token,
-                reply_message
-            )
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=message)])
+            line_bot_api.reply_message(reply_message)
         else:
             prompt_message = TextMessage(text="請輸入有效的關鍵字，用逗號分隔:")
-            reply_message = ReplyMessageRequest(messages=[prompt_message])
-            line_bot_api.reply_message(
-                event.reply_token,
-                reply_message
-            )
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[prompt_message])
+            line_bot_api.reply_message(reply_message)
     except Exception as e:
         logging.error(f"Error in handle_keywords_input: {e}")
     finally:
@@ -108,62 +98,45 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
             message = Carousel_Template()
         elif '新聞' in msg:
             message = TextMessage(text="請輸入關鍵字，用逗號分隔:")
-            reply_message = ReplyMessageRequest(messages=[message])
-            line_bot_api.reply_message(
-                event.reply_token,
-                reply_message
-            )
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+            line_bot_api.reply_message(reply_message)
             user_states[user_id] = 'waiting_for_keywords'
             return
         elif '功能列表' in msg:
             message = function_list()
         elif '回測' in msg:
             message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用逗號隔開):")
-            reply_message = ReplyMessageRequest(messages=[message])
-            line_bot_api.reply_message(
-                event.reply_token,
-                reply_message
-            )
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+            line_bot_api.reply_message(reply_message)
             user_states[user_id] = 'waiting_for_backtest'
             return
 
         if user_states.get(user_id) == 'waiting_for_backtest':
             try:
-                logging.info(f"收到回測輸入: {msg}")  # 调试信息
+                logging.info(f"收到回測輸入: {msg}")
                 result = backtest(msg)
-                logging.info(f"回測結果: {result}")  # 调试信息
-                message = TextMessage(text=result)  # 确保 result 是字符串
+                logging.info(f"回測結果: {result}")
+                message = TextMessage(text=result)
             except ValueError as e:
-                logging.error(f"解析輸入時發生錯誤: {e}")  # 调试信息
+                logging.error(f"解析輸入時發生錯誤: {e}")
                 message = TextMessage(text="輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入")
             finally:
-                user_states[user_id] = None  # 重置狀態
+                user_states[user_id] = None
 
-            reply_message = ReplyMessageRequest(messages=[message])
-            line_bot_api.reply_message(
-                event.reply_token,
-                reply_message
-            )
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+            line_bot_api.reply_message(reply_message)
             return
 
-        # 如果没有命中任何条件，提供默认回复
         else:
             message = TextMessage(text="未知的指令，請輸入有效的指令")
 
-        # 默认情况下回复消息
-        reply_message = ReplyMessageRequest(messages=[message])
-        line_bot_api.reply_message(
-            event.reply_token,
-            reply_message
-        )
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
     except Exception as e:
-        logging.error(f"處理訊息時發生錯誤: {e}")  # 调试信息
+        logging.error(f"處理訊息時發生錯誤: {e}")
         message = TextMessage(text="發生錯誤，請稍後再試")
-        reply_message = ReplyMessageRequest(messages=[message])
-        line_bot_api.reply_message(
-            event.reply_token,
-            reply_message
-        )
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
 
 @handler.add(MemberJoinedEvent)
 def welcome(event):
@@ -174,11 +147,8 @@ def welcome(event):
         profile = line_bot_api.get_group_member_profile(gid, uid)
         name = profile.display_name
         message = TextMessage(text=f'{name}歡迎加入')
-        reply_message = ReplyMessageRequest(messages=[message])
-        line_bot_api.reply_message(
-            event.reply_token,
-            reply_message
-        )
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)
