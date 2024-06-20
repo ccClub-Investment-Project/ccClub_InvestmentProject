@@ -174,6 +174,56 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
     finally:
         user_states[user_id] = None
 
+user_states = {}  # 用来存储用户状态的字典
+
+@handler.add(MessageEvent, message=TextMessageContent)
+def handle_message(event):
+    with ApiClient(configuration) as api_client:
+        line_bot_api = LineBotApi(api_client)
+
+        user_id = event.source.user_id
+        msg = event.message.text.strip()
+        logging.info(f"Received message: {msg} from user: {user_id} with reply token: {event.reply_token}")
+
+        try:
+            if user_id in user_states and user_states[user_id] == 'waiting_for_keywords':
+                handle_keywords_input(line_bot_api, event, msg, user_id)
+            else:
+                handle_regular_message(line_bot_api, event, msg, user_id)
+        except Exception as e:
+            logging.error(f"Error handling webhook: {e}")
+            error_message = TextMessage(text="發生錯誤，請稍後再試。")
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    replyToken=event.reply_token,
+                    messages=[error_message]
+                )
+            )
+            user_states[user_id] = None
+
+def handle_keywords_input(line_bot_api, event, msg, user_id):
+    try:
+        keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
+        if keywords:
+            message = fetch_and_filter_news_message(keywords, limit=10)
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    replyToken=event.reply_token,
+                    messages=[TextMessage(text=message)]
+                )
+            )
+        else:
+            prompt_message = TextMessage(text="請輸入有效的關鍵字，用逗號分隔:")
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    replyToken=event.reply_token,
+                    messages=[prompt_message]
+                )
+            )
+    except Exception as e:
+        logging.error(f"Error in handle_keywords_input: {e}")
+    finally:
+        user_states[user_id] = None
 
 def handle_regular_message(line_bot_api, event, msg, user_id):
     try:
@@ -212,8 +262,8 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
             try:
                 logging.info(f"收到回測輸入: {msg}")  # 调试信息
                 result = backtest(msg)
-                message = TextMessage(text=result)  # 确保 result 是字符串
                 logging.info(f"回測結果: {result}")  # 调试信息
+                message = TextMessage(text=result)  # 确保 result 是字符串
             except ValueError as e:
                 logging.error(f"解析輸入時發生錯誤: {e}")  # 调试信息
                 message = TextMessage(text="輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入")
@@ -248,20 +298,6 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
                 messages=[message]
             )
         )
-
-def backtest(msg):
-    parts = msg.split(',')
-    if len(parts) != 3:
-        raise ValueError("Input should contain three parts separated by commas.")
-    
-    stock, amount, years = parts
-    stock = stock.strip()
-    amount = int(amount.strip())
-    years = int(years.strip())
-    
-    # 在这里加入具体的回测逻辑
-    return f"回測結果: 標的 {stock}, 定期定額 {amount}, 年數 {years}"
-
 
 
 @handler.add(MemberJoinedEvent)
