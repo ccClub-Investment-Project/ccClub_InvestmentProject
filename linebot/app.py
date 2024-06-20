@@ -165,7 +165,6 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
                 print(f"回測結果: {message}")  # 调试信息
             except ValueError as e:
                 print(f"解析輸入時發生錯誤: {e}")  # 调试信息
-                message = "輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入"
             finally:
                 user_states[user_id] = None  # 重置狀態
             
