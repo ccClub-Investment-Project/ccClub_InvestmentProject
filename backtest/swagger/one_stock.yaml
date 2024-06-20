@@ -1,4 +1,4 @@
-Run backtest for one stock
+Run backtest for one stock of dollar cost averaging
 ---
 parameters:
   - name: id
@@ -27,22 +27,5 @@ parameters:
     default: 10
 responses:
   200:
-    description: The backtest results.
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The stock ID.
-              example: '0050'
-            info:
-              type: string
-              description: Information about the backtest.
-            analysis:
-              type: string
-              description: Analysis of the backtest results.
-            log:
-              type: string
-              description: Log of the backtest process.
+    description: Run backtest for one stock of dollar cost averaging.
+
