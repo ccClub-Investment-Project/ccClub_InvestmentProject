@@ -2,10 +2,10 @@ from flask import Flask, request, jsonify
 from flasgger import Swagger,swag_from
 from dotenv import load_dotenv
 load_dotenv()
-import os
+import os, json
 
 from backtest_manager import BacktestManager
-
+from data import get_json
 app = Flask(__name__)
 swagger = Swagger(app)
 
@@ -57,6 +57,15 @@ def one_stock():
         'log': log
     }
     return jsonify(response)
+
+
+@app.route('/etf_all_info', methods=['GET'])
+@swag_from('swagger/etf_all_info.yaml', methods=['GET'])
+def etf_all_info():
+    table = "etf_all_info"
+    data = get_json(table)
+    return jsonify(data)
+
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5555))
