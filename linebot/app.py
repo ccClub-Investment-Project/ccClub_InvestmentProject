@@ -176,30 +176,33 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
 
 user_states = {}  # 用来存储用户状态的字典
 
+from linebot.v3.messaging import LineBotApi  # Ensure LineBotApi is imported
+
+# Correct handle_message function
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
-    with ApiClient(configuration) as api_client:
-        line_bot_api = LineBotApi(api_client)
+    try:
+        line_bot_api = LineBotApi(channel_access_token)  # Use LineBotApi directly with the access token
 
         user_id = event.source.user_id
         msg = event.message.text.strip()
         logging.info(f"Received message: {msg} from user: {user_id} with reply token: {event.reply_token}")
 
-        try:
-            if user_id in user_states and user_states[user_id] == 'waiting_for_keywords':
-                handle_keywords_input(line_bot_api, event, msg, user_id)
-            else:
-                handle_regular_message(line_bot_api, event, msg, user_id)
-        except Exception as e:
-            logging.error(f"Error handling webhook: {e}")
-            error_message = TextMessage(text="發生錯誤，請稍後再試。")
-            line_bot_api.reply_message(
-                ReplyMessageRequest(
-                    replyToken=event.reply_token,
-                    messages=[error_message]
-                )
+        if user_id in user_states and user_states[user_id] == 'waiting_for_keywords':
+            handle_keywords_input(line_bot_api, event, msg, user_id)
+        else:
+            handle_regular_message(line_bot_api, event, msg, user_id)
+    except Exception as e:
+        logging.error(f"Error handling webhook: {e}")
+        error_message = TextMessage(text="發生錯誤，請稍後再試。")
+        line_bot_api.reply_message(
+            ReplyMessageRequest(
+                replyToken=event.reply_token,
+                messages=[error_message]
             )
-            user_states[user_id] = None
+        )
+        user_states[user_id] = None
+
 
 def handle_keywords_input(line_bot_api, event, msg, user_id):
     try:
