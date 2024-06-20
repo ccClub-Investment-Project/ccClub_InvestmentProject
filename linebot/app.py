@@ -87,7 +87,7 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[prompt_message])
             line_bot_api.reply_message(reply_message)
     except Exception as e:
-        logging.error(f"Error in handle_keywords_input: {e}")
+        logging.error(f"Error in handle_keywords_input: {e}", exc_info=True)
         error_message = TextMessage(text="獲取新聞時發生錯誤，請稍後再試。")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[error_message])
         line_bot_api.reply_message(reply_message)
@@ -102,8 +102,7 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
             message = buttons_message1()
         elif '換股' in msg:
             message = buttons_message2()
-        elif '目錄' in msg:
-            logging.info("用戶請求目錄")
+        elif '目錄' in msg:  
             carousel = Carousel_Template()
             logging.info(f"Carousel_Template 返回的消息: {carousel}")
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[carousel])
@@ -124,13 +123,33 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
             user_states[user_id] = 'waiting_for_backtest'
             return
 
+        def format_backtest_result(result):
+    # 假設 result 是一個包含所有必要信息的字典
+            formatted_result = f"""
+                定期定額投資報告
+                ====================
+                投資標的: {result['symbol']}
+                每月投資: {result['monthly_investment']:,} 元
+                累計投資: {result['total_investment']:,} 元
+
+                投資表現
+                --------------------
+                年化報酬率: {result['annual_return']:.2f}%
+                夏普值: {result['sharpe_ratio']:.2f}
+                最大回撤: {result['max_drawdown']:.2f}%
+
+                註: 本計算不包含股利收入
+                """
+            return formatted_result.strip()
+
+# 在處理回測結果時使用這個函數
         if user_states.get(user_id) == 'waiting_for_backtest':
             try:
                 logging.info(f"收到回測輸入: {msg}")
                 result = backtest(msg)
                 logging.info(f"回測結果: {result}")
-                result_str = str(result) if not isinstance(result, str) else result
-                message = TextMessage(text=result_str)
+                formatted_result = format_backtest_result(result)
+                message = TextMessage(text=formatted_result)
                 reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
                 line_bot_api.reply_message(reply_message)
             except ValueError as e:
@@ -139,13 +158,29 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
                 reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
                 line_bot_api.reply_message(reply_message)
             except Exception as e:
-                logging.error(f"回測過程中發生錯誤: {e}")
+                logging.error(f"回測過程中發生錯誤: {e}", exc_info=True)
                 message = TextMessage(text="回測過程中發生錯誤，請稍後再試")
                 reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
                 line_bot_api.reply_message(reply_message)
             finally:
                 user_states[user_id] = None
             return
+
+@handler.add(MemberJoinedEvent)
+def welcome(event):
+    with ApiClient(configuration) as api_client:
+        line_bot_api = MessagingApi(api_client)
+        uid = event.joined.members[0].user_id
+        gid = event.source.group_id
+        profile = line_bot_api.get_group_member_profile(gid, uid)
+        name = profile.display_name
+        message = TextMessage(text=f'{name}歡迎加入')
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=port)
+
 
 @handler.add(MemberJoinedEvent)
 def welcome(event):
