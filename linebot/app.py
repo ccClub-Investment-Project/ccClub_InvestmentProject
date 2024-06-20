@@ -20,6 +20,9 @@ from message import *
 from news import *
 from Function import *
 
+
+load_dotenv()
+
 app = Flask(__name__)
 
 # Load environment variables
@@ -53,7 +56,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
-    line_bot_api = LineBotApi(channel_access_token)  # Use LineBotApi directly with the access token
+    line_bot_api = MessagingApi(ApiClient(configuration))  # Use MessagingApi directly with ApiClient
     user_id = event.source.user_id
     msg = event.message.text.strip()
     logging.info(f"Received message: {msg} from user: {user_id} with reply token: {event.reply_token}")
