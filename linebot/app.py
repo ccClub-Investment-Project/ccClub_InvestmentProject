@@ -120,67 +120,84 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
         user_states[user_id] = None
 
 
+import re
+from linebot.models import TextMessage, ReplyMessageRequest
+
 user_states = {}  # 用来存储用户状态的字典
 
 def handle_regular_message(line_bot_api, event, msg, user_id):
-    if '財報' in msg:
-        message = buttons_message1()
-    elif '基本股票功能' in msg:
-        message = buttons_message1()
-    elif '換股' in msg:
-        message = buttons_message2()
-    elif '目錄' in msg:
-        message = Carousel_Template()
-    elif '新聞' in msg:
-        message = TextMessage(text="請輸入關鍵字，用逗號分隔:")
+    try:
+        if '財報' in msg:
+            message = buttons_message1()
+        elif '基本股票功能' in msg:
+            message = buttons_message1()
+        elif '換股' in msg:
+            message = buttons_message2()
+        elif '目錄' in msg:
+            message = Carousel_Template()
+        elif '新聞' in msg:
+            message = TextMessage(text="請輸入關鍵字，用逗號分隔:")
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    replyToken=event.reply_token,
+                    messages=[message]
+                )
+            )
+            user_states[user_id] = 'waiting_for_keywords'
+            return
+        elif '功能列表' in msg:
+            message = function_list()
+        elif '回測' in msg:
+            message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用逗號隔開):")
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    replyToken=event.reply_token,
+                    messages=[message]
+                )
+            )
+            user_states[user_id] = 'waiting_for_backtest'
+            return
+
+        elif user_states.get(user_id) == 'waiting_for_backtest':
+            try:
+                print(f"收到回測輸入: {msg}")  # 调试信息
+                message = backtest(msg)
+                print(f"回測結果: {message}")  # 调试信息
+            except ValueError as e:
+                print(f"解析輸入時發生錯誤: {e}")  # 调试信息
+                message = "輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入"
+            finally:
+                user_states[user_id] = None  # 重置狀態
+            
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    replyToken=event.reply_token,
+                    messages=[TextMessage(text=message)]
+                )
+            )
+            return
+
+        # 如果没有命中任何条件，提供默认回复
+        else:
+            message = TextMessage(text="未知的指令，請輸入有效的指令")
+
+        # 默认情况下回复消息
         line_bot_api.reply_message(
             ReplyMessageRequest(
                 replyToken=event.reply_token,
                 messages=[message]
             )
         )
-        user_states[user_id] = 'waiting_for_keywords'
-        return
-    elif '功能列表' in msg:
-        message = function_list()
-    elif '回測' in msg:
-        message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用逗號隔開):")
+    except Exception as e:
+        print(f"處理訊息時發生錯誤: {e}")  # 调试信息
+        message = TextMessage(text="發生錯誤，請稍後再試")
         line_bot_api.reply_message(
             ReplyMessageRequest(
                 replyToken=event.reply_token,
                 messages=[message]
             )
         )
-        user_states[user_id] = 'waiting_for_backtest'
-        return
 
-    elif user_states.get(user_id) == 'waiting_for_backtest':
-        try:
-            message = backtest(msg)
-        except ValueError:
-            message = "輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入"
-        finally:
-            user_states[user_id] = None  # 重置狀態
-        
-        line_bot_api.reply_message(
-            ReplyMessageRequest(
-                replyToken=event.reply_token,
-                messages=[TextMessage(text=message)]
-            )
-        )
-        return
-
-    # 如果没有命中任何条件，提供默认回复
-    else:
-        message = TextMessage(text="未知的指令，請輸入有效的指令")
-
-    # 默认情况下回复消息
-    line_bot_api.reply_message(
-        ReplyMessageRequest(
-            replyToken=event.reply_token,
-            messages=[message]
-        )
-    )
 
 
 @handler.add(MemberJoinedEvent)
