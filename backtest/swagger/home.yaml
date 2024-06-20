@@ -1,0 +1,10 @@
+Home endpoint
+---
+responses:
+  200:
+    description: Home endpoint, returns a welcome message.
+    content:
+      text/plain:
+        schema:
+          type: string
+          example: Backtest Running!!!

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flasgger import Swagger, swag_from
+from flasgger import Swagger,swag_from
 from dotenv import load_dotenv
 load_dotenv()
 import os
@@ -10,12 +10,12 @@ app = Flask(__name__)
 swagger = Swagger(app)
 
 @app.route("/")
-@swag_from('swagger.yaml', methods=['GET'])
+@swag_from('swagger/home.yaml', methods=['GET'])
 def home():
     return "Backtest Running!!!"
 
 @app.route('/one_stock', methods=['GET'])
-@swag_from('swagger.yaml', methods=['GET'], endpoint='one_stock')
+@swag_from('swagger/one_stock.yaml', methods=['GET'])
 def one_stock():
     backtest = BacktestManager()
     # Default values
