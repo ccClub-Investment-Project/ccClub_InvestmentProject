@@ -6,7 +6,7 @@ import tempfile
 import datetime
 import time
 from data import backtest
-
+import re
 from linebot.v3 import WebhookHandler
 from linebot.v3.exceptions import InvalidSignatureError
 from linebot.v3.messaging import (Configuration,ApiClient,MessagingApi,ReplyMessageRequest,TextMessage)
@@ -119,8 +119,6 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
     finally:
         user_states[user_id] = None
 
-import re
-from linebot.models import TextMessage, ReplyMessageRequest
 
 user_states = {}  # 用来存储用户状态的字典
 
