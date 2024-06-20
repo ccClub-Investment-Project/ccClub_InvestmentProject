@@ -6,3 +6,4 @@ yfinance
 matplotlib
 flasgger
 sqlalchemy
+psycopg2
