@@ -177,7 +177,6 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
 
 user_states = {}  # 用来存储用户状态的字典
 
-from linebot.v3.messaging import LineBotApi  # Ensure LineBotApi is imported
 
 # Correct handle_message function
 @handler.add(MessageEvent, message=TextMessageContent)
