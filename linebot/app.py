@@ -132,38 +132,47 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         elif '新聞' in msg:
             message = TextMessage(text="請輸入關鍵字，用逗號分隔:")
             line_bot_api.reply_message(
-                        ReplyMessageRequest(
-                            replyToken=event.reply_token,
-                            messages=[message]
-                        )
-                    )            
-            # 等待下一次進入keyword的方法
+                ReplyMessageRequest(
+                    replyToken=event.reply_token,
+                    messages=[message]
+                )
+            )
             user_states[user_id] = 'waiting_for_keywords'
             return
         elif '功能列表' in msg:
             message = function_list()
         elif '回測' in msg:
-            message = backtest(msg)
-        else:
-            # 回傳使用者輸入的訊息
-            message = TextMessage(text=msg)
-        
-        line_bot_api.reply_message(
-            ReplyMessageRequest(
-                replyToken=event.reply_token,
-                messages=[message]
+            message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用逗號隔開):")
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    replyToken=event.reply_token,
+                    messages=[message]
+                )
             )
-        )
+            user_states[user_id] = 'waiting_for_backtest'
+            return
+
+        elif user_states.get(user_id) == 'waiting_for_backtest':
+            try:
+                stock, amount, years = msg.split(',')
+                message = f"回測標的: {stock}, 定期定額價目: {amount}, 幾年: {years}"
+                # 這裡可以插入回測的具體實現邏輯
+            except ValueError:
+                message = "輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入"
+            finally:
+                user_states[user_id] = None  # 重置狀態
+            
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    replyToken=event.reply_token,
+                    messages=[TextMessage(text=message)]
+                )
+            )
+
     except Exception as e:
-        logging.error(f"Error in handle_regular_message: {e}")
-        error_message = TextMessage(text="發生錯誤，請稍後再試。")
-        line_bot_api.reply_message(
-            ReplyMessageRequest(
-                replyToken=event.reply_token,
-                messages=[error_message]
-            )
-        )
-        user_states[user_id] = None
+        # 如果有需要的話，可以在這裡添加錯誤處理邏輯
+        print(f"Exception: {e}")
+
 
 @handler.add(MemberJoinedEvent)
 def welcome(event):
