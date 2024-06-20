@@ -8,12 +8,13 @@ import time
 from data import backtest
 import re
 from linebot.v3 import WebhookHandler
+from linebot import LineBotApi
 from linebot.v3.exceptions import InvalidSignatureError
 from linebot.v3.messaging import (Configuration,ApiClient,MessagingApi,ReplyMessageRequest,TextMessage)
 from linebot.v3.webhooks import (MessageEvent,TextMessageContent)
 from linebot.v3.webhooks.models import MemberJoinedEvent
 load_dotenv()
-from linebot import LineBotApi
+
 
 # save loggings
 current_directory = os.path.dirname(os.path.abspath(__file__))
