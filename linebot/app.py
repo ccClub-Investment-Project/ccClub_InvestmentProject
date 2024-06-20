@@ -120,9 +120,6 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
         user_states[user_id] = None
 
 
-import re
-from linebot.models import TextMessage, ReplyMessageRequest
-
 user_states = {}  # 用来存储用户状态的字典
 
 def handle_regular_message(line_bot_api, event, msg, user_id):
