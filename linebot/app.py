@@ -136,7 +136,8 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
                 logging.info(f"收到回測輸入: {msg}")
                 result = backtest(msg)
                 logging.info(f"回測結果: {result}")
-                message = TextMessage(text=result)
+                result_str = str(result)
+                message = TextMessage(text=result_str)
                 reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
                 line_bot_api.reply_message(reply_message)
             except ValueError as e:
