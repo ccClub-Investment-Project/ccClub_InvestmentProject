@@ -26,6 +26,12 @@ channel_access_token = os.getenv('CHANNEL_ACCESS_TOKEN')
 channel_secret = os.getenv('CHANNEL_SECRET')
 port = int(os.getenv('PORT', 5000))
 
+# Debugging: Print the channel secret to ensure it's not None
+print(f"Channel Access Token: {channel_access_token}")
+print(f"Channel Secret: {channel_secret}")
+
+if channel_secret is None:
+    raise ValueError("The channel secret is not set. Please check your environment variables.")
 
 # get instance from linebot
 configuration = Configuration(access_token=channel_access_token)
@@ -46,7 +52,7 @@ def callback():
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
-        app.logger.info("Invalid signature. Please check your channel access token/channel secret.")
+        app.logger.error("Invalid signature. Please check your channel access token/channel secret.")
         abort(400)
 
     return 'OK'
@@ -101,74 +107,73 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
         user_states[user_id] = None
 
 def handle_regular_message(line_bot_api, event, msg, user_id):
-  
-        if '財報' in msg:
-            message = buttons_message1()
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-            line_bot_api.reply_message(reply_message)
-        if '基本股票功能' in msg:
-            message = buttons_message1()
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-            line_bot_api.reply_message(reply_message)
-            return
-        elif '換股' in msg:
-            message = buttons_message2()
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-            line_bot_api.reply_message(reply_message)
-            return
-        elif '目錄' in msg:  
-            carousel = Carousel_Template()
-            logging.info(f"Carousel_Template 返回的消息: {carousel}")
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[carousel])
-            line_bot_api.reply_message(reply_message)
-            return
-        elif '新聞' in msg:
-            message = TextMessage(text="請輸入關鍵字，用半形逗號分隔:")
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-            line_bot_api.reply_message(reply_message)
-            user_states[user_id] = 'waiting_for_keywords'
-            return
-        elif '功能列表' in msg:
-            message = function_list()
-        elif '回測' in msg:
-            message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用半形逗號隔開):")
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-            line_bot_api.reply_message(reply_message)
-            user_states[user_id] = 'waiting_for_backtest'
-            return
+    if '財報' in msg:
+        message = buttons_message1()
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+    elif '基本股票功能' in msg:
+        message = buttons_message1()
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+        return
+    elif '換股' in msg:
+        message = buttons_message2()
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+        return
+    elif '目錄' in msg:
+        carousel = Carousel_Template()
+        logging.info(f"Carousel_Template 返回的消息: {carousel}")
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[carousel])
+        line_bot_api.reply_message(reply_message)
+        return
+    elif '新聞' in msg:
+        message = TextMessage(text="請輸入關鍵字，用半形逗號分隔:")
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+        user_states[user_id] = 'waiting_for_keywords'
+        return
+    elif '功能列表' in msg:
+        message = function_list()
+    elif '回測' in msg:
+        message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用半形逗號隔開):")
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+        user_states[user_id] = 'waiting_for_backtest'
+        return
 
-        if user_states.get(user_id) == 'waiting_for_backtest':
-            try:
-                logging.info(f"收到回測輸入: {msg}")
-                result = backtest(msg)
-                logging.info(f"回測結果: {result}")
+    if user_states.get(user_id) == 'waiting_for_backtest':
+        try:
+            logging.info(f"收到回測輸入: {msg}")
+            result = backtest(msg)
+            logging.info(f"回測結果: {result}")
 
-                def format_backtest_result(result):
-                    result_str = str(result)
-                    start = result_str.find("text='") + 6
-                    end = result_str.rfind("'")
-                    content = result_str[start:end]
-                    formatted_result = content.replace("\\n", "\n")
-                    return formatted_result
+            def format_backtest_result(result):
+                result_str = str(result)
+                start = result_str.find("text='") + 6
+                end = result_str.rfind("'")
+                content = result_str[start:end]
+                formatted_result = content.replace("\\n", "\n")
+                return formatted_result
 
-                formatted_result = format_backtest_result(result)
-                message = TextMessage(text=formatted_result)
-                reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-                line_bot_api.reply_message(reply_message)
+            formatted_result = format_backtest_result(result)
+            message = TextMessage(text=formatted_result)
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+            line_bot_api.reply_message(reply_message)
 
-            except ValueError as e:
-                logging.error(f"解析輸入時發生錯誤: {e}")
-                message = TextMessage(text="輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入")
-                reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-                line_bot_api.reply_message(reply_message)
-            except Exception as e:
-                logging.error(f"回測過程中發生錯誤: {e}")
-                message = TextMessage(text="回測過程中發生錯誤，請稍後再試")
-                reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-                line_bot_api.reply_message(reply_message)
-            finally:
-                user_states[user_id] = None
-            return
+        except ValueError as e:
+            logging.error(f"解析輸入時發生錯誤: {e}")
+            message = TextMessage(text="輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入")
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+            line_bot_api.reply_message(reply_message)
+        except Exception as e:
+            logging.error(f"回測過程中發生錯誤: {e}")
+            message = TextMessage(text="回測過程中發生錯誤，請稍後再試")
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+            line_bot_api.reply_message(reply_message)
+        finally:
+            user_states[user_id] = None
+        return
 
 @handler.add(MemberJoinedEvent)
 def welcome(event):
@@ -177,7 +182,15 @@ def welcome(event):
         uid = event.joined.members[0].user_id
         gid = event.source.group_id
         profile = line_bot_api.get_group_member_profile(gid, uid)
-        name = profile.display
+        name = profile.display_name
+        message = TextMessage(text=f'{name}歡迎加入')
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+
+@app.route("/callback", methods=['POST'])
+def callback():
+    signature = request.headers.get('X-Line-Signature', '')
+    body = request.get_data(as_text=True)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)
