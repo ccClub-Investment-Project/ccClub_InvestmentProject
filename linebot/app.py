@@ -19,15 +19,19 @@ from message import *
 from news import *
 from Function import *
 
-
-load_dotenv()
-
 app = Flask(__name__)
 
 # Load environment variables
 channel_access_token = os.getenv('channel_access_token')
 channel_secret = os.getenv('channel_secret')
 port = int(os.getenv('PORT', 5000))
+
+# Debugging: Print the channel secret to ensure it's not None
+print(f"Channel Access Token: {channel_access_token}")
+print(f"Channel Secret: {channel_secret}")
+
+if channel_secret is None:
+    raise ValueError("The channel secret is not set. Please check your environment variables.")
 
 # get instance from linebot
 configuration = Configuration(access_token=channel_access_token)
@@ -179,10 +183,7 @@ def welcome(event):
         uid = event.joined.members[0].user_id
         gid = event.source.group_id
         profile = line_bot_api.get_group_member_profile(gid, uid)
-        name = profile.display_name
-        message = TextMessage(text=f'{name}歡迎加入')
-        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-        line_bot_api.reply_message(reply_message)
+        name = profile.display
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)
