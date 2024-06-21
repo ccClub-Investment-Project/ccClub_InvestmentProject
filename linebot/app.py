@@ -2,38 +2,38 @@ from flask import Flask, request, abort
 from dotenv import load_dotenv
 import logging
 import os
-import tempfile
-import datetime
-import time
-from data import backtest
-import re
 from linebot.v3 import WebhookHandler
 from linebot.v3.exceptions import InvalidSignatureError
-from linebot.v3.messaging import (Configuration,ApiClient,MessagingApi,ReplyMessageRequest,TextMessage)
-from linebot.v3.webhooks import (MessageEvent,TextMessageContent)
+from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, ReplyMessageRequest, TextMessage
+from linebot.v3.webhooks import MessageEvent, TextMessageContent
 from linebot.v3.webhooks.models import MemberJoinedEvent
-load_dotenv()
+from data import *
 
 # Custom module imports
 from message import *
 from news import *
 from Function import *
 
+# Load environment variables
+load_dotenv()
+
 app = Flask(__name__)
 
 # Load environment variables
-channel_access_token = os.getenv('CHANNEL_ACCESS_TOKEN')
-channel_secret = os.getenv('CHANNEL_SECRET')
+channel_access_token = os.getenv('channel_access_token')
+channel_secret = os.getenv('channel_secret')
 port = int(os.getenv('PORT', 5000))
 
-# Debugging: Print the channel secret to ensure it's not None
+# Debugging: Print the channel access token and channel secret
 print(f"Channel Access Token: {channel_access_token}")
 print(f"Channel Secret: {channel_secret}")
 
-if channel_secret is None:
+if not channel_access_token:
+    raise ValueError("The channel access token is not set. Please check your environment variables.")
+if not channel_secret:
     raise ValueError("The channel secret is not set. Please check your environment variables.")
 
-# get instance from linebot
+# Get instance from linebot
 configuration = Configuration(access_token=channel_access_token)
 handler = WebhookHandler(channel_secret)
 
@@ -45,7 +45,7 @@ def home():
 
 @app.route("/callback", methods=['POST'])
 def callback():
-    signature = request.headers['X-Line-Signature']
+    signature = request.headers.get('X-Line-Signature')
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
@@ -82,17 +82,17 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
         if keywords:
             logging.info(f"Fetching news for keywords: {keywords}")
             message = fetch_and_filter_news_message(keywords, limit=10)
-            
-            # 检查 message 是否为 TextMessage 对象
+
+            # Check if message is a TextMessage object
             if isinstance(message, TextMessage):
                 logging.info(f"Fetched news: {message.text[:100]}...")  # Log first 100 chars of the text
                 reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
             else:
-                # 如果不是 TextMessage 对象，将其转换为字符串
+                # If not a TextMessage object, convert to string
                 message_str = str(message)
                 logging.info(f"Fetched news: {message_str[:100]}...")  # Log first 100 chars
                 reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=message_str)])
-            
+
             line_bot_api.reply_message(reply_message)
         else:
             prompt_message = TextMessage(text="請輸入有效的關鍵字，用逗號分隔:")
@@ -174,6 +174,7 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         finally:
             user_states[user_id] = None
         return
+
 
 @handler.add(MemberJoinedEvent)
 def welcome(event):
