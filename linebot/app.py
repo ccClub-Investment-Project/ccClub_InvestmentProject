@@ -22,16 +22,10 @@ from Function import *
 app = Flask(__name__)
 
 # Load environment variables
-channel_access_token = os.getenv('channel_access_token')
-channel_secret = os.getenv('channel_secret')
+channel_access_token = os.getenv('CHANNEL_ACCESS_TOKEN')
+channel_secret = os.getenv('CHANNEL_SECRET')
 port = int(os.getenv('PORT', 5000))
 
-# Debugging: Print the channel secret to ensure it's not None
-print(f"Channel Access Token: {channel_access_token}")
-print(f"Channel Secret: {channel_secret}")
-
-if channel_secret is None:
-    raise ValueError("The channel secret is not set. Please check your environment variables.")
 
 # get instance from linebot
 configuration = Configuration(access_token=channel_access_token)
