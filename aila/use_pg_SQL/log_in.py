@@ -1,7 +1,3 @@
-import os
-import sys
-
-
 # # 获取上一级目录路径
 # parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))  # noqa: E402
 # # 将上一级目录添加到 sys.path
@@ -11,7 +7,6 @@ import sys
 # print(f"Parent directory: {parent_dir}")  # noqa: E402
 # print(f"Files in parent directory: {os.listdir(parent_dir)}")  # noqa: E402
 
-
 from sqlalchemy import create_engine
 import os
 from dotenv import load_dotenv
@@ -20,17 +15,18 @@ from dotenv import load_dotenv
 
 # 6/15
 # 加載 .env 文件中的環境變量
-load_dotenv()
+# load_dotenv()
 
 # 獲取環境變量
-project_dir = os.getenv('PROJECT_DIR')
+# project_dir = os.getenv('PROJECT_DIR')
 # print(f'PROJECT_DIR: {project_dir}')
 
 # 切換到項目目錄
-if project_dir:
-    os.chdir(project_dir)
-else:
-    raise FileNotFoundError("PROJECT_DIR environment variable not set")
+# if project_dir:
+#     os.chdir(project_dir)
+# else:
+#     raise FileNotFoundError("PROJECT_DIR environment variable not set")
+os.chdir('C:/python-training/ccClub_InvestmentProject/aila')
 
 
 def log_in_pgSQL():
@@ -43,10 +39,10 @@ def log_in_pgSQL():
     port = os.getenv("pgSQL_port")
 
     # print(f'pgSQL_dbname: {dbname}')
-   # print(f'pgSQL_user: {user}')
-   # print(f'pgSQL_password: {password}')
-   # print(f'pgSQL_host: {host}')
-   # print(f'pgSQL_port: {port}')
+    # print(f'pgSQL_user: {user}')
+    # print(f'pgSQL_password: {password}')
+    # print(f'pgSQL_host: {host}')
+    # print(f'pgSQL_port: {port}')
 
     if not all([dbname, user, password, host, port]):
         raise ValueError("One or more environment variables are missing.")
