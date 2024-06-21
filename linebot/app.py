@@ -187,10 +187,6 @@ def welcome(event):
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
 
-@app.route("/callback", methods=['POST'])
-def callback():
-    signature = request.headers.get('X-Line-Signature', '')
-    body = request.get_data(as_text=True)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)
