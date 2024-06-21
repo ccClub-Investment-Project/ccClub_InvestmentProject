@@ -44,6 +44,9 @@ df = fetch_data_from_db(table)
 # 確保日期列被識別為日期類型
 df["Date"] = pd.to_datetime(df["Date"])
 
+@app.route('/keep_alive')
+def keep_alive():
+    return "keep alive!!!"
 
 @app.route('/')
 def index():
