@@ -71,7 +71,7 @@ def index():
 
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
-    return render_template('app_index.html', graphJSON=graphJSON)
+    return render_template('app_0619_merge.html', graphJSON=graphJSON)
 
 
 if __name__ == '__main__':
