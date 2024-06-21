@@ -25,8 +25,8 @@ load_dotenv()
 app = Flask(__name__)
 
 # Load environment variables
-channel_access_token = os.getenv('CHANNEL_ACCESS_TOKEN')
-channel_secret = os.getenv('CHANNEL_SECRET')
+channel_access_token = os.getenv('channel_access_token')
+channel_secret = os.getenv('channel_secret')
 port = int(os.getenv('PORT', 5000))
 
 # get instance from linebot
@@ -125,7 +125,7 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
             line_bot_api.reply_message(reply_message)
             return
         elif '新聞' in msg:
-            message = TextMessage(text="請輸入關鍵字，用逗號分隔:")
+            message = TextMessage(text="請輸入關鍵字，用半形逗號分隔:")
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
             line_bot_api.reply_message(reply_message)
             user_states[user_id] = 'waiting_for_keywords'
@@ -133,7 +133,7 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         elif '功能列表' in msg:
             message = function_list()
         elif '回測' in msg:
-            message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用逗號隔開):")
+            message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用半形逗號隔開):")
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
             line_bot_api.reply_message(reply_message)
             user_states[user_id] = 'waiting_for_backtest'
