@@ -44,9 +44,6 @@ df = fetch_data_from_db(table)
 # 確保日期列被識別為日期類型
 df["Date"] = pd.to_datetime(df["Date"])
 
-@app.route('/keep_alive')
-def keep_alive():
-    return "keep alive!!!"
 
 @app.route('/')
 def index():
@@ -71,12 +68,12 @@ def index():
 
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
-    return render_template('app_0619_merge.html', graphJSON=graphJSON)
+    return render_template('app_0616.html', graphJSON=graphJSON)
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 # if __name__ == '__main__':
-#     from waitress import serve
-#     serve(app, host='0.0.0.0', port=8000, threads=4)
+#     app.run(debug=True)
+
+if __name__ == '__main__':
+    from waitress import serve
+    serve(app, host='0.0.0.0', port=8000, threads=4)
