@@ -8,11 +8,10 @@ from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, ReplyMe
 from linebot.v3.webhooks import MessageEvent, TextMessageContent
 from linebot.v3.webhooks.models import MemberJoinedEvent
 from data import *
-
-# Custom module imports
 from message import *
 from news import *
 from Function import *
+from stock import *
 
 # Load environment variables
 load_dotenv()
@@ -27,11 +26,6 @@ port = int(os.getenv('PORT', 5000))
 # Debugging: Print the channel access token and channel secret
 print(f"Channel Access Token: {channel_access_token}")
 print(f"Channel Secret: {channel_secret}")
-
-if not channel_access_token:
-    raise ValueError("The channel access token is not set. Please check your environment variables.")
-if not channel_secret:
-    raise ValueError("The channel secret is not set. Please check your environment variables.")
 
 # Get instance from linebot
 configuration = Configuration(access_token=channel_access_token)
@@ -77,7 +71,6 @@ def handle_message(event):
         user_states[user_id] = None
 
 def handle_keywords_input(line_bot_api, event, msg, user_id):
-    try:
         keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
         if keywords:
             logging.info(f"Fetching news for keywords: {keywords}")
@@ -98,13 +91,7 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
             prompt_message = TextMessage(text="請輸入有效的關鍵字，用逗號分隔:")
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[prompt_message])
             line_bot_api.reply_message(reply_message)
-    except Exception as e:
-        logging.error(f"Error in handle_keywords_input: {e}", exc_info=True)
-        error_message = TextMessage(text="獲取新聞時發生錯誤，請稍後再試。")
-        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[error_message])
-        line_bot_api.reply_message(reply_message)
-    finally:
-        user_states[user_id] = None
+   
 
 def handle_regular_message(line_bot_api, event, msg, user_id):
     if '財報' in msg:
@@ -133,8 +120,11 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_keywords'
         return
-    elif '功能列表' in msg:
-        message = function_list()
+    elif '查詢即時開盤價跟收盤價' in msg:
+        message = TextMessage(text="請輸入股票代號:")
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+        user_states[user_id] = 'waiting_for_stock'
     elif '回測' in msg:
         message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用半形逗號隔開):")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
@@ -143,39 +133,26 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         return
 
     if user_states.get(user_id) == 'waiting_for_backtest':
-        try:
-            logging.info(f"收到回測輸入: {msg}")
-            result = backtest(msg)
-            logging.info(f"回測結果: {result}")
-
-            def format_backtest_result(result):
-                result_str = str(result)
+            result1 = backtest(msg)
+            def format_backtest_result(result1):
+                result_str = str(result1)
                 start = result_str.find("text='") + 6
                 end = result_str.rfind("'")
                 content = result_str[start:end]
                 formatted_result = content.replace("\\n", "\n")
                 return formatted_result
 
-            formatted_result = format_backtest_result(result)
+            formatted_result = format_backtest_result(result1)
             message = TextMessage(text=formatted_result)
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
             line_bot_api.reply_message(reply_message)
-
-        except ValueError as e:
-            logging.error(f"解析輸入時發生錯誤: {e}")
-            message = TextMessage(text="輸入格式錯誤，請按照 '標的,定期定額,年數' 的格式輸入")
+    
+    if user_states.get(user_id) == 'waiting_for_stock':
+            result2 = create_stock_message(msg)
+            message = TextMessage(text=result2)
             reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
             line_bot_api.reply_message(reply_message)
-        except Exception as e:
-            logging.error(f"回測過程中發生錯誤: {e}")
-            message = TextMessage(text="回測過程中發生錯誤，請稍後再試")
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-            line_bot_api.reply_message(reply_message)
-        finally:
-            user_states[user_id] = None
-        return
-
-
+            
 @handler.add(MemberJoinedEvent)
 def welcome(event):
     with ApiClient(configuration) as api_client:
