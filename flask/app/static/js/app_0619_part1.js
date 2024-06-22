@@ -1,3 +1,16 @@
+// Plotly graph rendering function
+function renderGraphs(graphJSON, graphJSON1, graphJSON2) {
+  console.log("Graph Data:", graphJSON, graphJSON1, graphJSON2); // 调试信息
+  var graph = JSON.parse(graphJSON);
+  Plotly.newPlot("graph", graph.data, graph.layout, { responsive: true });
+
+  var graph1 = JSON.parse(graphJSON1);
+  Plotly.newPlot("graph1", graph1.data, graph1.layout, { responsive: true });
+
+  var graph2 = JSON.parse(graphJSON2);
+  Plotly.newPlot("graph2", graph2.data, graph2.layout, { responsive: true });
+}
+
 function showDiv(divId) {
   // 隱藏所有的 custom-rounded-box
   document.querySelectorAll(".custom-rounded-box").forEach((div) => {
