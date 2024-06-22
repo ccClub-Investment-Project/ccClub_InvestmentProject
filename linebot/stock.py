@@ -13,7 +13,7 @@ def create_stock_message(stock_code):
     if open_price and close_price:
         send_text = f"Stock Code: {stock_code}\n"
         send_text += f"Open Price: {open_price}\n"
-        send_text += f"Close Price: {close_price}\n"
+        send_text += f"Close Price: {close_price}"
         message = TextMessage(text=send_text)
     else:
         send_text = "Failed to retrieve stock prices."

@@ -59,17 +59,20 @@ def handle_message(event):
     logging.info(f"Received message: {msg} from user: {user_id} with reply token: {event.reply_token}")
 
     try:
-        if user_id in user_states and user_states[user_id] == 'waiting_for_keywords':
-            handle_keywords_input(line_bot_api, event, msg, user_id)
-        elif user_id in user_states and user_states[user_id] == 'waiting_for_stock':
-            result2 = create_stock_message(msg)
-            line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result2]))
-            user_states[user_id] = None
-        elif user_id in user_states and user_states[user_id] == 'waiting_for_backtest':
-            result1 = backtest(msg)
-            formatted_result = format_backtest_result(result1)
-            line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=formatted_result)]))
-            user_states[user_id] = None
+        if user_id in user_states:
+            if user_states[user_id] == 'waiting_for_keywords':
+                handle_keywords_input(line_bot_api, event, msg, user_id)
+            elif user_states[user_id] == 'waiting_for_stock':
+                result2 = create_stock_message(msg)
+                line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result2]))
+                user_states[user_id] = None
+            elif user_states[user_id] == 'waiting_for_backtest':
+                result1 = backtest(msg)
+                formatted_result = format_backtest_result(result1)
+                line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=formatted_result)]))
+                user_states[user_id] = None
+            else:
+                handle_regular_message(line_bot_api, event, msg, user_id)
         else:
             handle_regular_message(line_bot_api, event, msg, user_id)
     except Exception as e:
@@ -97,19 +100,17 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
         prompt_message = TextMessage(text="請輸入有效的關鍵字，用逗號分隔:")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[prompt_message])
         line_bot_api.reply_message(reply_message)
+    user_states[user_id] = None  # 重置用戶狀態
 
 def handle_regular_message(line_bot_api, event, msg, user_id):
-    if '財報' in msg:
-        message = buttons_message1()
-        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-        line_bot_api.reply_message(reply_message)
-    elif '基本股票功能' in msg:
-        message = buttons_message1()
+   
+    if "歷史股價查詢" in msg:
+        message = buttons_message()
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         return
     elif '換股' in msg:
-        message = buttons_message2()
+        message = buttons_message()
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         return
@@ -137,7 +138,6 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_backtest'
         return
-
 
 def format_backtest_result(result):
     result_str = str(result)
