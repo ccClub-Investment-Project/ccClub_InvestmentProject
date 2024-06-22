@@ -8,8 +8,8 @@ def buttons_message1():
             text='請選擇以下功能',
             actions=[
                 MessageAction(
-                    label="查詢股票資訊",
-                    text="查詢股票資訊"
+                    label="查詢即時開盤價跟收盤價",
+                    text="查詢即時開盤價跟收盤價"
                 ),
                 MessageAction(
                     label="歷史股價查詢",
