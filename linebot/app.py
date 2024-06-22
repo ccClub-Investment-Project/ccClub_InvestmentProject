@@ -61,37 +61,42 @@ def handle_message(event):
     try:
         if user_id in user_states and user_states[user_id] == 'waiting_for_keywords':
             handle_keywords_input(line_bot_api, event, msg, user_id)
+        elif user_id in user_states and user_states[user_id] == 'waiting_for_stock':
+            result2 = create_stock_message(msg)
+            line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result2]))
+            user_states[user_id] = None
+        elif user_id in user_states and user_states[user_id] == 'waiting_for_backtest':
+            result1 = backtest(msg)
+            formatted_result = format_backtest_result(result1)
+            line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=formatted_result)]))
+            user_states[user_id] = None
         else:
             handle_regular_message(line_bot_api, event, msg, user_id)
     except Exception as e:
         logging.error(f"Error handling webhook: {e}")
         error_message = TextMessage(text="發生錯誤，請稍後再試。")
-        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[error_message])
-        line_bot_api.reply_message(reply_message)
+        line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[error_message]))
         user_states[user_id] = None
 
 def handle_keywords_input(line_bot_api, event, msg, user_id):
-        keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
-        if keywords:
-            logging.info(f"Fetching news for keywords: {keywords}")
-            message = fetch_and_filter_news_message(keywords, limit=10)
+    keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
+    if keywords:
+        logging.info(f"Fetching news for keywords: {keywords}")
+        message = fetch_and_filter_news_message(keywords, limit=10)
 
-            # Check if message is a TextMessage object
-            if isinstance(message, TextMessage):
-                logging.info(f"Fetched news: {message.text[:100]}...")  # Log first 100 chars of the text
-                reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-            else:
-                # If not a TextMessage object, convert to string
-                message_str = str(message)
-                logging.info(f"Fetched news: {message_str[:100]}...")  # Log first 100 chars
-                reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=message_str)])
-
-            line_bot_api.reply_message(reply_message)
+        if isinstance(message, TextMessage):
+            logging.info(f"Fetched news: {message.text[:100]}...")  # Log first 100 chars of the text
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         else:
-            prompt_message = TextMessage(text="請輸入有效的關鍵字，用逗號分隔:")
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[prompt_message])
-            line_bot_api.reply_message(reply_message)
-   
+            message_str = str(message)
+            logging.info(f"Fetched news: {message_str[:100]}...")  # Log first 100 chars
+            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=message_str)])
+
+        line_bot_api.reply_message(reply_message)
+    else:
+        prompt_message = TextMessage(text="請輸入有效的關鍵字，用逗號分隔:")
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[prompt_message])
+        line_bot_api.reply_message(reply_message)
 
 def handle_regular_message(line_bot_api, event, msg, user_id):
     if '財報' in msg:
@@ -125,6 +130,7 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_stock'
+        return
     elif '回測' in msg:
         message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用半形逗號隔開):")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
@@ -132,27 +138,15 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         user_states[user_id] = 'waiting_for_backtest'
         return
 
-    if user_states.get(user_id) == 'waiting_for_backtest':
-            result1 = backtest(msg)
-            def format_backtest_result(result1):
-                result_str = str(result1)
-                start = result_str.find("text='") + 6
-                end = result_str.rfind("'")
-                content = result_str[start:end]
-                formatted_result = content.replace("\\n", "\n")
-                return formatted_result
 
-            formatted_result = format_backtest_result(result1)
-            message = TextMessage(text=formatted_result)
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-            line_bot_api.reply_message(reply_message)
-    
-    if user_states.get(user_id) == 'waiting_for_stock':
-            result2 = create_stock_message(msg)
-            message = TextMessage(text=result2)
-            reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-            line_bot_api.reply_message(reply_message)
-            
+def format_backtest_result(result):
+    result_str = str(result)
+    start = result_str.find("text='") + 6
+    end = result_str.rfind("'")
+    content = result_str[start:end]
+    formatted_result = content.replace("\\n", "\n")
+    return formatted_result
+
 @handler.add(MemberJoinedEvent)
 def welcome(event):
     with ApiClient(configuration) as api_client:
@@ -164,7 +158,6 @@ def welcome(event):
         message = TextMessage(text=f'{name}歡迎加入')
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)
