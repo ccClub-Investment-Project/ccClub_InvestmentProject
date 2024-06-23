@@ -126,7 +126,7 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_keywords'
         return
-    elif '查詢即時開盤價跟收盤價' in msg:
+    elif '即時開盤價跟收盤價' in msg:
         message = TextMessage(text="請輸入股票代號:")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
