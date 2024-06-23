@@ -25,7 +25,7 @@ from dotenv import load_dotenv
 # # 切換到項目目錄
 
 
-os.chdir('C:/python-training/ccClub_InvestmentProject/aila')
+os.chdir('C:/python-training/ccClub_InvestmentProject/flask')
 
 
 def log_in_pgSQL():
