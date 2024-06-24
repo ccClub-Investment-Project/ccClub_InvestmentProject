@@ -7,9 +7,6 @@ sys.path.insert(0, project_root)
 os.chdir(project_root)
 
 from linebot import news
-news = news.CnyesNewsSpider()
-# all_news = news.get_latest_news()
-# print(all_news[0])
 
 from flask import Flask, request, jsonify
 from flasgger import Swagger,swag_from
@@ -78,6 +75,29 @@ def etf_all_info():
     table = "etf_all_info"
     data = get_json(table)
     return jsonify(data)
+
+
+@app.route('/news',methods=['GET'])
+@swag_from('swagger/news.yaml', methods=['GET'])
+def get_news():
+    # Default values
+    keyword = 'etf'
+    amount = 20 
+
+    if 'keyword' in request.args:
+        keyword = request.args.get('keyword')
+    if 'amount' in request.args:
+        amount = int(request.args.get('amount'))
+
+    new_news = news.CnyesNewsSpider()
+    all_news = new_news.get_latest_news()
+    filtered = new_news.filter_news(all_news, keyword)
+    if len(filtered) >= amount:
+        limit = amount
+    else: 
+        limit = len(filtered)
+    filtered_limit = filtered[:limit]
+    return jsonify(filtered_limit)
 
 
 if __name__ == "__main__":
