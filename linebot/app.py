@@ -83,7 +83,6 @@ def handle_message(event):
         line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[error_message]))
         user_states[user_id] = None
 
-
 def handle_keywords_input(line_bot_api, event, msg, user_id):
     keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
     if keywords:

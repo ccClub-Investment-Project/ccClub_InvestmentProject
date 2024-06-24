@@ -23,7 +23,6 @@ def create_stock_message(stock_code):
     return message
 
 """歷史股價查詢"""
-
 def parse_input(input_string):
     parts = input_string.split(',')
     if len(parts) != 3:
@@ -51,7 +50,11 @@ def historical_stock_message(input_string):
         if historical_prices:
             send_text = f"Stock Code: {stock_code}\nHistorical Prices:\n"
             for date, open_price, close_price in historical_prices:
-                send_text += f"Date: {date}, Open: {open_price}, Close: {close_price}\n"
+                new_line = f"Date: {date}, Open: {open_price}, Close: {close_price}\n"
+                if len(send_text) + len(new_line) > 5000:
+                    send_text += "...\nData truncated due to length limit."
+                    break
+                send_text += new_line
             message = TextMessage(text=send_text)
         else:
             send_text = "No historical stock prices found for the given date range."
@@ -61,5 +64,3 @@ def historical_stock_message(input_string):
         send_text = f"Failed to retrieve stock prices. Error: {str(e)}"
         message = TextMessage(text=send_text)
     return message
-
-
