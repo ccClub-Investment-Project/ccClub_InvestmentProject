@@ -81,17 +81,24 @@ def etf_all_info():
 @swag_from('swagger/news.yaml', methods=['GET'])
 def get_news():
     # Default values
-    keyword = 'etf'
-    amount = 20 
+    msg = ''
+    amount = 100
 
     if 'keyword' in request.args:
-        keyword = request.args.get('keyword')
+        msg = request.args.get('keyword')
     if 'amount' in request.args:
         amount = int(request.args.get('amount'))
 
     new_news = news.CnyesNewsSpider()
     all_news = new_news.get_latest_news()
-    filtered = new_news.filter_news(all_news, keyword)
+    
+    # for keyword
+    keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
+    if msg != '':
+        filtered = new_news.filter_news(all_news, keywords)
+    else:
+        filtered = all_news
+    # for amount
     if len(filtered) >= amount:
         limit = amount
     else: 
