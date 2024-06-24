@@ -1,6 +1,8 @@
 from linebot.v3.messaging.models import *
 
 # Function Definitions
+
+
 def buttons_message():
     message = TemplateMessage(
         alt_text='換股',
@@ -20,6 +22,7 @@ def buttons_message():
     )
     return message
 
+
 def Carousel_Template():
     carousel_template_message = TemplateMessage(
         alt_text='Carousel template',
@@ -33,7 +36,7 @@ def Carousel_Template():
                         MessageAction(
                             label='即時開盤價跟收盤價',
                             text='即時開盤價跟收盤價'
-                        ), 
+                        ),
                         MessageAction(
                             label="歷史股價查詢",
                             text="歷史股價查詢"
@@ -62,7 +65,7 @@ def Carousel_Template():
                             text='回測'
                         ),
                         # URIAction(
-                        #     label='定期定額 回測API',    
+                        #     label='定期定額 回測API',
                         #     uri='https://backtest-kk2m.onrender.com/one_stock?id=0056&amount=3000&date=5&duration=1'
                         # )
                     ]
