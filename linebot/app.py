@@ -69,8 +69,9 @@ def handle_message(event):
                 line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=formatted_result)]))
                 user_states[user_id] = None
             elif user_states[user_id] == 'waiting_for_hstocks':
+                logging.info(f"Processing historical stock message for {msg}")
                 result3 = historical_stock_message(msg)
-                line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=result3)]))
+                line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result3]))
                 user_states[user_id] = None
             else:
                 handle_regular_message(line_bot_api, event, msg, user_id)
@@ -81,6 +82,7 @@ def handle_message(event):
         error_message = TextMessage(text="發生錯誤，請稍後再試。")
         line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[error_message]))
         user_states[user_id] = None
+
 
 def handle_keywords_input(line_bot_api, event, msg, user_id):
     keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
