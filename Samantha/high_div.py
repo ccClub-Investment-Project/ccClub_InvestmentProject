@@ -1,75 +1,63 @@
 # Date: 06/13/2024
 # Description: find the high dividend yield stocks listed in TWSE and OTC
 
-import csv
+# Part 2: liquidity check:
+'''Liquidity check: the average daily trading volume reaches 100 million 每日平均成交額達1億'''
+
+import pandas as pd
+import twstock
 
 
-# def stock_pool_selection(ticker):
-# '''select the stock to be included into the stock pool'''
-# csv path
-input_csv_file = 'web_scraping_raw_data/StockList.csv'
-output_csv_file = 'web_scraping_raw_data/top_300_companies.csv'
+# csv file path
+input_csv_file = 'web_scraping_raw_data/top_mar_cap_companies.csv'
+output_csv_file = 'web_scraping_raw_data/top_mar_cap_companies_w_trading_volume.csv'
 
-# selected columns in header
-selected_columns = [0,1,2,10,11]
+# read csv file
+df_csv = pd.read_csv(input_csv_file)
+# print(df_csv)
+# print(df_csv['代號'])
+# print(df_csv['代號'].astype(int))
 
-# open CSV file
-companies = []
-with open(input_csv_file, mode='r', encoding='utf-8-sig') as file:
-    reader = csv.reader(file)
-    headers = next(reader)
+# create a dictionary to save stock ticker and corresponding trading volume
+average_volumes = {}
 
-    # selected header
-    selected_headers = [headers[i] for i in selected_columns]
-    print(selected_headers)
+# calculate trading volume for corresponding stocks
+for ticker in df_csv['代號'].astype(str):     # twstock's ticker should be string
+    # construct a stock instance
+    stock = twstock.Stock(ticker)
 
+    # fetch data from twstock
+    stock_data = stock.fetch_from(2023, 6)
+    # print(stock_data)
+    # print(len(stock_data))
 
-    # read every line
-    for line in reader:
-        selected_line = [line[i] for i in selected_columns]
-        companies.append(selected_line)
+    # transform stock data into pandas Dataframe
+    processed_data = []
+    for data in stock_data:
+        if data.turnover is None:
+            print(data.turnover)
+            processed_data.append(data._replace(turnover=0))
+        else:
+            processed_data.append(data)
+    df_stock = pd.DataFrame(processed_data)
 
-    # sort by market cap
-    top_300_companies = sorted(companies, key=lambda x: x[1], reverse=True)[:300]
+    # [Data(date=datetime.datetime(2023, 6, 1, 0, 0), capacity=25257673, turnover=13920836412, open=550.0, high=554.0, low=550.0, close=551.0, change=-7.0, transaction=25441), ..................]
 
-    # write into new csv
-    with open(output_csv_file, mode='w', newline='', encoding='utf-8-sig') as file:
-        writer = csv.writer(file)
-        writer.writerow(selected_headers)
-        writer.writerows(top_300_companies)
+    # set the index of pandas DataFrame *****************
+    # df_stock.set_index('date', inplace=True)
 
-    print(f"top 300 companies by market cap were written into {output_csv_file}")
-
-
-
-
-
-def top_mar_cap_check(ticker):
-    '''Market cap check: top 300 by market cap 市值前300大'''
-
-def liquility_check(ticker):
-    '''Liquidity check: the average daily trading volume reaches 100 million 每日平均成交額達1億'''
-
-def earnings_check(ticker):
-    '''Financial check: the sum of operating income trailing four seasons is positive 近四季營業利益總和為正數'''
+    average_volume = df_stock['turnover'].mean()
 
 
-def dividend_continuity_check(ticker):
-    '''dividend check: consistently paid cash dividends in each of the 3 fiscal years'''
+    # add to the dictionary of stock
+    average_volume= df_stock['turnover'].mean()
+    average_volumes[ticker] = average_volume
 
+# add the trading volume to new column in csv
+df_csv['240天平均成交量'] = df_stock['代號']
 
-def calculate_div_yield(ticker):
-    '''The forcast dividend yield can be calculated as
-       1) dividend from FY23/stock price, or
-       2) 最近4季EPS總和×最近3年度平均現金股利發放率 / 審核資料截止日股價'''
+# save to new csv
+df_csv.to_csv(output_csv_file,index=False)
+# df_csv.to_csv(output_csv_file, index=False)
 
-
-
-# main functions
-def high_div_pool(ticker):
-    '''generate a high dividend yield stock pool to make recommendation, ranked by dividend yield'''
-
-
-def notification_announcement_rebalancing(ticker):
-    '''Notifies the announcement of index rebalancing by parsing the PDF file on https://taiwanindex.com.tw/news
-    '''
+print(f"csv file is saved to {output_csv_file}")
