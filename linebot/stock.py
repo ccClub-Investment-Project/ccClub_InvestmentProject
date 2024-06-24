@@ -1,5 +1,6 @@
 import twstock
 from linebot.v3.messaging import TextMessage
+from datetime import datetime
 
 def get_stock_price(stock_code):
     stock = twstock.realtime.get(stock_code)
@@ -17,5 +18,41 @@ def create_stock_message(stock_code):
         message = TextMessage(text=send_text)
     else:
         send_text = "Failed to retrieve stock prices."
+        message = TextMessage(text=send_text)
+    return message
+
+"""歷史股價查詢"""
+
+def get_historical_stock_prices(stock_code, start_date, end_date):
+    stock = twstock.Stock(stock_code)
+    historical_data = stock.fetch_from(start_date.year, start_date.month)
+    prices = [(d.date, d.open, d.close) for d in historical_data if start_date <= d.date <= end_date]
+    return prices
+
+def parse_input(input_string):
+    parts = input_string.split(',')
+    if len(parts) != 3:
+        raise ValueError("Input string must contain exactly three parts separated by commas.")
+    
+    stock_code = parts[0].strip()
+    start_date = datetime.strptime(parts[1].strip(), "%Y-%m-%d")
+    end_date = datetime.strptime(parts[2].strip(), "%Y-%m-%d")
+    
+    return stock_code, start_date, end_date
+
+def historical_stock_message(input_string):
+    try:
+        stock_code, start_date, end_date = parse_input(input_string)
+        historical_prices = get_historical_stock_prices(stock_code, start_date, end_date)
+        if historical_prices:
+            send_text = f"Stock Code: {stock_code}\nHistorical Prices:\n"
+            for date, open_price, close_price in historical_prices:
+                send_text += f"Date: {date}, Open: {open_price}, Close: {close_price}\n"
+            message = TextMessage(text=send_text)
+        else:
+            send_text = "No historical stock prices found for the given date range."
+            message = TextMessage(text=send_text)
+    except Exception as e:
+        send_text = f"Failed to retrieve stock prices. Error: {str(e)}"
         message = TextMessage(text=send_text)
     return message

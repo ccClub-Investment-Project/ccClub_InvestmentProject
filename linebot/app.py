@@ -23,9 +23,6 @@ channel_access_token = os.getenv('channel_access_token')
 channel_secret = os.getenv('channel_secret')
 port = int(os.getenv('PORT', 5000))
 
-# Debugging: Print the channel access token and channel secret
-print(f"Channel Access Token: {channel_access_token}")
-print(f"Channel Secret: {channel_secret}")
 
 # Get instance from linebot
 configuration = Configuration(access_token=channel_access_token)
@@ -71,6 +68,10 @@ def handle_message(event):
                 formatted_result = format_backtest_result(result1)
                 line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=formatted_result)]))
                 user_states[user_id] = None
+            elif user_states[user_id] == 'waiting_for_hstocks':
+                result3 = historical_stock_message(msg)
+                line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=result3)]))
+                user_states[user_id] = None
             else:
                 handle_regular_message(line_bot_api, event, msg, user_id)
         else:
@@ -105,9 +106,10 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
 def handle_regular_message(line_bot_api, event, msg, user_id):
    
     if "歷史股價查詢" in msg:
-        message = buttons_message()
+        message = TextMessage(text="請輸入公司代號,開始日期,結束日期(請用半形逗號隔開):")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
+        user_states[user_id] = 'waiting_for_hstocks'
         return
     elif '換股' in msg:
         message = buttons_message()

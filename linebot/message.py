@@ -51,7 +51,7 @@ def Carousel_Template():
                     actions=[
                         URIAction(
                             label='互動式網站',
-                            uri='https://backtest-kk2m.onrender.com/one_stock?id=0056&amount=3000&date=5&duration=1'
+                            uri='https://ccclub-investmentproject.onrender.com/'
                         ),
                         MessageAction(
                             label='新聞',
