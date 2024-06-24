@@ -1,3 +1,16 @@
+# 加入專案目錄 => 為了讀取別的資料夾
+import os
+import sys
+current_path = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.join(current_path, '..')
+sys.path.insert(0, project_root)
+os.chdir(project_root)
+
+from linebot import news
+news = news.CnyesNewsSpider()
+# all_news = news.get_latest_news()
+# print(all_news[0])
+
 from flask import Flask, request, jsonify
 from flasgger import Swagger,swag_from
 from dotenv import load_dotenv

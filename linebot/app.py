@@ -9,7 +9,7 @@ from linebot.v3.webhooks import MessageEvent, TextMessageContent
 from linebot.v3.webhooks.models import MemberJoinedEvent
 from data import *
 from message import *
-from news import *
+from news2 import *
 from Function import *
 from stock import *
 
