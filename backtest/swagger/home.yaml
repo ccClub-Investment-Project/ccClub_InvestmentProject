@@ -1,0 +1,6 @@
+Home endpoint
+---
+description: Collecting Data!!!
+responses:
+  200:
+    description: Home endpoint, returns a welcome message.

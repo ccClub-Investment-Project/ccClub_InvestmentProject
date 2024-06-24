@@ -1,0 +1,9 @@
+flask
+gunicorn
+python-dotenv
+backtrader
+yfinance
+matplotlib
+flasgger
+sqlalchemy
+psycopg2

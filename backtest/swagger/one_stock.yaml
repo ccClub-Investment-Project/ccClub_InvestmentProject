@@ -1,0 +1,31 @@
+Run backtest for one stock of dollar cost averaging
+---
+parameters:
+  - name: id
+    in: query
+    type: string
+    description: The stock ID to backtest.
+    required: false
+    default: '0050'
+  - name: amount
+    in: query
+    type: integer
+    description: The amount to buy.
+    required: false
+    default: 3000
+  - name: date
+    in: query
+    type: integer
+    description: The buy date.
+    required: false
+    default: 5
+  - name: duration
+    in: query
+    type: integer
+    description: The duration in years.
+    required: false
+    default: 10
+responses:
+  200:
+    description: Run backtest for one stock of dollar cost averaging.
+

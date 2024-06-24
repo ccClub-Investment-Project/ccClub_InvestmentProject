@@ -19,3 +19,4 @@ dash-bootstrap-components
 nbformat
 sqlalchemy
 yfinance
+flasgger
