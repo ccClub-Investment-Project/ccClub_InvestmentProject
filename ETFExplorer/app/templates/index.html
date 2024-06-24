@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>個人看盤頁面</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    {%metas%} {%favicon%} {%css%}
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Taiwan Stock Index 10 Years</h1>
+      </div>
+      <div class="content">
+        <div class="stock-info">
+          <h2>股票資訊</h2>
+          <p>股價：$100</p>
+          <p>成交量：200,000</p>
+          <p>市值：$1,000,000,000</p>
+          <p>PE比率：15</p>
+          <p>EPS：$5</p>
+        </div>
+        <div class="chart">
+          <h2>Taiwan Stock Index Over Time</h2>
+          <div id="dash-app"></div>
+          <!-- 這裡是 Dash 應用插入點 -->
+        </div>
+      </div>
+      <div class="footer">
+        <p>&copy; 2024 個人看盤頁面</p>
+      </div>
+    </div>
+    <footer>{%config%} {%scripts%} {%renderer%}</footer>
+  </body>
+</html>

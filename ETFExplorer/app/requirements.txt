@@ -1,0 +1,8 @@
+psycopg2
+pandas
+sqlalchemy
+python-dotenv
+flask
+plotly
+psycopg2
+gunicorn
