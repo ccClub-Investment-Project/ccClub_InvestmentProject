@@ -2,3 +2,5 @@ line-bot-sdk
 flask
 gunicorn
 python-dotenv
+twstock
+lxml

@@ -1,26 +1,7 @@
 from linebot.v3.messaging.models import *
 
 # Function Definitions
-def buttons_message1():
-    message = TemplateMessage(
-        alt_text='基本股票功能',
-        template=ButtonsTemplate(
-            text='請選擇以下功能',
-            actions=[
-                MessageAction(
-                    label="查詢即時開盤價跟收盤價",
-                    text="查詢即時開盤價跟收盤價"
-                ),
-                MessageAction(
-                    label="歷史股價查詢",
-                    text="歷史股價查詢"
-                )
-            ]
-        )
-    )
-    return message
-
-def buttons_message2():
+def buttons_message():
     message = TemplateMessage(
         alt_text='換股',
         template=ButtonsTemplate(
@@ -50,12 +31,12 @@ def Carousel_Template():
                     text='Description 1',
                     actions=[
                         MessageAction(
-                            label='財報',
-                            text='財報'
-                        ),
+                            label='即時開盤價跟收盤價',
+                            text='即時開盤價跟收盤價'
+                        ), 
                         MessageAction(
-                            label='基本股票功能',
-                            text='基本股票功能'
+                            label="歷史股價查詢",
+                            text="歷史股價查詢"
                         ),
                         MessageAction(
                             label='換股',
