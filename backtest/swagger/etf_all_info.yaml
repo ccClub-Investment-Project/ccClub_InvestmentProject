@@ -1,6 +1,0 @@
-Get all ETF information
----
-description: Retrieve detailed information about all ETFs.
-responses:
-  200:
-    description: A list of ETFs.

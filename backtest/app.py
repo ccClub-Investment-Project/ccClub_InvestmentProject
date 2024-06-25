@@ -69,12 +69,7 @@ def one_stock():
     return jsonify(response)
 
 
-@app.route('/etf_all_info', methods=['GET'])
-@swag_from('swagger/etf_all_info.yaml', methods=['GET'])
-def etf_all_info():
-    table = "etf_all_info"
-    data = get_json(table)
-    return jsonify(data)
+
 
 
 @app.route('/news',methods=['GET'])
@@ -137,6 +132,13 @@ def get_news():
     filtered = unique_news[:limit]
 
     return jsonify(filtered)
+
+@app.route('/tables/<table_name>', methods=['GET'])
+@swag_from('swagger/tables.yaml', methods=['GET'])
+def etf_all_info(table_name):
+    data = get_json(table_name)
+    return jsonify(data)
+
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5555))
