@@ -82,6 +82,9 @@ def create_plot():
 #     fig = px.bar(df, x='Date', y='Volume', title='Stock Volume Over Time')
 #     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 #     return graphJSON
+@app.route("/keep_alive")
+def test():
+    return "website Running!!!"
 
 
 @app.route('/')
