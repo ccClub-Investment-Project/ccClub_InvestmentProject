@@ -1,0 +1,21 @@
+Get all talbes from SQL
+eg. etf_all_info, etf_domestic_nav, etf_domestic_list, etf_0050_constituents...
+---
+parameters:
+  - name: table_name
+    in: path
+    type: string
+    required: true
+    default: 'etf_all_info'
+    description: Name of the table to retrieve data from. 
+definitions:
+  TableData:
+    type: object
+    properties:
+      table:
+        type: string
+      data:
+        type: string
+responses:
+  200:
+    description: Data from the specified table

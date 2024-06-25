@@ -1,0 +1,28 @@
+<!-- news_block.html -->
+<article class="content-block">
+    <header>
+        {{ news.title }}
+        <a href="https://news.cnyes.com/news/id/{{ news.newsId }}" target="_blank" class="link-button">查看詳細</a>
+    </header>
+    <p>Keywords: {{ news.keyword | join(', ') }}</p>
+    <p>ETF: {{ news.etf | join(', ') }}</p>
+</article>
+<div class="divider"></div>
+
+<style>
+    .link-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin-left: 10px;
+        border-radius: 4px;
+    }
+
+    .link-button:hover {
+        background-color: #45a049;
+    }
+</style>

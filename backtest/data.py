@@ -44,3 +44,15 @@ def get_json(table):
 # # 轉乘json
 # json_data = json.dumps(data_list, ensure_ascii=False)
 # print(json_data)
+
+
+# 抓取api資料 (for sql tables)
+
+import requests
+
+url_base = 'https://backtest-kk2m.onrender.com/tables'
+
+def api_table_data(table_name):
+    url = url_base + "/" + table_name
+    response = requests.get(url)
+    return response.json()

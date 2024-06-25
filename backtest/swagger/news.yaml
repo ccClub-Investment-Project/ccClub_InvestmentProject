@@ -1,0 +1,25 @@
+Get all Financial News information
+---
+description: Retrieve detailed information about all Financial News.
+parameters:
+  - name: keywords
+    in: query
+    type: string
+    description: Keywords for filter
+    required: false
+    default: '台股,美股'
+  - name: etf
+    in: query
+    type: boolean
+    description: Filter for ETF related news
+    required: false
+    default: True
+  - name: limit
+    in: query
+    type: integer
+    description: The number of news items to return (default 25)
+    required: false
+    default: 25
+responses:
+  200:
+    description: A list of News.
