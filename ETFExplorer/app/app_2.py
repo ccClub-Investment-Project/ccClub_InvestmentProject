@@ -15,6 +15,8 @@ import plotly.express as px
 import pandas as pd
 from flask import Flask, render_template
 from use_pg_SQL.getdata import fetch_data_from_db
+from use_api.data import get_news_data
+# news = get_news_data('台股,美股',True, 25)
 
 app = Flask(__name__)
 
@@ -85,11 +87,13 @@ def create_plot():
 @app.route('/')
 def index():
     graphJSON = create_plot()
+    news = get_news_data('台股,美股', True, 25)  # 获取新闻数据
+
     # graphJSON1 = create_plot1()
     # graphJSON2 = create_plot2()
     # print(graphJSON)
     # return render_template('app_0619_merge.html', graphJSON=graphJSON, graphJSON1=graphJSON1, graphJSON2=graphJSON2)
-    return render_template('app_0619_merge.html', graphJSON=graphJSON)
+    return render_template('app_0619_merge.html', graphJSON=graphJSON,  news_list=news)
 
 
 if __name__ == '__main__':
