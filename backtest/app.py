@@ -81,31 +81,62 @@ def etf_all_info():
 @swag_from('swagger/news.yaml', methods=['GET'])
 def get_news():
     # Default values
-    msg = ''
-    amount = 100
+    keywords = '台股,美股'
+    limit = 25
+    etf = True
 
-    if 'keyword' in request.args:
-        msg = request.args.get('keyword')
-    if 'amount' in request.args:
-        amount = int(request.args.get('amount'))
+    if 'keywords' in request.args:
+        keywords = request.args.get('keywords')
+    if 'etf' in request.args:
+        etf = bool(request.args.get('etf'))
+    if 'limit' in request.args:
+        limit = int(request.args.get('limit'))
 
     new_news = news.CnyesNewsSpider()
     all_news = new_news.get_latest_news()
     
-    # for keyword
-    keywords = [keyword.strip() for keyword in msg.split(',') if keyword.strip()]
-    if msg != '':
-        filtered = new_news.filter_news(all_news, keywords)
-    else:
-        filtered = all_news
-    # for amount
-    if len(filtered) >= amount:
-        limit = amount
-    else: 
-        limit = len(filtered)
-    filtered_limit = filtered[:limit]
-    return jsonify(filtered_limit)
+    filtered = []
 
+    # 設定ETF filter
+    def get_etf_filter(etf,all_news):
+        etf_list=[]
+        if etf == True:
+            for new in all_news:
+                if new['etf']!=[]:
+                    etf_list.append(new)
+        return etf_list
+
+    # 設定keyword filter
+    def get_keyword_filter(keywords, all_news):
+        keywords_list=[]
+        for new in all_news:
+            # match in keyword array
+            if any(keyword in new.get("keyword") for keyword in keywords):
+                keywords_list.append(new)
+            # match in title
+            if any(keyword.lower() in new.get("title", "").lower() for keyword in keywords):
+                keywords_list.append(new)
+        return keywords_list
+
+    etf_list = get_etf_filter(etf, all_news)
+    keywords_list = get_keyword_filter(keywords, all_news)
+
+    # 合并 ETF 和关键词过滤后的列表
+    combined_list = etf_list + keywords_list
+
+    # 移除重复的 newsId
+    unique_news = []
+    seen_news_ids = set()
+    for news_item in combined_list:
+        news_id = news_item['newsId']
+        if news_id not in seen_news_ids:
+            unique_news.append(news_item)
+            seen_news_ids.add(news_id)
+
+    # 限制返回的结果数量
+    filtered = unique_news[:limit]
+
+    return jsonify(filtered)
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5555))
