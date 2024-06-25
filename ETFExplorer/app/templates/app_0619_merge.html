@@ -102,21 +102,13 @@
     </article>
     <article class="right-column">
       <section class="news-rounded-box">
-        <article class="content-block">
-          <header>新聞</header>
-        </article>
-        <div class="divider"></div>
-        <article class="content-block">
-          <header>新聞</header>
-        </article>
-        <div class="divider"></div>
-        <article class="content-block">
-          <header>新聞</header>
-        </article>
-        <div class="divider"></div>
-        <article class="content-block">
-          <header>新聞</header>
-        </article>
+        <h2>Latest News</h2>
+        <div id="news-container">
+          <!-- 使用 include 指令加载 news_block.html 模板 -->
+          {% for news in news_list[:5] %}
+          {% include 'news_block.html' %}
+          {% endfor %}
+        </div>
       </section>
     </article>
   </div>
