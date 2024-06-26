@@ -13,10 +13,10 @@ WAIT_TIME = 5
 
 
 SLEEP_TIME = 2
-CSV_FILENAME = 'financial_dividend_data.csv'
+CSV_FILENAME = 'financial_net_data.csv'
 
 # 读取公司数据
-companies_df = pd.read_csv('company2.csv')
+companies_df = pd.read_csv('company3.csv')
 companies = companies_df['company'].tolist()
 years = range(109, 113)
 
@@ -29,7 +29,7 @@ def initialize_driver():
     return webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=firefox_options)
 
 def fetch_financial_data(driver, company, year):
-    url = "https://mops.twse.com.tw/mops/web/t164sb05"
+    url = f"https://mops.twse.com.tw/mops/web/t164sb04?encodeURIComponent=1&step=1&firstin=1&off=1&TYPEK=all&year=%7Byear%7D&season=%7Bseason%7D&co_id=%7Bcompany%7D"
     driver.get(url)
     
     try:
@@ -55,7 +55,7 @@ def fetch_financial_data(driver, company, year):
         dividend_rows = driver.find_elements(By.CSS_SELECTOR, "#table01 table.hasBorder tr")
         for row in dividend_rows:
             cells = row.find_elements(By.TAG_NAME, "td")
-            if len(cells) >= 2 and "發放現金股利" in cells[0].text:
+            if len(cells) >= 2 and "母公司業主（淨利∕損）" in cells[0].text:
                 return cells[1].text.strip()
         
         print(f"No dividend data found for {company} in year {year}")
