@@ -33,8 +33,9 @@ def backtest(msg):
         stock_log = results.get("log")
         # 构建字符串
         money = stock_info['每月投資金額(元)']
-        send_text += f"《定期定額{money}元，投資{stock_id}》\n"
-        send_text += f"回測範圍: {stock_info['回測範圍(年)']} 年\n"
+        send_text += f"每個月定期定額: {money}元\n"
+        send_text += f"投資標的: {stock_id}\n"
+        send_text += f"回測範圍: {stock_info['回測範圍(年)']}年\n"
         send_text += f"累績投資金額: {stock_info['累績投資金額(元)']}元\n"
         send_text += f"夏普值: {stock_analysis['夏普值']}\n"
         send_text += f"年化報酬率: {stock_analysis['年化報酬率(%)']}%\n"
