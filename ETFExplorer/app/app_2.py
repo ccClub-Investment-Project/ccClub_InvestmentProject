@@ -19,16 +19,33 @@ from use_api.data import get_news_data
 app = Flask(__name__)
 
 # 從資料庫讀取數據
-table = 'taiwan_stock_index_10y'
-df = fetch_data_from_db(table)
+# table = 'taiwan_stock_index_10y'
+# df = fetch_data_from_db(table)
 
 # 確保日期列被識別為日期類型
-df["Date"] = pd.to_datetime(df["Date"])
+# df["Date"] = pd.to_datetime(df["Date"])
+
+# 測試讀取yahoo finance
+import yfinance as yf
+stock_id1 = '0050.TW'
+df1 = yf.download(stock_id1)
+# 将索引重置为列
+df1.reset_index(inplace=True)
+
+stock_id2 = '0056.TW'
+df2 = yf.download(stock_id2)
+# 将索引重置为列
+df2.reset_index(inplace=True)
+
 
 def create_plot():
     # 生成 Plotly 圖表
-    fig = px.line(df, x='Date', y='Close',
-                  title='Taiwan Stock Index Over Time')
+    fig = px.line()
+    fig.add_scatter(x=df1['Date'], y=df1['Close'], mode='lines', name=stock_id1)
+    fig.add_scatter(x=df2['Date'], y=df2['Close'], mode='lines', name=stock_id2)
+    # fig = px.line(df, x='Date', y='Close',
+    #               title='0050')
+
     fig.update_layout(
         xaxis=dict(
             rangeselector=dict(
@@ -89,7 +106,7 @@ def index():
     graphJSON = create_plot()
     
     # 放置策略1的圖表 (放置許多ETF) 讀取 yahoo finance
-
+    
     # 放置新聞區塊
     news = get_news_data('台股,美股', True, 25)  # 获取新闻数据
 
@@ -99,13 +116,6 @@ def index():
     # return render_template('app_0619_merge.html', graphJSON=graphJSON, graphJSON1=graphJSON1, graphJSON2=graphJSON2)
     return render_template('app_0619_merge.html', graphJSON=graphJSON,  news_list=news)
 
-
-@app.route("/tabs/<tab_id>")
-def load_tab(tab_id):
-    try:
-        return render_template(f'tabs/tab_{tab_id}.html')
-    except Exception as e:
-        return jsonify({"error": str(e)}), 404
     
 if __name__ == '__main__':
     app.run(debug=True)
