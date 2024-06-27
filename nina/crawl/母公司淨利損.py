@@ -1,3 +1,4 @@
+import os
 import time
 import pandas as pd
 from selenium import webdriver
@@ -9,14 +10,27 @@ from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 
 # 配置
-WAIT_TIME = 5
-
-
+WAIT_TIME = 10
 SLEEP_TIME = 2
 CSV_FILENAME = 'financial_net_data.csv'
 
-# 读取公司数据
-companies_df = pd.read_csv('company3.csv')
+# 检查当前工作目录
+print("Current working directory:", os.getcwd())
+
+# 改变工作目录到包含123.csv的目录
+os.chdir(r'C:\Users\chimou\Desktop\Python\123')
+
+# 读取公司数据并调试打印
+try:
+    companies_df = pd.read_csv('123.csv', on_bad_lines='skip', encoding='utf-8', engine='python')
+    print(companies_df.head())
+except FileNotFoundError as e:
+    print(f"File not found: {e}")
+    exit(1)
+except pd.errors.ParserError as e:
+    print(f"Parsing error: {e}")
+    exit(1)
+
 companies = companies_df['company'].tolist()
 years = range(109, 113)
 
@@ -52,10 +66,17 @@ def fetch_financial_data(driver, company, year):
         
         WebDriverWait(driver, WAIT_TIME).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#table01 table.hasBorder")))
         
+        try:
+            detailed_info_button = driver.find_element(By.XPATH, "//input[@type='button' and @value='詳細資料']")
+            detailed_info_button.click()
+            WebDriverWait(driver, WAIT_TIME).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#table01 table.hasBorder")))
+        except Exception as e:
+            print(f"No '詳細資料' button for {company} in year {year}: {e}")
+        
         dividend_rows = driver.find_elements(By.CSS_SELECTOR, "#table01 table.hasBorder tr")
         for row in dividend_rows:
             cells = row.find_elements(By.TAG_NAME, "td")
-            if len(cells) >= 2 and "母公司業主（淨利∕損）" in cells[0].text:
+            if len(cells) >= 2 and ("母公司業主（淨利∕損）" in cells[0].text):
                 return cells[1].text.strip()
         
         print(f"No dividend data found for {company} in year {year}")
@@ -79,7 +100,7 @@ def main():
             for year in years:
                 print(f"Fetching data for company: {company}, year: {year}")
                 attempt = 1
-                while attempt <= 1:  # 最多尝试两次
+                while attempt <= 3:  # 最多尝试三次
                     dividend = fetch_financial_data(driver, company, year)
                     if dividend is not None:
                         company_data[f"{year}季"] = dividend
@@ -89,7 +110,7 @@ def main():
                         attempt += 1
                         time.sleep(SLEEP_TIME)
                 else:
-                    print(f"Failed to fetch data for {company} in year {year} after 2 attempts.")
+                    print(f"Failed to fetch data for {company} in year {year} after 3 attempts.")
             
             save_to_csv([company_data], CSV_FILENAME)
             print(f"Data for company {company} saved to {CSV_FILENAME}")
@@ -101,5 +122,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
