@@ -1,0 +1,18 @@
+.content-section {
+  display: flex;
+  /* flex-wrap: wrap; */
+  margin: 20px;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+}
+@media (max-width: 640px) {
+  .content-section {
+    flex-direction: column;
+    gap: 0px;
+  }
+}
+.div-2 {
+  gap: 10px;
+  display: flex;
+}
