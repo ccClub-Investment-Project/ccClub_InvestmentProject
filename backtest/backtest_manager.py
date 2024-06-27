@@ -1,7 +1,7 @@
 from __future__ import (absolute_import, division, print_function, unicode_literals)
 import backtrader as bt
 import yfinance as yf
-import re
+import re, math
 # 讀取一些策略
 from strategy.dollar_cost_averaging import DollarCostAveraging
 from datetime import datetime, timedelta
@@ -59,6 +59,12 @@ class BacktestManager:
         self.results = self.cerebro.run()
 
         logs = self.results[0].logs
+
+        # 先記錄總共買了幾個月？
+        months = len(logs)
+        years = round(float(months / 12),2)
+        self.info['回測範圍(年)']=years
+
         log_dict = []
         for log in logs:
             parts = log.split(', ')
@@ -76,7 +82,7 @@ class BacktestManager:
                 "price": price,
                 "cost": cost,
                 "comm": comm
-            }         
+            }      
             log_dict.append(item)
         return log_dict
 
@@ -100,6 +106,7 @@ class BacktestManager:
             "最大回撤(%)": ana_drawdown,
             "年化報酬率(%)": ana_returns
         }
+        
         return self.ana_results
 
           
