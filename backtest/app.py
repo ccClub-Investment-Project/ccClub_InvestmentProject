@@ -24,33 +24,22 @@ swagger = Swagger(app)
 def home():
     return "Backtest Running!!!"
 
-@app.route('/one_stock', methods=['GET'])
-@swag_from('swagger/one_stock.yaml', methods=['GET'])
-def one_stock():
+@app.route('/backtest/<stock_id>', methods=['GET'])
+@swag_from('swagger/backtest_stock.yaml', methods=['GET'])
+def backtest_stock(stock_id):
     backtest = BacktestManager()
     # Default values
-    id = '0050'
-    amount = 3000 
-    date = 5
-    duration = 10
-
-    if 'id' in request.args:
-        id = request.args.get('id')
+    amount = 6000 
+    id = stock_id
     if 'amount' in request.args:
         amount = int(request.args.get('amount'))
-    if 'date' in request.args:
-        date = int(request.args.get('date'))
-    if 'duration' in request.args:
-        duration = int(request.args.get('duration'))
-
-    stock_ids = [f"{id}.TW"]
-    buy_amount = [amount]
-    buy_date = date
-    duration_year = duration
+    
+    stock_id = f"{id}.TW"
+    buy_amount = amount
 
     try:
-        backtest.load_data_yahoo(stock_ids=stock_ids, duration_year=duration_year)
-        info = backtest.buy_period(buy_amount, buy_date)
+        backtest.load_data_yahoo(stock_id=stock_id)
+        info = backtest.buy_period(buy_amount)
         log = backtest.run()
         analysis = backtest.analysis()
     except Exception as e:

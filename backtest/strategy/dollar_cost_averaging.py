@@ -3,8 +3,8 @@ import backtrader as bt
 class DollarCostAveraging(bt.Strategy):
     
     params = (
-        ('amounts', [3000,3000,3000]),  # 每期投資金額
-        ('date', 4) # 購買日期 = 觸發日期 + 1
+        ('amount', 6000),  # 每期投資金額
+        ('date', 15) # 購買日期 = 觸發日期 + 1
     )
 
     def __init__(self):
@@ -16,19 +16,17 @@ class DollarCostAveraging(bt.Strategy):
         )
 
     def notify_timer(self, timer, when, *args, **kwargs):
-        for i, data in enumerate(self.datas):
-            # 对每个数据源执行定期定额投资
-            money = self.params.amounts[i]
-            current_price = data.close[0]  # 获取当前数据源的收盘价
-            size = money / current_price  # 计算可买入的股份数
-            self.buy(data=data, size=size)
+        data = self.datas[0]
+        money = self.params.amount
+        current_price = data.close[0]  # 获取当前数据源的收盘价
+        size = money / current_price  # 计算可买入的股份数
+        self.buy(data=data, size=size)
 
     def log(self, txt, df=None):
         '''records'''
         df = df or self.datas[0].datetime.date(0)
         content = '%s, %s' % (df.isoformat(), txt)
         self.logs.append(content)
-        # print(content)
 
     def notify_order(self, order):
         if order.status in [order.Submitted, order.Accepted]:

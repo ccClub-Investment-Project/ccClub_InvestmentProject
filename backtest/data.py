@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 import pandas as pd
 import json
+import pandas as pd
 
 
 load_dotenv()
@@ -55,4 +56,5 @@ url_base = 'https://backtest-kk2m.onrender.com/tables'
 def api_table_data(table_name):
     url = url_base + "/" + table_name
     response = requests.get(url)
-    return response.json()
+    data = response.json()
+    return pd.DataFrame(data)
