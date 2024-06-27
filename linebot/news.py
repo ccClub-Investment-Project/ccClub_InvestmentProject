@@ -1,4 +1,6 @@
 import requests
+from bs4 import BeautifulSoup
+
 class CnyesNewsSpider:
     def get_latest_news(self, pages=10, limit=10):
         headers = {
@@ -12,8 +14,29 @@ class CnyesNewsSpider:
                 r = requests.get(f"https://api.cnyes.com/media/api/v1/newslist/category/headline?page={page}&limit={limit}", headers=headers, timeout=10)
                 r.raise_for_status()  # 如果響應不是200，這將拋出異常
                 data = r.json()
-                print(f"API Response Page {page}: {data}")  # 打印每個頁面的響應
-                all_news.extend(data.get('items', {}).get('data', []))
+                # print(f"API Response Page {page}: {data}")  # 打印每個頁面的響應
+                new_items = data.get('items', {}).get('data', [])
+                
+                def add_date(new_items):
+                    # 取得日期
+                    for i, new_item in enumerate(new_items):
+                        new_id = new_item['newsId']
+                        url = f"https://news.cnyes.com/news/id/{new_id}"
+                        response = requests.get(url, headers=headers)
+                        soup = BeautifulSoup(response.content, 'html.parser')
+                        # 使用 CSS 選擇器提取相應元素的內容
+                        element = soup.select_one('body > div.content-main > main > div > article > p')
+                        # body > div.content-main > main > div > article > p
+                        date_author = ""
+                        if element:
+                            date_author = element.get_text()
+                            print(element.get_text())
+                        else:
+                            print("沒有找到匹配的元素")
+                        new_items[i]['date_author'] = date_author
+                    return new_items
+                # new_items = add_date(new_items)
+                all_news.extend(new_items)
             except requests.RequestException as e:
                 print(f"請求第{page}頁新聞失敗: {e}")
                 break
