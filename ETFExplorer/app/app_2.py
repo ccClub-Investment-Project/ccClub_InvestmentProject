@@ -7,7 +7,6 @@ project_root = os.path.join(current_path, '..')  # noqa: E402
 sys.path.insert(0, project_root)  # noqa: E402
 os.chdir(project_root)  # noqa: E402
 
-
 # cd ccClub_InvestmentProject/aila
 import json
 import plotly
@@ -16,7 +15,6 @@ import pandas as pd
 from flask import Flask, render_template
 from use_pg_SQL.getdata import fetch_data_from_db
 from use_api.data import get_news_data
-# news = get_news_data('台股,美股',True, 25)
 
 app = Flask(__name__)
 
@@ -26,7 +24,6 @@ df = fetch_data_from_db(table)
 
 # 確保日期列被識別為日期類型
 df["Date"] = pd.to_datetime(df["Date"])
-
 
 def create_plot():
     # 生成 Plotly 圖表
@@ -90,6 +87,10 @@ def test():
 @app.route('/')
 def index():
     graphJSON = create_plot()
+    
+    # 放置策略1的圖表 (放置許多ETF) 讀取 yahoo finance
+
+    # 放置新聞區塊
     news = get_news_data('台股,美股', True, 25)  # 获取新闻数据
 
     # graphJSON1 = create_plot1()
@@ -99,5 +100,12 @@ def index():
     return render_template('app_0619_merge.html', graphJSON=graphJSON,  news_list=news)
 
 
+@app.route("/tabs/<tab_id>")
+def load_tab(tab_id):
+    try:
+        return render_template(f'tabs/tab_{tab_id}.html')
+    except Exception as e:
+        return jsonify({"error": str(e)}), 404
+    
 if __name__ == '__main__':
     app.run(debug=True)

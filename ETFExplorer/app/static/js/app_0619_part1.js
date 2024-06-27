@@ -117,5 +117,6 @@ function showDiv(divId) {
     .classList.add("active");
 }
 
+
 // // 預設顯示第一個策略
 // showDiv("01");
