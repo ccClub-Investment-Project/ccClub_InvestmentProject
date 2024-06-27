@@ -136,7 +136,7 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         user_states[user_id] = 'waiting_for_stock'
         return
     elif '回測' in msg:
-        message = TextMessage(text="請問要回測哪一支,定期定額多少,幾年(請用半形逗號隔開):")
+        message = TextMessage(text="輸入股票代號與定期定額金額(半形逗號隔開):例如,0050,6000")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_backtest'
