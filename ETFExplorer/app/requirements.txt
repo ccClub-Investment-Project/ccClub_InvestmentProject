@@ -6,3 +6,5 @@ flask
 plotly
 psycopg2
 gunicorn
+requests
+yfinance

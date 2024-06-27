@@ -1,45 +1,50 @@
-import requests, re
+import requests, re, math
 from linebot.v3.messaging import TextMessage
 
-def get_stock_data(id, amount, duration):
-    url = 'https://backtest-kk2m.onrender.com/one_stock'
+def get_stock_data(id, amount=6000):
+    url = 'https://backtest-kk2m.onrender.com/backtest/{id}'.format(id=id)
     params = {
-        'id': id,
         'amount': amount,
-        'duration': duration
     }
     response = requests.get(url, params=params)
     return response.json()
 
-
 # for 定期定額使用
 def backtest(msg):
-    parts = msg.split(',')
-    numbers = [re.findall(r'\d+', part) for part in parts]
-    inputs = [numbers[0][0]] + [int(num) for sublist in numbers[1:] for num in sublist]
-    
-    send_text = ""
-    if len(numbers) ==3:
-        results = get_stock_data(inputs[0], inputs[1], inputs[2])
+    try:
+        send_text = ""
+        parts = msg.split(',')
+        if len(parts) == 2:
+            input_id, amount = parts[0],parts[1]
+            results = get_stock_data(input_id, int(amount))
+
+        elif len(parts) ==1:
+            input_id = parts[0]
+            results = get_stock_data(input_id)
+        else:
+            results = get_stock_data("0050")  
         # 提取 id
         stock_id = results.get("id")
         # 提取 info
         stock_info = results.get("info")
         # 提取 analysis
         stock_analysis = results.get("analysis")
+        # 提取 log
+        stock_log = results.get("log")
         # 构建字符串
-        send_text = ""
-
-        send_text += f"定期定額投資: {stock_id}\n"
-        for value in stock_info:
-            send_text += f"{value}\n"
-        for value in stock_analysis:
-            send_text += f"{value}\n"
+        money = stock_info['每月投資金額(元)']
+        send_text += f"每個月定期定額: {money}元\n"
+        send_text += f"投資標的: {stock_id}\n"
+        send_text += f"回測範圍: {stock_info['回測範圍(年)']}年\n"
+        send_text += f"累績投資金額: {stock_info['累績投資金額(元)']}元\n"
+        send_text += f"夏普值: {stock_analysis['夏普值']}\n"
+        send_text += f"年化報酬率: {stock_analysis['年化報酬率(%)']}%\n"
+        send_text += f"最大回撤: {stock_analysis['最大回撤(%)']}%\n"
         send_text += f"(Notes:不包含股利計算)"
-
-            
-    else:
+    except Exception as error:
         send_text = "資料錯誤"
-    
+        print("An error occurred:", error)
+        
     message = TextMessage(text=send_text)
+
     return message

@@ -7,7 +7,6 @@ project_root = os.path.join(current_path, '..')  # noqa: E402
 sys.path.insert(0, project_root)  # noqa: E402
 os.chdir(project_root)  # noqa: E402
 
-
 # cd ccClub_InvestmentProject/aila
 import json
 import plotly
@@ -16,22 +15,37 @@ import pandas as pd
 from flask import Flask, render_template
 from use_pg_SQL.getdata import fetch_data_from_db
 from use_api.data import get_news_data
-# news = get_news_data('台股,美股',True, 25)
 
 app = Flask(__name__)
 
 # 從資料庫讀取數據
-table = 'taiwan_stock_index_10y'
-df = fetch_data_from_db(table)
+# table = 'taiwan_stock_index_10y'
+# df = fetch_data_from_db(table)
 
 # 確保日期列被識別為日期類型
-df["Date"] = pd.to_datetime(df["Date"])
+# df["Date"] = pd.to_datetime(df["Date"])
+
+# 測試讀取yahoo finance
+import yfinance as yf
+stock_id1 = '0050.TW'
+df1 = yf.download(stock_id1)
+# 将索引重置为列
+df1.reset_index(inplace=True)
+
+stock_id2 = '0056.TW'
+df2 = yf.download(stock_id2)
+# 将索引重置为列
+df2.reset_index(inplace=True)
 
 
 def create_plot():
     # 生成 Plotly 圖表
-    fig = px.line(df, x='Date', y='Close',
-                  title='Taiwan Stock Index Over Time')
+    fig = px.line()
+    fig.add_scatter(x=df1['Date'], y=df1['Close'], mode='lines', name=stock_id1)
+    fig.add_scatter(x=df2['Date'], y=df2['Close'], mode='lines', name=stock_id2)
+    # fig = px.line(df, x='Date', y='Close',
+    #               title='0050')
+
     fig.update_layout(
         xaxis=dict(
             rangeselector=dict(
@@ -90,6 +104,10 @@ def test():
 @app.route('/')
 def index():
     graphJSON = create_plot()
+    
+    # 放置策略1的圖表 (放置許多ETF) 讀取 yahoo finance
+    
+    # 放置新聞區塊
     news = get_news_data('台股,美股', True, 25)  # 获取新闻数据
 
     # graphJSON1 = create_plot1()
@@ -98,6 +116,6 @@ def index():
     # return render_template('app_0619_merge.html', graphJSON=graphJSON, graphJSON1=graphJSON1, graphJSON2=graphJSON2)
     return render_template('app_0619_merge.html', graphJSON=graphJSON,  news_list=news)
 
-
+    
 if __name__ == '__main__':
     app.run(debug=True)

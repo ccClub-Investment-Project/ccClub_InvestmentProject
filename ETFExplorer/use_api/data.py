@@ -1,13 +1,12 @@
 import requests
+import yfinance
 
-url_base = 'https://backtest-kk2m.onrender.com'
+url_base = "https://backtest-kk2m.onrender.com"
 
-def get_stock_data(id, amount, duration):
-    url = url_base + "/one_stock"
+def get_stock_data(id, amount=6000):
+    url = 'https://backtest-kk2m.onrender.com/backtest/{id}'.format(id=id)
     params = {
-        'id': id,
         'amount': amount,
-        'duration': duration
     }
     response = requests.get(url, params=params)
     return response.json()

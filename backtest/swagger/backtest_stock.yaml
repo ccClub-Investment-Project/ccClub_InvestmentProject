@@ -1,0 +1,19 @@
+Run backtest for one stock of dollar cost averaging
+---
+parameters:
+  - name: stock_id
+    in: path
+    description: Stock symbol followed by .TW (e.g., 0050)
+    required: true
+    default: "0050"
+    type: string
+  - name: amount
+    in: query
+    type: integer
+    description: The amount to buy per month.
+    required: false
+    default: 6000
+responses:
+  200:
+    description: Run backtest for one stock of dollar cost averaging.
+
