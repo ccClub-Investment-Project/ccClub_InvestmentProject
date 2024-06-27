@@ -1,70 +1,98 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ETF 換股策略</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/app_0619_part1.css') }}"
+    />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ETF 換股策略</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/app_0619_part1.css') }}" />
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
-
-<body>
-  <div class="navbar">
-    <div class="logo">
-      <img src="your-logo-url.png" alt="Logo" />
-      <span>ETFExplore</span>
-    </div>
-  </div>
-  <div class="loading-bar-container">
-    <div class="loading-bar"></div>
-  </div>
-
-  <div class="content-section">
-    <article class="left-column">
-      <div class="tab-box">
-        <div class="custom-tab" onclick="showDiv('01')">策略 1</div>
-        <div class="custom-tab" onclick="showDiv('02')">策略 2</div>
-        <div class="custom-tab" onclick="showDiv('03')">策略 3</div>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <img src="your-logo-url.png" alt="Logo" />
+        <span>ETFExplore</span>
       </div>
-      <div id="01" class="custom-rounded-box">
-        <div class="div-2">
-          <div class="column">
-            <div class="chart">
-              <div id="graph" class="chart-container"></div>
-              <!-- <div id="graph1" class="chart-container"></div>
+    </div>
+    <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+    </div>
+
+    <div class="content-section">
+      <article class="left-column">
+        <div class="tab-box">
+          <div class="custom-tab" onclick="showDiv('01')">策略 1</div>
+          <div class="custom-tab" onclick="showDiv('02')">策略 2</div>
+          <div class="custom-tab" onclick="showDiv('03')">策略 3</div>
+        </div>
+        <div id="01" class="custom-rounded-box">
+          <div class="div-2">
+            <div class="column">
+              <div class="chart">
+                <div id="graph" class="chart-container"></div>
+                <!-- <div id="graph1" class="chart-container"></div>
                 <div id="graph2" class="chart-container"></div> -->
+              </div>
+            </div>
+            <div class="strategy-detail-all">
+              <div class="strategy-detail">
+                <div class="strategy-detail-element">
+                  <div class="strategy-detail-title">市值 :</div>
+                  <div class="strategy-detail-content">串 data</div>
+                </div>
+                <div class="strategy-detail-element">
+                  <div class="strategy-detail-title">開盤 :</div>
+                  <div class="strategy-detail-content">串 data</div>
+                </div>
+                <div class="strategy-detail-element">
+                  <div class="strategy-detail-title">收盤 :</div>
+                  <div class="strategy-detail-content">串 data</div>
+                </div>
+                <div class="strategy-detail-element">
+                  <div class="strategy-detail-title">成交價 :</div>
+                  <div class="strategy-detail-content">串 data</div>
+                </div>
+              </div>
+              <div class="test-botton">
+                <button id="backtest-button" class="custom-button">回測</button>
+              </div>
             </div>
           </div>
-          <div class="strategy-detail-all">
+        </div>
+        <div id="02" class="custom-rounded-box" style="display: none">
+          <div class="div-2">
+            <div class="column">
+              <img
+                loading="lazy"
+                srcset="
+                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=100   100w,
+                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=200   200w,
+                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=400   400w,
+                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=800   800w,
+                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=1200 1200w,
+                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=1600 1600w,
+                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=2000 2000w,
+                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a
+                "
+                class="img"
+                alt="Image 2"
+              />
+            </div>
             <div class="strategy-detail">
-              <div class="strategy-detail-element">
-                <div class="strategy-detail-title">市值 :</div>
-                <div class="strategy-detail-content">串 data</div>
-              </div>
-              <div class="strategy-detail-element">
-                <div class="strategy-detail-title">開盤 :</div>
-                <div class="strategy-detail-content">串 data</div>
-              </div>
-              <div class="strategy-detail-element">
-                <div class="strategy-detail-title">收盤 :</div>
-                <div class="strategy-detail-content">串 data</div>
-              </div>
-              <div class="strategy-detail-element">
-                <div class="strategy-detail-title">成交價 :</div>
-                <div class="strategy-detail-content">串 data</div>
-              </div>
-            </div>
-            <div class="test-botton">
-              <button id="backtest-button" class="custom-button">回測</button>
+              <div class="div-3">2</div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="02" class="custom-rounded-box" style="display: none">
-        <div class="div-2">
-          <div class="column">
-            <img loading="lazy" srcset="
+        <div id="03" class="custom-rounded-box" style="display: none">
+          <div class="div-2">
+            <div class="column">
+              <img
+                loading="lazy"
+                srcset="
                   https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=100   100w,
                   https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=200   200w,
                   https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=400   400w,
@@ -73,167 +101,162 @@
                   https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=1600 1600w,
                   https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=2000 2000w,
                   https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a
-                " class="img" alt="Image 2" />
-          </div>
-          <div class="strategy-detail">
-            <div class="div-3">2</div>
-          </div>
-        </div>
-      </div>
-      <div id="03" class="custom-rounded-box" style="display: none">
-        <div class="div-2">
-          <div class="column">
-            <img loading="lazy" srcset="
-                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=100   100w,
-                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=200   200w,
-                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=400   400w,
-                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=800   800w,
-                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=1200 1200w,
-                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=1600 1600w,
-                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=2000 2000w,
-                  https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a
-                " class="img" alt="Image 3" />
-          </div>
-          <div class="strategy-detail">
-            <div class="div-3">3</div>
+                "
+                class="img"
+                alt="Image 3"
+              />
+            </div>
+            <div class="strategy-detail">
+              <div class="div-3">3</div>
+            </div>
           </div>
         </div>
-      </div>
-    </article>
-    <article class="right-column">
-      <section class="news-rounded-box">
-        <h2>Latest News</h2>
-        <div id="news-container">
-          <!-- 使用 include 指令加载 news_block.html 模板 -->
-          {% for news in news_list[:5] %}
-          {% include 'news_block.html' %}
-          {% endfor %}
+        <div id="backtest-window" class="backtest-window" style="display: none">
+          <p>這是回測視窗內容</p>
+          <!-- 可以在這裡放置更多內容，例如表單或圖表 -->
         </div>
-      </section>
-    </article>
-  </div>
-  <div id="backtest-window" class="backtest-window" style="display: none">
-    <p>這是回測視窗內容</p>
-    <!-- 可以在這裡放置更多內容，例如表單或圖表 -->
-  </div>
+      </article>
 
-  <aside class="change-stock-time-column">
-    <div class="change-stock-time">
-      <form>
+      <article class="right-column">
+        <section class="news-rounded-box">
+          <h2>Latest News</h2>
+          <div id="news-container">
+            <!-- 使用 include 指令加载 news_block.html 模板 -->
+            {% for news in news_list[:5] %} {% include 'news_block.html' %} {%
+            endfor %}
+          </div>
+        </section>
+      </article>
+    </div>
+
+    <aside class="change-stock-time-column">
+      <div class="change-stock-time">
+        <form>
+          <div class="content-area">
+            <div class="half-width-column">
+              <label for="label1">Label</label>
+              <input type="text" id="label1" />
+            </div>
+
+            <div class="half-width-column">
+              <label for="label2">Label</label>
+              <input type="text" id="label2" />
+            </div>
+            <div class="half-width-column">
+              <div>
+                <section>
+                  <header>倒數</header>
+                  <div>15天</div>
+                  <div>X時 X分</div>
+                </section>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="custom-button"
+              onclick="alert('Button 1 clicked!')"
+            >
+              Click me!
+            </button>
+          </div>
+        </form>
+        <div class="divider"></div>
         <div class="content-area">
-          <div class="half-width-column">
-            <label for="label1">Label</label>
-            <input type="text" id="label1" />
-          </div>
-
-          <div class="half-width-column">
-            <label for="label2">Label</label>
-            <input type="text" id="label2" />
-          </div>
-          <div class="half-width-column">
-            <div>
-              <section>
-                <header>倒數</header>
-                <div>15天</div>
-                <div>X時 X分</div>
-              </section>
+          <form>
+            <div class="half-width-column">
+              <label for="label3">Label</label>
+              <input type="text" id="label3" />
             </div>
-          </div>
-          <button type="button" class="custom-button" onclick="alert('Button 1 clicked!')">
-            Click me!
-          </button>
+            <div class="half-width-column">
+              <label for="label4">Label</label>
+              <input type="text" id="label4" />
+            </div>
+            <div class="half-width-column">
+              <div>
+                <section>
+                  <header>倒數</header>
+                  <div>15天</div>
+                  <div>X時 X分</div>
+                </section>
+              </div>
+              <button
+                type="button"
+                class="custom-button"
+                onclick="alert('Button 2 clicked!')"
+              >
+                Click me!
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-      <div class="divider"></div>
-      <div class="content-area">
-        <form>
-          <div class="half-width-column">
-            <label for="label3">Label</label>
-            <input type="text" id="label3" />
-          </div>
-          <div class="half-width-column">
-            <label for="label4">Label</label>
-            <input type="text" id="label4" />
-          </div>
-          <div class="half-width-column">
-            <div>
-              <section>
-                <header>倒數</header>
-                <div>15天</div>
-                <div>X時 X分</div>
-              </section>
+        <div class="divider"></div>
+        <div class="content-area">
+          <form>
+            <div class="half-width-column">
+              <label for="label5">Label</label>
+              <input type="text" id="label5" />
             </div>
-            <button type="button" class="custom-button" onclick="alert('Button 2 clicked!')">
-              Click me!
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class="divider"></div>
-      <div class="content-area">
-        <form>
-          <div class="half-width-column">
-            <label for="label5">Label</label>
-            <input type="text" id="label5" />
-          </div>
-          <div class="half-width-column">
-            <label for="label6">Label</label>
-            <input type="text" id="label6" />
-          </div>
-          <div class="half-width-column">
-            <div>
-              <section>
-                <header>倒數</header>
-                <div>15天</div>
-                <div>X時 X分</div>
-              </section>
+            <div class="half-width-column">
+              <label for="label6">Label</label>
+              <input type="text" id="label6" />
             </div>
-            <button type="button" class="custom-button" onclick="alert('Button 3 clicked!')">
-              Click me!
-            </button>
-          </div>
-        </form>
+            <div class="half-width-column">
+              <div>
+                <section>
+                  <header>倒數</header>
+                  <div>15天</div>
+                  <div>X時 X分</div>
+                </section>
+              </div>
+              <button
+                type="button"
+                class="custom-button"
+                onclick="alert('Button 3 clicked!')"
+              >
+                Click me!
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="content-area">
-      <section>
-        <header>001234 換股</header>
-      </section>
-      <section>
-        <header>
-          XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        </header>
-      </section>
-    </div>
-  </aside>
+      <div class="content-area">
+        <section>
+          <header>001234 換股</header>
+        </section>
+        <section>
+          <header>
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          </header>
+        </section>
+      </div>
+    </aside>
 
-  <script src="{{ url_for('static', filename='js/app_0619_part1.js') }}"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-      var graphJSON = {{ graphJSON | safe
-    }};
-    console.log(graphJSON);  // 調試輸出
+    <script src="{{ url_for('static', filename='js/app_0619_part1.js') }}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        var graphJSON = {{ graphJSON | safe
+      }};
+      console.log(graphJSON);  // 調試輸出
 
-    // 調整圖表的佈局
-    var layout = graphJSON.layout || {};
-    layout.autosize = true;
-    //layout.height = 600;  // 設置圖表高度
-    //layout.width = 1000;  // 設置圖表寬度
-    layout.margin = {
-      l: 50,  // 左邊距
-      r: 50,  // 右邊距
-      t: 50,  // 上邊距
-      b: 50   // 下邊距
-    };
+      // 調整圖表的佈局
+      var layout = graphJSON.layout || {};
+      layout.autosize = true;
+      //layout.height = 600;  // 設置圖表高度
+      //layout.width = 1000;  // 設置圖表寬度
+      layout.margin = {
+        l: 50,  // 左邊距
+        r: 50,  // 右邊距
+        t: 50,  // 上邊距
+        b: 50   // 下邊距
+      };
 
-    // 檢查是否包含有效數據
-    if (graphJSON.data && graphJSON.data.length > 0) {
-      Plotly.newPlot("graph", graphJSON.data, layout, { responsive: true });
-    } else {
-      console.error("Graph data is empty or invalid");
-    }
-      });
-  </script>
-</body>
-
+      // 檢查是否包含有效數據
+      if (graphJSON.data && graphJSON.data.length > 0) {
+        Plotly.newPlot("graph", graphJSON.data, layout, { responsive: true });
+      } else {
+        console.error("Graph data is empty or invalid");
+      }
+        });
+    </script>
+  </body>
 </html>
