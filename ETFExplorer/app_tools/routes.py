@@ -6,10 +6,7 @@ from flask import render_template, redirect, url_for
 from datetime import datetime
 import logging
 from app_tools.plot_creation import create_plot
-from use_api.data import get_news_data, api_table_data
 from use_api.data_loader import etf_domestic_list, news, graphJSON, refresh_data # 导入预先加载的数据
-
-
 
 def init_routes(app):
     @app.route("/keep_alive")
@@ -45,4 +42,3 @@ def init_routes(app):
     # 添加自定义过滤器到Jinja2环境
     app.jinja_env.filters['datetimeformat'] = datetimeformat
 
-    return app
