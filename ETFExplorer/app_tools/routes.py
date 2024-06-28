@@ -1,11 +1,11 @@
-from utils import setup_project_root
-setup_project_root()
+# from app_tools.utils import setup_project_root
+# setup_project_root()
 
 # 定義路由和視圖函數
 from flask import render_template
 from datetime import datetime
 
-from app.plot_creation import create_plot
+from app_tools.plot_creation import create_plot
 from use_api.data import get_news_data, api_table_data
 
 def init_routes(app):
