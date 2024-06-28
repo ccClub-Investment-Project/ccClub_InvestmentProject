@@ -40,3 +40,5 @@ def init_routes(app):
 
     # 添加自定义过滤器到Jinja2环境
     app.jinja_env.filters['datetimeformat'] = datetimeformat
+
+    return app
