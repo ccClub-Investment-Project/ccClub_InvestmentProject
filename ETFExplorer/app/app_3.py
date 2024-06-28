@@ -1,7 +1,4 @@
 
-from utils import setup_project_root
-setup_project_root()
-
 from flask import Flask
 from routes import init_routes
 

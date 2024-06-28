@@ -3,7 +3,6 @@
 import os
 import sys
 
-
 def setup_project_root():
     current_path = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.join(current_path, '..')
