@@ -107,7 +107,6 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
     user_states[user_id] = None  # 重置用戶狀態
 
 def handle_regular_message(line_bot_api, event, msg, user_id):
-   
     if "歷史股價查詢" in msg:
         message = TextMessage(text="請輸入公司代號,開始日期,結束日期(請用半形逗號隔開):")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
@@ -131,7 +130,6 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         user_states[user_id] = 'waiting_for_rank'
     elif '目錄' in msg:
         carousel = Carousel_Template()
-        logging.info(f"Carousel_Template 返回的消息: {carousel}")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[carousel])
         line_bot_api.reply_message(reply_message)
         return
