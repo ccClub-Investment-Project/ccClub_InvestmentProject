@@ -16,8 +16,25 @@ class CnyesNewsSpider:
                 data = r.json()
                 # print(f"API Response Page {page}: {data}")  # 打印每個頁面的響應
                 new_items = data.get('items', {}).get('data', [])
-                
-                def add_date(new_items):
+            
+                # new_items = add_date(new_items)
+                all_news.extend(new_items)
+            except requests.RequestException as e:
+                print(f"請求第{page}頁新聞失敗: {e}")
+                break
+            except ValueError as e:
+                print(f"解析第{page}頁 JSON 失敗: {e}")
+                break
+        return all_news
+
+    def filter_news(self, newslist, keywords):
+        filtered_news = []
+        for news in newslist:
+            if any(keyword.lower() in news.get("title", "").lower() for keyword in keywords):
+                filtered_news.append(news)
+        return filtered_news
+
+    def add_date(new_items):
                     # 取得日期
                     for i, new_item in enumerate(new_items):
                         new_id = new_item['newsId']
@@ -35,19 +52,3 @@ class CnyesNewsSpider:
                             print("沒有找到匹配的元素")
                         new_items[i]['date_author'] = date_author
                     return new_items
-                # new_items = add_date(new_items)
-                all_news.extend(new_items)
-            except requests.RequestException as e:
-                print(f"請求第{page}頁新聞失敗: {e}")
-                break
-            except ValueError as e:
-                print(f"解析第{page}頁 JSON 失敗: {e}")
-                break
-        return all_news
-
-    def filter_news(self, newslist, keywords):
-        filtered_news = []
-        for news in newslist:
-            if any(keyword.lower() in news.get("title", "").lower() for keyword in keywords):
-                filtered_news.append(news)
-        return filtered_news
