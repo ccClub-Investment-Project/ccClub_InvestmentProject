@@ -21,3 +21,4 @@ venv/
 linebot.log
 path.env
 
+.vscode/settings.json
