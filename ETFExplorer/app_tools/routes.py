@@ -2,11 +2,14 @@
 # setup_project_root()
 
 # 定義路由和視圖函數
-from flask import render_template
+from flask import render_template, redirect, url_for
 from datetime import datetime
-
+import logging
 from app_tools.plot_creation import create_plot
 from use_api.data import get_news_data, api_table_data
+from use_api.data_loader import etf_domestic_list, news, graphJSON, refresh_data # 导入预先加载的数据
+
+
 
 def init_routes(app):
     @app.route("/keep_alive")
@@ -15,13 +18,7 @@ def init_routes(app):
 
     @app.route('/')
     def index():
-        graphJSON = create_plot()
-
-        # 放置新聞區塊
-        news = get_news_data('台股,美股', True, 25)  # 获取新闻数据
-
         # 放置etf info列表
-        etf_domestic_list = api_table_data('etf_domestic_list')
         etf_domestic_count = len(etf_domestic_list)  # 计算 JSON 数据项的数量
         # 定义变量
         items = ['Apple', 'Banana', 'Cherry']
@@ -34,6 +31,13 @@ def init_routes(app):
             news_list=news, 
             items=items, 
             extra_info=extra_info)
+
+    @app.route('/refresh_data')
+    def refresh():
+        logging.info("Refreshing data")
+        refresh_data()
+        return redirect(url_for('index'))
+
 
     def datetimeformat(value, format='%Y-%m-%d %H:%M:%S'):
         return datetime.fromtimestamp(value).strftime(format)
