@@ -1,0 +1,18 @@
+.left-column {
+  width: auto;
+}
+@media (max-width: 640px) {
+  .left-column {
+    width: 100%;
+  }
+}
+.right-column {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+@media (max-width: 640px) {
+  .right-column {
+    width: 100%;
+  }
+}

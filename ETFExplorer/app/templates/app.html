@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ETF 換股策略</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/common.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/navbar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/loading-bar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/content-section.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/backtest-window.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/columns.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/tabs.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/news.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/change-stock-time.css') }}"
+    />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <img src="your-logo-url.png" alt="Logo" />
+        <span>ETFExplore</span>
+      </div>
+    </div>
+
+    <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+    </div>
+
+    <div class="content-section">
+      <div class="test">
+        <article class="left-column">
+          <div class="tab-box">
+            <div class="custom-tab" onclick="showDiv('01')">定期定額</div>
+            <div class="custom-tab" onclick="showDiv('02')">策略 2</div>
+            <div class="custom-tab" onclick="showDiv('03')">策略 3</div>
+          </div>
+          {% include 'tabs/tab_01.html' %} {% include 'tabs/tab_02.html' %} {%
+          include 'tabs/tab_03.html' %} {% include 'backtest_window.html' %}
+        </article>
+        {% include 'change_stock_time.html' %}
+      </div>
+
+      <article class="right-column">
+        <section class="news-rounded-box">
+          <h2>Latest News</h2>
+          <div id="news-container">
+            {% for news in news_list[:5] %} {% include 'news_block.html' %} {%
+            endfor %}
+          </div>
+        </section>
+      </article>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/loading-bar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/render-graphs.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/toggle-backtest-window.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/show-div.js') }}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        var graphJSON = {{ graphJSON | safe }};
+        console.log(graphJSON);
+
+        var layout = graphJSON.layout || {};
+        layout.autosize = true;
+        layout.margin = {
+          l: 50,
+          r: 50,
+          t: 50,
+          b: 50
+        };
+
+        if (graphJSON.data && graphJSON.data.length > 0) {
+          Plotly.newPlot("graph", graphJSON.data, layout, { responsive: true });
+        } else {
+          console.error("Graph data is empty or invalid");
+        }
+      });
+    </script>
+  </body>
+</html>

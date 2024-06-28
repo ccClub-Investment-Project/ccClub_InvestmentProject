@@ -1,4 +1,4 @@
-from app import app
+from ccClub_InvestmentProject.ETFExplorer.app.app_3 import app
 from flask import render_template
 from app.plot_utils import create_plot
 

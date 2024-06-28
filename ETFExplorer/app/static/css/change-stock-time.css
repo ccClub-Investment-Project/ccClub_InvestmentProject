@@ -1,0 +1,46 @@
+.change-stock-time-column {
+  display: flex;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  margin: 20px;
+  gap: 20px;
+  width: 95%;
+  justify-content: center;
+  padding: 20px;
+}
+.content-area {
+  display: flex;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+.change-stock-time {
+  margin: 10px;
+  width: 67%;
+}
+.half-width-column {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+@media (max-width: 991px) {
+  .half-width-column {
+    width: 100%;
+  }
+}
+.full-width-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.custom-button {
+  all: unset;
+  display: flex;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  justify-content: center;
+}
