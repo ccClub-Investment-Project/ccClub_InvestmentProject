@@ -22,7 +22,6 @@ channel_access_token = os.getenv('channel_access_token')
 channel_secret = os.getenv('channel_secret')
 port = int(os.getenv('PORT', 5000))
 
-
 # Get instance from linebot
 configuration = Configuration(access_token=channel_access_token)
 handler = WebhookHandler(channel_secret)
@@ -49,10 +48,14 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
-    line_bot_api = MessagingApi(ApiClient(configuration))  # Use MessagingApi directly with ApiClient
+    line_bot_api = MessagingApi(ApiClient(configuration))
     user_id = event.source.user_id
     msg = event.message.text.strip()
     logging.info(f"Received message: {msg} from user: {user_id} with reply token: {event.reply_token}")
+
+    # 默认回复消息
+    welcome_message = TextMessage(text='歡迎光臨!請先key "目錄"')
+    line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[welcome_message]))
 
     try:
         if user_id in user_states:
