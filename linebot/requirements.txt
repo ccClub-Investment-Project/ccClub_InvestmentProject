@@ -4,3 +4,4 @@ gunicorn
 python-dotenv
 twstock
 lxml
+beautifulsoup4
