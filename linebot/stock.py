@@ -43,9 +43,9 @@ def get_historical_stock_prices(stock_code, start_date, end_date):
 
 def historical_stock_message(input_string):
     try:
-        logging.info(f"Parsing input: {input_string}")
+        
         stock_code, start_date, end_date = parse_input(input_string)
-        logging.info(f"Fetching historical prices for {stock_code} from {start_date} to {end_date}")
+        
         historical_prices = get_historical_stock_prices(stock_code, start_date, end_date)
         if historical_prices:
             send_text = f"Stock Code: {stock_code}\nHistorical Prices:\n"

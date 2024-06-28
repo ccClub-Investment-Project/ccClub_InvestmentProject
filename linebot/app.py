@@ -10,7 +10,6 @@ from linebot.v3.webhooks.models import MemberJoinedEvent
 from data import *
 from message import *
 from news2 import *
-from Function import *
 from stock import *
 
 # Load environment variables
@@ -117,6 +116,16 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         return
+    elif '殖利率篩選' in msg:
+        message = buttons_message()
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+        user_states[user_id] = 'waiting_for_Dividend'
+    elif '最推薦幾股' in msg:
+        message = buttons_message()
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+        user_states[user_id] = 'waiting_for_rank'
     elif '目錄' in msg:
         carousel = Carousel_Template()
         logging.info(f"Carousel_Template 返回的消息: {carousel}")
@@ -158,7 +167,7 @@ def welcome(event):
         gid = event.source.group_id
         profile = line_bot_api.get_group_member_profile(gid, uid)
         name = profile.display_name
-        message = TextMessage(text=f'{name}歡迎加入')
+        message = TextMessage(text=f'歡迎光臨!請先key "目錄"')
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
 
