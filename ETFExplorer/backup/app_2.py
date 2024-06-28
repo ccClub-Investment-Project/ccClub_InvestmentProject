@@ -1,5 +1,6 @@
 import os  # noqa: E402
 import sys  # noqa: E402
+from datetime import datetime
 print(os.getcwd())  # noqa: E402
 # 确保当前工作目录为项目的根目录
 current_path = os.path.dirname(os.path.abspath(__file__))  # noqa: E402
@@ -117,5 +118,12 @@ def index():
     return render_template('app_0619_merge.html', graphJSON=graphJSON,  news_list=news)
 
     
+
+def datetimeformat(value, format='%Y-%m-%d %H:%M:%S'):
+    return datetime.fromtimestamp(value).strftime(format)
+
+# 添加自定义过滤器到Jinja2环境
+app.jinja_env.filters['datetimeformat'] = datetimeformat
+
 if __name__ == '__main__':
     app.run(debug=True)

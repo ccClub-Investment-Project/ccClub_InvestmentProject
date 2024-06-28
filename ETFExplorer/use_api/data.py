@@ -1,25 +1,43 @@
 import requests
 import yfinance
 
-url_base = "https://backtest-kk2m.onrender.com"
+URL_BASE = "https://backtest-kk2m.onrender.com"
+URL_TABLE = f"{URL_BASE}/tables"
+
+session = requests.Session()
 
 def get_stock_data(id, amount=6000):
-    url = 'https://backtest-kk2m.onrender.com/backtest/{id}'.format(id=id)
-    params = {
-        'amount': amount,
-    }
-    response = requests.get(url, params=params)
-    return response.json()
+    url = f"{URL_BASE}/backtest/{id}"
+    params = {'amount': amount}
+    try:
+        response = session.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"Error fetching stock data: {e}")
+        return None
 
 def get_news_data(keywords, etf, limit):
-    url = url_base + "/news"
-    params = {
-        'keywords': keywords,
-        'etf': etf,
-        'limit': limit
-    }
-    response = requests.get(url, params=params)
-    return response.json()
+    url = f"{URL_BASE}/news"
+    params = {'keywords': keywords, 'etf': etf, 'limit': limit}
+    try:
+        response = session.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"Error fetching news data: {e}")
+        return None
+
+def api_table_data(table_name):
+    url = f"{URL_TABLE}/{table_name}"
+    try:
+        response = session.get(url, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"Error fetching table data: {e}")
+        return None
+
 
 # news = get_news_data('台股,美股',True, 25)
 # print(len(news))

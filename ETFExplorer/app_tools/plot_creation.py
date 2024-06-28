@@ -4,6 +4,7 @@ import json
 import plotly
 import plotly.express as px
 import yfinance as yf
+from use_api.data import api_table_data
 
 
 def fetch_stock_data(stock_id):
@@ -13,18 +14,16 @@ def fetch_stock_data(stock_id):
 
 
 def create_plot():
-    stock_id1 = '0050.TW'
-    stock_id2 = '0056.TW'
-
-    df1 = fetch_stock_data(stock_id1)
-    df2 = fetch_stock_data(stock_id2)
-
+    etf_domestic_list = api_table_data('etf_domestic_list')
     fig = px.line()
-    fig.add_scatter(x=df1['Date'], y=df1['Close'],
-                    mode='lines', name=stock_id1)
-    fig.add_scatter(x=df2['Date'], y=df2['Close'],
-                    mode='lines', name=stock_id2)
 
+    for etf in etf_domestic_list:
+        code = etf['code']
+        stock_id = f"{code}.TW"
+        df = fetch_stock_data(stock_id)
+        fig.add_scatter(x=df['Date'], y=df['Close'],
+                    mode='lines', name=stock_id)
+ 
     fig.update_layout(
         xaxis=dict(
             rangeselector=dict(

@@ -4,6 +4,7 @@
         {{ news.title }}
         <a href="https://news.cnyes.com/news/id/{{ news.newsId }}" target="_blank" class="link-button">查看詳細</a>
     </header>
+    <p>Publish Date: {{ news.publishAt | int | datetimeformat('%Y-%m-%d %H:%M:%S') }}</p>
     <p>Keywords: {{ news.keyword | join(', ') }}</p>
     <p>ETF: {{ news.etf | join(', ') }}</p>
 </article>
