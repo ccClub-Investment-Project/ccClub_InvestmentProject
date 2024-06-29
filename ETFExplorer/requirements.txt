@@ -10,3 +10,4 @@ requests
 yfinance
 celery
 redis
+flask_caching
