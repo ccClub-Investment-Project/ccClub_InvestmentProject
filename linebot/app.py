@@ -206,10 +206,7 @@ def welcome(event):
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
         uid = event.joined.members[0].user_id
-        gid = event.source.group_id
-        profile = line_bot_api.get_group_member_profile(gid, uid)
-        name = profile.display_name
-        message = TextMessage(text=f'歡迎光臨!請先key "目錄"')
+        message = TextMessage(text='歡迎光臨!請先key "目錄"')
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
 
