@@ -1,5 +1,6 @@
 import csv
 from linebot.v3.messaging import TextMessage
+import logging
 
 # 讀取 CSV 文件
 def read_csv(file_path):
