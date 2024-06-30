@@ -13,15 +13,36 @@ def read_csv(file_path):
 
 # 根據市值篩選股票
 def select_by_market_cap(data, min_market_cap):
-    return [row for row in data if row['市值(億)'] and float(row['市值(億)']) >= min_market_cap]
+    filtered_data = []
+    for row in data:
+        try:
+            if row['市值(億)'] and float(row['市值(億)']) >= min_market_cap:
+                filtered_data.append(row)
+        except ValueError:
+            logging.error(f"Invalid 市值(億) value: {row['市值(億)']}")
+    return filtered_data
 
 # 根據交易量篩選股票
 def select_by_trading_volume(data, min_trading_volume):
-    return [row for row in data if row['平均日成交額(元)'] and float(row['平均日成交額(元)']) / 100000000 >= min_trading_volume]
+    filtered_data = []
+    for row in data:
+        try:
+            if row['平均日成交額(元)'] and float(row['平均日成交額(元)']) / 100000000 >= min_trading_volume:
+                filtered_data.append(row)
+        except ValueError:
+            logging.error(f"Invalid 平均日成交額(元) value: {row['平均日成交額(元)']}")
+    return filtered_data
 
 # 根據淨利潤篩選股票
 def select_by_profit(data):
-    return [row for row in data if row['2023年淨利'] and float(row['2023年淨利']) > 0]
+    filtered_data = []
+    for row in data:
+        try:
+            if row['2023年淨利'] and float(row['2023年淨利']) > 0:
+                filtered_data.append(row)
+        except ValueError:
+            logging.error(f"Invalid 2023年淨利 value: {row['2023年淨利']}")
+    return filtered_data
 
 # 根據股利發放率每年 > 0篩選股票
 def select_by_constant_dividend_payout(data):
@@ -31,18 +52,25 @@ def select_by_constant_dividend_payout(data):
             payouts = [float(row[f'{year}年股利發放率']) for year in ['2020', '2021', '2022']]
             if all(payout > 0 for payout in payouts):
                 result.append(row)
-        except ValueError:
-            continue
+        except ValueError as e:
+            logging.error(f"Invalid 股利發放率 value: {e}")
     return result
 
 # 根據股利收益率篩選股票
 def select_by_dividend_yield(data, min_yield):
-    return [row for row in data if row['現金殖利率'] and float(row['現金殖利率']) >= min_yield]
+    filtered_data = []
+    for row in data:
+        try:
+            if row['現金殖利率'] and float(row['現金殖利率']) >= min_yield:
+                filtered_data.append(row)
+        except ValueError:
+            logging.error(f"Invalid 現金殖利率 value: {row['現金殖利率']}")
+    return filtered_data
 
 # 主函數
 def main(min_yield1=0):
     try:
-        input_csv_file = 'stock_data_final.csv'  # Adjust the path to your CSV file
+        input_csv_file = '/mnt/data/stock_data_final.csv'  # Adjust the path to your CSV file
         data = read_csv(input_csv_file)
         # Part 1: select by market cap
         min_market_cap = 10
@@ -57,15 +85,17 @@ def main(min_yield1=0):
         # Part 5: select by dividend yield
         min_yield = min_yield1 / 100  # 轉換為小數
         data = select_by_dividend_yield(data, min_yield)
-        output_csv_file = 'filtered_stock_data.csv'
-        fieldnames = data[0].keys()
-        with open(output_csv_file, mode='w', newline='', encoding='utf-8-sig') as outfile:
-            writer = csv.DictWriter(outfile, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(data)
-        # 按照現金殖利率排序
-        data.sort(key=lambda x: float(x['現金殖利率']), reverse=True)
+        
         if data:
+            # 按照現金殖利率排序
+            data.sort(key=lambda x: float(x['現金殖利率']), reverse=True)
+            output_csv_file = '/mnt/data/filtered_stock_data.csv'
+            fieldnames = data[0].keys()
+            with open(output_csv_file, mode='w', newline='', encoding='utf-8-sig') as outfile:
+                writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(data)
+                
             send_text = f"共有 {len(data)} 檔股票符合條件。\n\n"
             send_text += "符合條件的股票如下：\n"
             send_text += "代號, 公司名稱, 現金殖利率\n"
@@ -73,6 +103,7 @@ def main(min_yield1=0):
                 send_text += f"{row['代號']}, {row['名稱']}, {float(row['現金殖利率']) * 100:.2f}%\n"
         else:
             send_text = "沒有符合條件的股票。"
+            
         message = TextMessage(text=send_text)
         return message
     except Exception as e:
