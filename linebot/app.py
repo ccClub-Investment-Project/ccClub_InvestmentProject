@@ -72,10 +72,15 @@ def handle_message(event):
                 line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=formatted_result)]))
                 user_states[user_id] = None
             elif user_states[user_id] == 'waiting_for_hstocks':
-                logging.info(f"Processing historical stock message for {msg}")
                 result3 = historical_stock_message(msg)
                 line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result3]))
                 user_states[user_id] = None
+            elif user_states[user_id] == 'waiting_for_Dividend':
+                result4 = main(msg)
+                line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result4]))
+            elif user_states[user_id] == 'waiting_for_rank':
+                result5 = main(msg)
+                line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result5]))
             else:
                 handle_regular_message(line_bot_api, event, msg, user_id)
         else:
