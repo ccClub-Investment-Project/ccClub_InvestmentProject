@@ -42,7 +42,7 @@ def select_by_dividend_yield(data, min_yield):
 # 主函數
 def main(min_yield1=0):
     try:
-        input_csv_file = '/mnt/data/stock_data_final.csv'  # Adjust the path to your CSV file
+        input_csv_file = 'stock_data_final.csv'  # Adjust the path to your CSV file
         data = read_csv(input_csv_file)
         # Part 1: select by market cap
         min_market_cap = 10
@@ -57,7 +57,7 @@ def main(min_yield1=0):
         # Part 5: select by dividend yield
         min_yield = min_yield1 / 100  # 轉換為小數
         data = select_by_dividend_yield(data, min_yield)
-        output_csv_file = '/mnt/data/filtered_stock_data.csv'
+        output_csv_file = 'filtered_stock_data.csv'
         fieldnames = data[0].keys()
         with open(output_csv_file, mode='w', newline='', encoding='utf-8-sig') as outfile:
             writer = csv.DictWriter(outfile, fieldnames=fieldnames)
