@@ -132,6 +132,7 @@ def main_n(top_n=10):
         if data:
             # 按照現金殖利率排序
             data.sort(key=lambda x: float(x['現金殖利率']), reverse=True)
+            top_n = int(top_n)  # Convert top_n to an integer
             data = data[:top_n]  # 取前 top_n 檔
             
             output_csv_file = 'filtered_stock_data.csv'
