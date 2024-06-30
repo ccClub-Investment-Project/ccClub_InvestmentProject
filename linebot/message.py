@@ -10,12 +10,12 @@ def buttons_message():
             text='請選擇以下功能',
             actions=[
                 MessageAction(
-                    label="換股時間",
-                    text="換股時間"
+                    label="最推薦幾股",
+                    text="最推薦幾股"
                 ),
                 MessageAction(
-                    label="換了哪些股",
-                    text="換了哪些股"
+                    label="殖利率篩選",
+                    text="殖利率篩選"
                 )
             ]
         )
@@ -31,7 +31,7 @@ def Carousel_Template():
                 CarouselColumn(
                     thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Number_1_in_green_rounded_square.svg/200px-Number_1_in_green_rounded_square.svg.png',
                     title='股票相關功能',
-                    text='Description 1',
+                    text='金融相關功能',
                     actions=[
                         MessageAction(
                             label='即時開盤價跟收盤價',
@@ -50,11 +50,11 @@ def Carousel_Template():
                 CarouselColumn(
                     thumbnail_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuo7n2_HNSFuT3T7Z9PUZmn1SDM6G6-iXfRC3FxdGTj7X1Wr0RzA',
                     title='其他相關功能',
-                    text='Description 2',
+                    text='互動式功能',
                     actions=[
                         URIAction(
                             label='互動式網站',
-                            uri='https://ccclub-investmentproject.onrender.com/'
+                            uri='https://ccclub-investmentproject-9ika.onrender.com/'
                         ),
                         MessageAction(
                             label='新聞',

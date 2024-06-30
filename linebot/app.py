@@ -10,7 +10,6 @@ from linebot.v3.webhooks.models import MemberJoinedEvent
 from data import *
 from message import *
 from news2 import *
-from Function import *
 from stock import *
 
 # Load environment variables
@@ -22,7 +21,6 @@ app = Flask(__name__)
 channel_access_token = os.getenv('channel_access_token')
 channel_secret = os.getenv('channel_secret')
 port = int(os.getenv('PORT', 5000))
-
 
 # Get instance from linebot
 configuration = Configuration(access_token=channel_access_token)
@@ -50,10 +48,14 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
-    line_bot_api = MessagingApi(ApiClient(configuration))  # Use MessagingApi directly with ApiClient
+    line_bot_api = MessagingApi(ApiClient(configuration))
     user_id = event.source.user_id
     msg = event.message.text.strip()
     logging.info(f"Received message: {msg} from user: {user_id} with reply token: {event.reply_token}")
+
+    # 默认回复消息
+    welcome_message = TextMessage(text='歡迎光臨!請先key "目錄"')
+    line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[welcome_message]))
 
     try:
         if user_id in user_states:
@@ -104,43 +106,78 @@ def handle_keywords_input(line_bot_api, event, msg, user_id):
         line_bot_api.reply_message(reply_message)
     user_states[user_id] = None  # 重置用戶狀態
 
+@handler.add(MessageEvent, message=TextMessageContent)
+def handle_message(event):
+    line_bot_api = MessagingApi(ApiClient(configuration))
+    user_id = event.source.user_id
+    msg = event.message.text.strip()
+    logging.info(f"Received message: {msg} from user: {user_id} with reply token: {event.reply_token}")
+
+    # Check if the user is in a specific state
+    user_state = user_states.get(user_id)
+
+    if user_state == 'waiting_for_keywords':
+        handle_keywords_input(line_bot_api, event, msg, user_id)
+    elif user_state == 'waiting_for_stock':
+        result2 = create_stock_message(msg)
+        line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result2]))
+        user_states[user_id] = None
+    elif user_state == 'waiting_for_backtest':
+        result1 = backtest(msg)
+        formatted_result = format_backtest_result(result1)
+        line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=formatted_result)]))
+        user_states[user_id] = None
+    elif user_state == 'waiting_for_hstocks':
+        result3 = historical_stock_message(msg)
+        line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result3]))
+        user_states[user_id] = None
+    else:
+        handle_regular_message(line_bot_api, event, msg, user_id)
+
 def handle_regular_message(line_bot_api, event, msg, user_id):
-   
     if "歷史股價查詢" in msg:
-        message = TextMessage(text="請輸入公司代號,開始日期,結束日期(請用半形逗號隔開):")
+        message = TextMessage(text="請輸入公司代號,開始日期,結束日期(請用半形逗號隔開)例如,0050,20240608,20240628):")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_hstocks'
-        return
     elif '換股' in msg:
         message = buttons_message()
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
-        return
+    elif '殖利率篩選' in msg:
+        message = buttons_message()
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+        user_states[user_id] = 'waiting_for_Dividend'
+    elif '最推薦幾股' in msg:
+        message = buttons_message()
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+        line_bot_api.reply_message(reply_message)
+        user_states[user_id] = 'waiting_for_rank'
     elif '目錄' in msg:
         carousel = Carousel_Template()
-        logging.info(f"Carousel_Template 返回的消息: {carousel}")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[carousel])
         line_bot_api.reply_message(reply_message)
-        return
     elif '新聞' in msg:
         message = TextMessage(text="請輸入關鍵字，用半形逗號分隔:")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_keywords'
-        return
     elif '即時開盤價跟收盤價' in msg:
         message = TextMessage(text="請輸入股票代號:")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_stock'
-        return
     elif '回測' in msg:
         message = TextMessage(text="輸入股票代號與定期定額金額(半形逗號隔開):例如,0050,6000")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_backtest'
-        return
+    else:
+        welcome_message = TextMessage(text='歡迎光臨!請先key "目錄"')
+        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[welcome_message])
+        line_bot_api.reply_message(reply_message)
+
 
 def format_backtest_result(result):
     result_str = str(result)
@@ -158,7 +195,7 @@ def welcome(event):
         gid = event.source.group_id
         profile = line_bot_api.get_group_member_profile(gid, uid)
         name = profile.display_name
-        message = TextMessage(text=f'{name}歡迎加入')
+        message = TextMessage(text=f'歡迎光臨!請先key "目錄"')
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
 

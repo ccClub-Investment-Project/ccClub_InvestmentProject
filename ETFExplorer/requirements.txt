@@ -8,3 +8,6 @@ psycopg2
 gunicorn
 requests
 yfinance
+celery
+redis
+flask_caching

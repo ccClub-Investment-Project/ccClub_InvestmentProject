@@ -20,3 +20,4 @@ nbformat
 sqlalchemy
 yfinance
 flasgger
+Flask-Caching
