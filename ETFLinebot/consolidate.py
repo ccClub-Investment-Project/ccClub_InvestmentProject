@@ -70,7 +70,10 @@ def select_by_dividend_yield(data, min_yield):
 # 主函數
 def main(min_yield1=0):
     try:
-        input_csv_file = 'stock_data_final.csv'  # Adjust the path to your CSV file
+        # 獲取當前模組的目錄
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        input_csv_file = os.path.join(current_dir, 'stock_data_final.csv')
+        # input_csv_file = 'stock_data_final.csv'  # Adjust the path to your CSV file
         data = read_csv(input_csv_file)
         # Part 1: select by market cap
         min_market_cap = 10
@@ -109,10 +112,13 @@ def main(min_yield1=0):
     except Exception as e:
         logging.error(f"Error in main function: {e}")
         return TextMessage(text="An error occurred while processing the data.")
-    
+import os
 def main_n(top_n=10):
     try:
-        input_csv_file = 'stock_data_final.csv'  # Adjust the path to your CSV file
+        # 獲取當前模組的目錄
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        input_csv_file = os.path.join(current_dir, 'stock_data_final.csv')
+        # input_csv_file = 'stock_data_final.csv'  # Adjust the path to your CSV file
         data = read_csv(input_csv_file)
         
         # Part 1: select by market cap
