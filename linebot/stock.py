@@ -35,7 +35,6 @@ def parse_input(input_string):
     return stock_code, start_date, end_date
 
 def get_historical_stock_prices(stock_code, start_date, end_date):
-    import twstock
     stock = twstock.Stock(stock_code)
     historical_data = stock.fetch_from(start_date.year, start_date.month)
     prices = [(d.date, d.open, d.close) for d in historical_data if start_date <= d.date <= end_date]

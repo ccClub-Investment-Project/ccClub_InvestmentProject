@@ -11,11 +11,7 @@ from data import *
 from message import *
 from news2 import *
 from stock import *
-
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), 'Samantha'))
-from Samantha import filter_stocks, filter_top_10_dividend_stocks
-
+from consolidate import *
 
 # Load environment variables
 load_dotenv()
@@ -32,7 +28,6 @@ configuration = Configuration(access_token=channel_access_token)
 handler = WebhookHandler(channel_secret)
 
 user_states = {}
-user_inputs = {}
 
 @app.route("/")
 def home():
@@ -81,66 +76,6 @@ def handle_message(event):
                 result3 = historical_stock_message(msg)
                 line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result3]))
                 user_states[user_id] = None
-
-
-            elif user_state == 'waiting_for_Dividend':
-                if msg == '1':
-                    user_states[user_id] = 'waiting_for_Dividend_Simple'
-                    message = TextMessage(text="請選擇股市小白還是股市高手？\n1. 股市小白\n2. 股市高手")
-                    line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[message]))
-                elif msg == '2':
-                    user_states[user_id] = 'waiting_for_Dividend_Advanced'
-                    message = TextMessage(
-                        text="請輸入市值(億), 交易量(億), 是否前一年獲利(Y/N), 是否連續三年發放現金股利(Y/N), 現金殖利率 (%) \n例如：1000, 10, Y, Y, 3.0")
-                    line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[message]))
-                else:
-                    message = TextMessage(text="請選擇「1」或「2」")
-                    line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[message]))
-            elif user_state == 'waiting_for_Dividend_Simple':
-                if msg == '1':
-                    # 取得殖利率最高的十檔股票
-                    top_10_stocks = filter_top_10_dividend_stocks()
-                    if top_10_stocks:
-                        message_text = "以下是殖利率最高的十檔股票：\n"
-                        for stock in top_10_stocks:
-                            message_text += f"{stock['代號']} - {stock['名稱']} 現金殖利率: {float(stock['現金殖利率']) * 100:.2f}%\n"
-                        line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token,
-                                                                       messages=[TextMessage(text=message_text)]))
-                    else:
-                        line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[
-                            TextMessage(text="無法取得殖利率最高的股票資料。")]))
-                else:
-                    message = TextMessage(text="請輸入「1」來查看殖利率最高的十檔股票")
-                    line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[message]))
-
-            elif user_state == 'waiting_for_Dividend_Advanced':
-                try:
-                    min_market_cap, min_trading_volume, profit_or_not, payout, dividend_yield = [x.strip() for x in
-                                                                                                 msg.split(',')]
-                    min_market_cap = float(min_market_cap)
-                    min_trading_volume = float(min_trading_volume)
-                    dividend_yield = float(dividend_yield)
-
-                    # 執行選股邏輯
-                    stocks = filter_stocks(min_market_cap, min_trading_volume, profit_or_not, payout, dividend_yield)
-                    if stocks:
-                        message = "\n".join(
-                            [f"{stock['代號']} - {stock['名稱']} 現金殖利率: {float(stock['現金殖利率']) * 100:.2f}%"
-                             for stock in stocks])
-                    else:
-                        message = "沒有符合條件的股票。"
-
-                    line_bot_api.reply_message(
-                        ReplyMessageRequest(reply_token=event.reply_token, messages=[TextMessage(text=message)]))
-
-
-                except Exception as e:
-                    logging.error(f"Error in dividend filtering: {e}")
-                    line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[
-                        TextMessage(text="輸入的參數有誤，請重新檢查格式。")]))
-                user_states[user_id] = None
-
-
             else:
                 handle_regular_message(line_bot_api, event, msg, user_id)
         else:
@@ -197,6 +132,14 @@ def handle_message(event):
         result3 = historical_stock_message(msg)
         line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result3]))
         user_states[user_id] = None
+    elif user_state == 'waiting_for_Dividend':
+        result4 = main(msg)
+        line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result4]))
+        user_states[user_id] = None
+    elif user_state == 'waiting_for_rank':
+        result5 = main(msg)
+        line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result5]))
+        user_states[user_id] = None
     else:
         handle_regular_message(line_bot_api, event, msg, user_id)
 
@@ -211,12 +154,12 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
     elif '殖利率篩選' in msg:
-        message = buttons_message()
+        message = TextMessage(text="請輸入殖利率")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_Dividend'
     elif '最推薦幾股' in msg:
-        message = buttons_message()
+        message = TextMessage(text="請輸入想知道的前幾檔股票")
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_rank'
@@ -245,9 +188,6 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         line_bot_api.reply_message(reply_message)
 
 
-
-
-
 def format_backtest_result(result):
     result_str = str(result)
     start = result_str.find("text='") + 6
@@ -267,10 +207,6 @@ def welcome(event):
         message = TextMessage(text=f'歡迎光臨!請先key "目錄"')
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
         line_bot_api.reply_message(reply_message)
-
-# 選股
-
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)
