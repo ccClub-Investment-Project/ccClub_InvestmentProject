@@ -49,8 +49,8 @@ def select_by_constant_dividend_payout(data):
     result = []
     for row in data:
         try:
-            payouts = [float(row[f'{year}年股利發放率']) for year in ['2020', '2021', '2022']]
-            if all(payout > 0 for payout in payouts):
+            payouts = [float(row[f'{year}年股利發放率']) for year in ['2020', '2021', '2022'] if row[f'{year}年股利發放率']]
+            if payouts and all(payout > 0 for payout in payouts):
                 result.append(row)
         except ValueError as e:
             logging.error(f"Invalid 股利發放率 value: {e}")
@@ -83,7 +83,7 @@ def main(min_yield1=0):
         # Part 4: select by constant dividend payout
         data = select_by_constant_dividend_payout(data)
         # Part 5: select by dividend yield
-        min_yield = min_yield1 / 100  # 轉換為小數
+        min_yield = float(min_yield1) / 100  # Convert min_yield1 to float before division
         data = select_by_dividend_yield(data, min_yield)
         
         if data:
