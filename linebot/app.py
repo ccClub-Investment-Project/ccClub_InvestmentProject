@@ -79,7 +79,7 @@ def handle_message(event):
                 result4 = main(msg)
                 line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result4]))
             elif user_states[user_id] == 'waiting_for_rank':
-                result5 = main(msg)
+                result5 = main_n(msg)
                 line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result5]))
             else:
                 handle_regular_message(line_bot_api, event, msg, user_id)
@@ -142,7 +142,7 @@ def handle_message(event):
         line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result4]))
         user_states[user_id] = None
     elif user_state == 'waiting_for_rank':
-        result5 = main(msg)
+        result5 = main_n(msg)
         line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[result5]))
         user_states[user_id] = None
     else:

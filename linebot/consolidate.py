@@ -109,6 +109,50 @@ def main(min_yield1=0):
     except Exception as e:
         logging.error(f"Error in main function: {e}")
         return TextMessage(text="An error occurred while processing the data.")
+    
+def main_n(top_n=10):
+    try:
+        input_csv_file = 'stock_data_final.csv'  # Adjust the path to your CSV file
+        data = read_csv(input_csv_file)
+        
+        # Part 1: select by market cap
+        min_market_cap = 10
+        data = select_by_market_cap(data, min_market_cap)
+        
+        # Part 2: select by trading volume
+        min_trading_volume = 1
+        data = select_by_trading_volume(data, min_trading_volume)
+        
+        # Part 3: select by profit > 0
+        data = select_by_profit(data)
+        
+        # Part 4: select by constant dividend payout
+        data = select_by_constant_dividend_payout(data)
+        
+        if data:
+            # 按照現金殖利率排序
+            data.sort(key=lambda x: float(x['現金殖利率']), reverse=True)
+            data = data[:top_n]  # 取前 top_n 檔
+            
+            output_csv_file = 'filtered_stock_data.csv'
+            fieldnames = data[0].keys()
+            with open(output_csv_file, mode='w', newline='', encoding='utf-8-sig') as outfile:
+                writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(data)
+            
+            send_text = f"以下是殖利率由高到低排序的前 {top_n} 檔股票：\n\n"
+            send_text += "代號, 公司名稱, 現金殖利率\n"
+            for row in data:
+                send_text += f"{row['代號']}, {row['名稱']}, {float(row['現金殖利率']) * 100:.2f}%\n"
+        else:
+            send_text = "沒有符合條件的股票。"
+        
+        message = TextMessage(text=send_text)
+        return message
+    except Exception as e:
+        logging.error(f"Error in main function: {e}")
+        return TextMessage(text="處理數據時發生錯誤。")
 
 if __name__ == '__main__':
     main(5)  # example argument
