@@ -2,6 +2,10 @@ import csv
 from linebot.v3.messaging import TextMessage
 import logging
 
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+
 # 讀取 CSV 文件
 def read_csv(file_path):
     with open(file_path, mode='r', encoding='utf-8-sig') as file:
