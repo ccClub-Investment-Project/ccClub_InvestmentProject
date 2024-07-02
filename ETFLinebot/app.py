@@ -11,7 +11,7 @@ from data import *
 from message import *
 from news2 import *
 from stock import *
-from consolidate import *
+from consolidate4 import *
 
 # Load environment variables
 load_dotenv()

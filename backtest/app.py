@@ -129,11 +129,11 @@ def etf_all_info(table_name):
     data = get_json(table_name)
     return jsonify(data)
 
-def get_main():
-    return consolidate.main()
+# def get_main():
+#     return consolidate.main()
 
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5555))
-    print(get_main())
+    # print(get_main())
     app.run(host='0.0.0.0', port=port)
