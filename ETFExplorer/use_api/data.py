@@ -3,6 +3,7 @@ import yfinance
 
 URL_BASE = "https://backtest-kk2m.onrender.com"
 URL_TABLE = f"{URL_BASE}/tables"
+URL_Strategy = f"{URL_BASE}/strategy"
 
 session = requests.Session()
 
@@ -38,9 +39,37 @@ def api_table_data(table_name):
         print(f"Error fetching table data: {e}")
         return None
 
+def get_strategy_basic(top_n):
+    url = f"{URL_Strategy}/basic"
+    params = {'top_n': top_n}
+
+    try:
+        response = session.get(url,params=params, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"Error fetching table data: {e}")
+        return None
+
+def get_strategy_yield(min_yield):
+    params = {'min_yield': min_yield}
+
+    url = f"{URL_Strategy}/yield"
+    try:
+        response = session.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"Error fetching table data: {e}")
+        return None
 
 # news = get_news_data('台股,美股',True, 25)
 # print(len(news))
 # print(news[0])
 
 # https://news.cnyes.com/news/id/{news['newsId']
+
+
+# test = get_strategy_basic(20)
+# test = get_strategy_yield(5)
+# print(test)
