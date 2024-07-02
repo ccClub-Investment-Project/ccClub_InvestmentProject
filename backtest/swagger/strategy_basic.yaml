@@ -1,0 +1,31 @@
+Get strategy basic information
+---
+description: Retrieve the top N stocks sorted by a specific strategy.
+parameters:
+  - name: top_n
+    in: query
+    type: integer
+    description: The number of top stocks to return
+    required: false
+    default: 0
+responses:
+  200:
+    description: A JSON list of the top N stocks.
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          代號:
+            type: string
+            description: Stock code
+            example: "2330"
+          名稱:
+            type: string
+            description: Company name
+            example: "台積電"
+          現金殖利率:
+            type: number
+            format: float
+            description: Cash dividend yield
+            example: 5.5

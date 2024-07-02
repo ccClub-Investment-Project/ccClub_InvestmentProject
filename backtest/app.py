@@ -3,11 +3,16 @@ import os
 import sys
 current_path = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.join(current_path, '..')
-sys.path.insert(0, project_root)
-os.chdir(project_root)
 
-from ETFLinebot import news
-from ETFLinebot import consolidate
+# 将 ETFLinebot 文件夹添加到系统路径
+etflinebot_path = os.path.join(project_root, 'ETFLinebot')
+print(etflinebot_path)
+sys.path.append(etflinebot_path)
+
+# sys.path.insert(0, project_root)
+# os.chdir(project_root)
+
+import news, consolidate3
 
 from flask import Flask, request, jsonify
 from flasgger import Swagger,swag_from
@@ -57,10 +62,6 @@ def backtest_stock(stock_id):
         'log': log
     }
     return jsonify(response)
-
-
-
-
 
 @app.route('/news',methods=['GET'])
 @swag_from('swagger/news.yaml', methods=['GET'])
@@ -129,8 +130,33 @@ def etf_all_info(table_name):
     data = get_json(table_name)
     return jsonify(data)
 
-# def get_main():
-#     return consolidate.main()
+@app.route('/strategy/basic', methods=['GET'])
+@swag_from('swagger/strategy_basic.yaml', methods=['GET'])
+def get_strategy_basic():
+    top_n = 0
+    if 'top_n' in request.args:
+        top_n = int(request.args.get('top_n'))
+
+    df = consolidate3.strategy_basic(top_n).df_filtered
+    df = df[['代號', '名稱', '現金殖利率']]
+    if df.empty:
+        return jsonify({"message": "没有符合条件的股票。"})
+
+    return jsonify(df.to_dict(orient='records'))
+
+@app.route('/strategy/yield', methods=['GET'])
+@swag_from('swagger/strategy_yield.yaml', methods=['GET'])
+def get_strategy_yield():
+    min_yield = 5
+    if 'min_yield' in request.args:
+        min_yield = float(request.args.get('min_yield'))
+
+    df = consolidate3.strategy_yield(min_yield).df_filtered
+    df = df[['代號', '名稱', '現金殖利率']]
+    if df.empty:
+        return jsonify({"message": "没有符合条件的股票。"})
+
+    return jsonify(df.to_dict(orient='records'))
 
 
 if __name__ == "__main__":

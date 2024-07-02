@@ -1,0 +1,31 @@
+Get strategy yield information
+---
+description: Retrieve stocks with a cash dividend yield greater than or equal to the specified minimum yield.
+parameters:
+  - name: min_yield
+    in: query
+    type: float
+    description: The minimum cash dividend yield to filter stocks.
+    required: false
+    default: 5
+responses:
+  200:
+    description: A list of stocks with a cash dividend yield greater than or equal to the specified minimum yield.
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          代號:
+            type: string
+            example: "2330"
+          名稱:
+            type: string
+            example: "台積電"
+          現金殖利率:
+            type: float
+            example: 5.5
+  400:
+    description: Bad request
+  500:
+    description: Internal server error
