@@ -8,7 +8,8 @@
 }
 .tab-box {
   display: flex;
-  max-width: 300px;
+  width: 100%; /* 讓 tab-box 佔滿容器寬度 */
+  max-width: none; /* 移除最大寬度限制 */
   position: relative;
   z-index: 0;
 }

@@ -1,16 +1,21 @@
 .left-column {
-  width: auto;
+  flex: 3; /* 調整左列的寬度 */
+  box-sizing: border-box;
 }
+
 @media (max-width: 640px) {
   .left-column {
     width: 100%;
   }
 }
+
 .right-column {
+  flex: 1; /* 調整右列的寬度 */
   display: flex;
   flex-direction: column;
-  width: 33%;
+  box-sizing: border-box;
 }
+
 @media (max-width: 640px) {
   .right-column {
     width: 100%;

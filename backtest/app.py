@@ -161,5 +161,4 @@ def get_strategy_yield():
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5555))
-    # print(get_main())
     app.run(host='0.0.0.0', port=port)

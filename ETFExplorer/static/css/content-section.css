@@ -1,18 +1,20 @@
 .content-section {
   display: flex;
-  /* flex-wrap: wrap; */
-  /* margin: 20px; */
-  gap: 20px;
-  width: 97%;
+  gap: 20px; /* 調整列之間的間距 */
+  width: 98%;
+  height: auto;
   justify-content: center;
-  margin: 20px auto;
+  margin: 10px auto; /* 上下 20px 外邊距，水平居中 */
+  box-sizing: border-box;
 }
+
 @media (max-width: 640px) {
   .content-section {
     flex-direction: column;
     gap: 0px;
   }
 }
+
 .div-2 {
   gap: 10px;
   display: flex;

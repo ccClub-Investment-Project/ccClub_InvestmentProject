@@ -1,73 +1,35 @@
 <div id="01" class="custom-rounded-box">
-    <h1>國內成分股ETF定期定額</h1>
-
+    <h1>ETF換股預測</h1>
+  
     <div class="div-2">
-        <div class="column">
-            <div class="chart">
-                <div id="graph" class="chart-container"></div>
-            </div>
-
+      <div class="column">
+        <div class="chart">
+          <div id="graph-1" class="chart-container"></div>
         </div>
-
-        <div class="strategy-detail-all">
-            <div class="strategy-detail">
-                <div class="strategy-detail-element">
-                    <div class="strategy-detail-title">國內成分股ETF</div>
-                    <div class="strategy-detail-content">總共幾檔ETF: {{ etf_domestic_count }}</div>
-                </div>               
-            </div>
-
-            <title>ETF List</title>
-            <div class="scrollable-list">
-                {% for etf in etf_domestic_list %}
-                <div class="etf-item">
-                    <strong>{{ etf.code }}</strong> 
-                    <strong>{{ etf.short_name }}</strong> 
-                </div>
-                {% endfor %}
-            </div>
-
-            <div class="test-botton">
-                <button id="backtest-button" class="custom-button">回測結果</button>
-            </div>
+      </div>
+      <div class="strategy-detail-all">
+        <div class="strategy-detail">
+          <div class="strategy-detail-element">
+            <div class="strategy-detail-title">市值 :</div>
+            <div class="strategy-detail-content">串 data</div>
+          </div>
+          <div class="strategy-detail-element">
+            <div class="strategy-detail-title">開盤 :</div>
+            <div class="strategy-detail-content">串 data</div>
+          </div>
+          <div class="strategy-detail-element">
+            <div class="strategy-detail-title">收盤 :</div>
+            <div class="strategy-detail-content">串 data</div>
+          </div>
+          <div class="strategy-detail-element">
+            <div class="strategy-detail-title">成交價 :</div>
+            <div class="strategy-detail-content">串 data</div>
+          </div>
         </div>
+        <div class="test-botton">
+          <button id="backtest-button-1" class="custom-button-1">回測結果</button>
+        </div>
+      </div>
     </div>
-    {% include '/backtest/backtest_01.html' %}
-</div>
-
-<style>
-    .strategy-detail-element {
-        display: flex;
-        flex-direction: column; /* 设置为垂直方向上的列排列 */
-        justify-content: center; /* 在容器中垂直居中 */
-        align-items: flex-start; /* 从左侧对齐 */
-        padding: 10px;
-        border: 1px solid #ccc;
-        margin-bottom: 10px;
-    }
-
-    .strategy-detail-title {
-        font-weight: bold;
-        font-size: 16px;
-        margin-bottom: 5px; /* 可选：增加标题与内容之间的间距 */
-    }
-
-    .strategy-detail-content {
-        font-size: 16px;
-    }
-</style>
-
-
-<style>
-    .scrollable-list {
-        max-height: 200px;
-        overflow-y: auto;
-        border: 1px solid #ccc;
-        padding: 10px;
-    }
-    .etf-item {
-        margin-bottom: 5px;
-        padding: 5px;
-        border-bottom: 1px solid #eee;
-    }
-</style>
+  </div>
+  

@@ -1,34 +1,47 @@
 <div id="02" class="custom-rounded-box">
-  <h1>國內成分股ETF定期定額 2</h1>
+  <h1>國內成分股ETF定期定額</h1>
 
   <div class="div-2">
-    <div class="column">
-      <div class="chart">
-        <div id="graph" class="chart-container"></div>
+      <div class="left-column">
+          
+              <div id="graph-2" class="chart-container"></div>
+    
       </div>
-    </div>
-    <div class="strategy-detail-all">
-      <div class="strategy-detail">
-        <div class="strategy-detail-element">
-          <div class="strategy-detail-title">市值 :</div>
-          <div class="strategy-detail-content">串 data</div>
-        </div>
-        <div class="strategy-detail-element">
-          <div class="strategy-detail-title">開盤 :</div>
-          <div class="strategy-detail-content">串 data</div>
-        </div>
-        <div class="strategy-detail-element">
-          <div class="strategy-detail-title">收盤 :</div>
-          <div class="strategy-detail-content">串 data</div>
-        </div>
-        <div class="strategy-detail-element">
-          <div class="strategy-detail-title">成交價 :</div>
-          <div class="strategy-detail-content">串 data</div>
+
+      <div class="right-column">
+        <div class="info-container">
+            <div>總共幾檔ETF:{{ etf_domestic_count }}</div>
+            <div class="scrollable-list">
+                {% for etf in etf_domestic_list %}
+                <div class="etf-item">
+                    <strong>{{ etf.code }}</strong> 
+                    <strong>{{ etf.short_name }}</strong> 
+                </div>
+                {% endfor %}
+            </div>
+
+          <div class="test-botton">
+              <button id="backtest-button" class="link-button">回測結果</button>
+          </div>
         </div>
       </div>
-      <div class="test-botton">
-        <button id="backtest-button" class="custom-button">回測結果</button>
-      </div>
-    </div>
   </div>
+  {% include '/backtest/backtest_01.html' %}
 </div>
+
+
+<style>
+  .scrollable-list {
+      max-height: 320px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+  }
+  .etf-item {
+      margin-bottom: 5px;
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+  }
+</style>
+
+
