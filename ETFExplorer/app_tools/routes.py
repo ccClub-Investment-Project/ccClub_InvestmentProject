@@ -9,7 +9,6 @@ from app_tools.plot_creation import create_plot1
 # 預先把資料讀進來
 from use_api.data_loader import etf_domestic_list, graphJSON1, graphJSON2 # 导入预先加载的数据
 from use_api.data_loader import refresh_data
-
 from use_api.data import get_news_data, api_table_data, get_strategy_basic, get_strategy_yield
 
 def init_routes(app, cache):
@@ -30,6 +29,12 @@ def init_routes(app, cache):
         # 將更新後的數據轉換為 JSON 格式
         return jsonify(updated_data)
 
+    @app.route('/update_plot')
+    def update_plot():
+        value = request.args.get('value', type=int)
+        # 調用 create_plot1 函數，傳入選擇的值
+        graphJSON1 = create_plot1(value)
+        return graphJSON1
 
     @app.route('/')
     def index():
@@ -44,7 +49,7 @@ def init_routes(app, cache):
         # extra_info = 'This is some extra information.'
 
 
-        return render_template('app.html', 
+        return render_template('app.html',
             graphJSON1=graphJSON1,
             graphJSON2=graphJSON2,
             etf_domestic_list = etf_domestic_list,

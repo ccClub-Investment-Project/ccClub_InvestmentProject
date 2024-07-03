@@ -86,10 +86,18 @@
           .then(response => response.json())
           .then(data => {
             updateYieldTable(data);
-            //updateGraphs(data)
           })
           .catch(error => console.error('Error:', error));
 
+        // Fetch updated plot data
+        fetch(`/update_plot?value=${selectedRate}`, {
+          method: 'GET',
+        })
+          .then(response => response.json())
+          .then(graphJSON1 => {
+            updatePlot(graphJSON1);
+          })
+          .catch(error => console.error('Error:', error));
         // 檢查是否大於 8%，如果是則觸發 alert
         //if (selectedRate > 8) {
         //  alert("已選擇大於 8% 的殖利率");
@@ -148,6 +156,24 @@
       etfCountDiv.textContent = '總共幾檔ETF: ' + data.length;
     }
 
+    function updatePlot(graphJSON1) {
+      var layout = graphJSON1.layout || {};
+      console.log(graphJSON1);
+
+      layout.autosize = true;
+      layout.margin = {
+        l: 50,
+        r: 50,
+        t: 50,
+        b: 50
+      };
+
+      if (graphJSON1.data && graphJSON1.data.length > 0) {
+        Plotly.newPlot("graph-1", graphJSON1.data, layout, { responsive: true });
+      } else {
+        console.error("Graph data is empty or invalid");
+      }
+    }
   </script>
   <!-- 繪圖 -->
   <script>
