@@ -3,7 +3,10 @@
   justify-content: center;
   height: 100%;
   border-radius: 5px;
-  //margin: 20px 20px 0 20px;
-  //padding: 20px;
-  overflow-y: auto; /* 垂直方向溢出時顯示滾動條 */
+  margin: 10px 10px 0 10px;
+  padding: 10px;
+  overflow-y: auto;
+  /* 垂直方向溢出時顯示滾動條 */
+  border: 1px solid black;
+  /* 指定完整的邊框樣式 */
 }

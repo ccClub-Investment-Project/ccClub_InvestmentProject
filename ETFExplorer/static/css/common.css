@@ -53,8 +53,30 @@ body {
 footer {
   background-color: #333;
   padding: 5px 20px;
-  /* 上下 10px，左右 20px 的內縮 */
+  /* 上下 5px，左右 20px 的內縮 */
+  color: #fff;
+  /* 將文字顏色設置為白色 */
 }
+
+footer a {
+  color: #ffcc00;
+  /* 更改超連結的顏色 */
+  text-decoration: none;
+  /* 移除超連結的下劃線 */
+}
+
+footer a:hover {
+  color: #ffa500;
+  /* 滑鼠懸停時變更超連結顏色 */
+  text-decoration: underline;
+  /* 滑鼠懸停時添加下劃線 */
+}
+
+footer a:visited {
+  color: #ffcc00;
+  /* 已訪問過的超連結顏色 */
+}
+
 
 
 @media (max-width: 991px) {
@@ -69,7 +91,7 @@ footer {
 
 /* 基本樣式 */
 div {
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   /* 邊框 */
   border-radius: 5px;
   /* 圓角 */
@@ -141,7 +163,7 @@ div:nth-child(2) {
 .scrollable-list {
   max-height: 350px;
   overflow-y: auto;
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   padding: 10px;
 }
 

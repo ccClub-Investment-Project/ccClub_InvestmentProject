@@ -1,20 +1,28 @@
 .custom-rounded-box {
   background-color: #f0f0f0;
   height: auto;
-  border-radius: 5px; /* 圓角 */
-  padding: 20px; /* 可根據需要調整內邊距 */
+  border-radius: 5px;
+  /* 圓角 */
+  padding: 20px;
+  /* 可根據需要調整內邊距 */
   position: relative;
   z-index: 1;
+  border: 1px solid black;
+  /* 指定完整的邊框樣式 */
 }
+
 .tab-box {
   display: flex;
-  width: 100%; /* 讓 tab-box 佔滿容器寬度 */
-  max-width: none; /* 移除最大寬度限制 */
+  width: 100%;
+  /* 讓 tab-box 佔滿容器寬度 */
+  max-width: none;
+  /* 移除最大寬度限制 */
   position: relative;
   z-index: 0;
 }
+
 .custom-tab {
-  color:grey;
+  color: grey;
   background-color: #d3d3d3;
   justify-content: flex-end;
   padding: 0 20px 15px;
@@ -24,12 +32,16 @@
   position: relative;
   top: 10px;
   transition: top 0.2s, background-color 0.2s ease-out, color 0.2s ease-out;
+  border: 1px solid black;
+  /* 指定完整的邊框樣式 */
 }
+
 .custom-tab:hover,
 .custom-tab:focus {
   background-color: #e1f9fe;
   top: 2px;
 }
+
 .custom-tab.active {
   color: black;
   background-color: #f0f0f0;
