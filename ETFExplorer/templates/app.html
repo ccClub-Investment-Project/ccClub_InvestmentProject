@@ -67,7 +67,7 @@
   <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
 
 
-
+  <!-- 下拉式選單 -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       // 取得下拉式選單元素
@@ -86,6 +86,7 @@
           .then(response => response.json())
           .then(data => {
             updateYieldTable(data);
+            //updateGraphs(data)
           })
           .catch(error => console.error('Error:', error));
 
@@ -110,11 +111,17 @@
 
     function updateYieldTable(data) {
       const table = document.getElementById('yieldTable');
+      const etfCountDiv = document.getElementById('how-many-etf');
+
       // 清空現有表格內容
       table.innerHTML = '';
 
       // 創建表頭
       let headerRow = table.insertRow();
+      let noHeader = document.createElement('th');
+      noHeader.textContent = 'No.';
+      headerRow.appendChild(noHeader);
+
       for (let key in data[0]) {
         let th = document.createElement('th');
         th.textContent = key;
@@ -122,8 +129,11 @@
       }
 
       // 填充數據
-      data.forEach(row => {
+      data.forEach((row, index) => {
         let tr = table.insertRow();
+        let noCell = tr.insertCell();
+        noCell.textContent = index + 1;
+
         for (let key in row) {
           let td = tr.insertCell();
           if (key === '現金殖利率') {
@@ -133,32 +143,51 @@
           }
         }
       });
+
+      // 更新總數顯示
+      etfCountDiv.textContent = '總共幾檔ETF: ' + data.length;
     }
 
-
   </script>
-
+  <!-- 繪圖 -->
   <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-      var graphJSON = {{ graphJSON | safe
+      var graphJSON1 = {{ graphJSON1 | safe
     }};
-    console.log(graphJSON);
+    var graphJSON2 = {{ graphJSON2 | safe }};
+    console.log(graphJSON1);
+    console.log(graphJSON2);
 
-    var layout = graphJSON.layout || {};
-    layout.autosize = true;
-    layout.margin = {
+    var layout1 = graphJSON1.layout || {};
+    layout1.autosize = true;
+    layout1.margin = {
       l: 50,
       r: 50,
       t: 50,
       b: 50
     };
 
-    if (graphJSON.data && graphJSON.data.length > 0) {
-      Plotly.newPlot("graph-2", graphJSON.data, layout, { responsive: true });
+    if (graphJSON1.data && graphJSON1.data.length > 0) {
+      Plotly.newPlot("graph-1", graphJSON1.data, layout1, { responsive: true });
     } else {
       console.error("Graph data is empty or invalid");
     }
-      });
+
+    var layout2 = graphJSON2.layout || {};
+    layout2.autosize = true;
+    layout2.margin = {
+      l: 50,
+      r: 50,
+      t: 50,
+      b: 50
+    };
+
+    if (graphJSON2.data && graphJSON2.data.length > 0) {
+      Plotly.newPlot("graph-2", graphJSON2.data, layout2, { responsive: true });
+    } else {
+      console.error("Graph data is empty or invalid");
+    }
+    });
   </script>
 
 

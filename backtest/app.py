@@ -147,7 +147,7 @@ def get_strategy_basic():
 @app.route('/strategy/yield', methods=['GET'])
 @swag_from('swagger/strategy_yield.yaml', methods=['GET'])
 def get_strategy_yield():
-    min_yield = 0
+    min_yield = 5
     if 'min_yield' in request.args:
         min_yield = float(request.args.get('min_yield'))
 

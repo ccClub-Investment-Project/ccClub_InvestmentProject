@@ -31,21 +31,23 @@
       <div id="graph-1"></div>
     </div>
 
-    <div class="right-column" style="flex:1.2">
+    <div class="right-column" style="flex:1.5">
       <div class="info-container">
-        <div>總共幾檔ETF:{{ strategy_basic_count }}</div>
+        <div id="how-many-etf">總共幾檔ETF:{{ strategy_yield_count }}</div>
         <div class="scrollable-list">
           <table id="yieldTable">
             <thead>
               <tr>
+                <th>No.</th>
                 <th>代號</th>
                 <th>名稱</th>
                 <th>現金殖利率</th>
               </tr>
             </thead>
             <tbody>
-              {% for strategy in strategy_yield() %}
+              {% for strategy in strategy_yield(5) %}
               <tr>
+                <td>{{ loop.index }}</td>
                 <td>{{ strategy['代號'] }}</td>
                 <td>{{ strategy['名稱'] }}</td>
                 <td>{{ "%0.2f" | format(strategy['現金殖利率'] * 100) }}%</td>
@@ -85,9 +87,27 @@
   th,
   td {
     padding: 10px;
-    text-align: left;
+    text-align: center;
+  }
+
+  th {
+    background-color: #003366;
+    /* 深藍色 */
+    color: white;
+    /* 白色字體 */
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #f0f0f0;
+    /* 灰色 */
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #e0f7fa;
+    /* 淺藍色 */
   }
 </style>
+
 
 <style>
   h1 {
