@@ -33,12 +33,9 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/tabs.css') }}"
     />
+    
     <!-- 以下待確認 -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="{{ url_for('static', filename='js/show-div.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
-
-    <!-- 以下待確認 -->
 
   </head>
 
@@ -58,7 +55,7 @@
         <div class="left-column">
           <section>
             <div class="tab-box">
-              <div class="custom-tab" data-div-id="01" onclick="showDiv('01')">ETF換股預測</div>
+              <div class="custom-tab active" data-div-id="01" onclick="showDiv('01')">ETF換股預測</div>
               <div class="custom-tab" data-div-id="02" onclick="showDiv('02')">定期定額回測</div>
             </div>
             {% include 'tabs/tab_01.html' %}
@@ -84,6 +81,10 @@
       <p><a href="#contact">聯繫我們</a></p>
     </footer>
 
+
+    <!-- 以下待確認 -->
+    <script src="{{ url_for('static', filename='js/show-div.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
 
     <script>
       document.addEventListener('DOMContentLoaded', (event) => {

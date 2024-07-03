@@ -39,7 +39,7 @@ def api_table_data(table_name):
         print(f"Error fetching table data: {e}")
         return None
 
-def get_strategy_basic(top_n):
+def get_strategy_basic(top_n=0):
     url = f"{URL_Strategy}/basic"
     params = {'top_n': top_n}
 
@@ -51,7 +51,7 @@ def get_strategy_basic(top_n):
         print(f"Error fetching table data: {e}")
         return None
 
-def get_strategy_yield(min_yield):
+def get_strategy_yield(min_yield=5):
     params = {'min_yield': min_yield}
 
     url = f"{URL_Strategy}/yield"
@@ -72,4 +72,4 @@ def get_strategy_yield(min_yield):
 
 # test = get_strategy_basic(20)
 # test = get_strategy_yield(5)
-# print(test)
+# print (test)

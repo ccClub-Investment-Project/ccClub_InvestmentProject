@@ -11,7 +11,7 @@ from app_tools.plot_creation import create_plot
 from use_api.data_loader import etf_domestic_list, graphJSON, refresh_data # 导入预先加载的数据
 from use_api.data_loader import graphJSON, refresh_data # 导入预先加载的数据
 
-from use_api.data import get_news_data, api_table_data
+from use_api.data import get_news_data, api_table_data, get_strategy_basic, get_strategy_yield
 
 def init_routes(app, cache):
 
@@ -30,14 +30,20 @@ def init_routes(app, cache):
         news = get_news()
         # 計算ETF數量
         etf_domestic_count = len(etf_domestic_list)
-        # 定义变量
+        #
+        strategy_basic_count = len(get_strategy_basic())
+        # test - 定义变量
         items = ['Apple', 'Banana', 'Cherry']
         extra_info = 'This is some extra information.'
+
 
         return render_template('app.html', 
             graphJSON=graphJSON,
             etf_domestic_list = etf_domestic_list,
             etf_domestic_count = etf_domestic_count,
+            strategy_basic_count = strategy_basic_count,
+            strategy_basic = get_strategy_basic,
+            strategy_yield = get_strategy_yield,
             news_list=news, 
             items=items, 
             extra_info=extra_info)

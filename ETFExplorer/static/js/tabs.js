@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   // 初始化時隱藏所有非預設顯示的 tab 內容
-  document.querySelectorAll(".custom-rounded-box").forEach((div) => {
-    if (div.id !== "01") { // 預設顯示的 tab 的 id
-      div.style.display = "none";
-    }
-  });
+  // document.querySelectorAll(".custom-rounded-box").forEach((div) => {
+  //   if (div.id !== "01") { // 預設顯示的 tab 的 id
+  //     div.style.display = "none";
+  //   }
+  // });
 
   // 綁定點擊事件
   document.querySelectorAll(".custom-tab").forEach((tab) => {

@@ -1,35 +1,61 @@
 <div id="01" class="custom-rounded-box">
-    <h1>ETF換股預測</h1>
-  
-    <div class="div-2">
-      <div class="column">
-        <div class="chart">
-          <div id="graph-1" class="chart-container"></div>
+  <h1>ETF換股預測</h1>
+  <h4>篩選條件1: </h4>
+  <h4>篩選條件2: </h4>
+  <h4>篩選條件3: </h4>
+  <h4>篩選條件4: </h4>
+
+  <div class="div-2">
+    <div class="left-column">
+      <div id="graph-1"></div>
+    </div>
+
+    <div class="right-column" style="flex:2">
+      <div class="info-container">
+        <div>總共幾檔ETF:{{ strategy_basic_count }}</div>
+        <div class="scrollable-list">
+          <table>
+            <thead>
+              <tr>
+                <th>代號</th>
+                <th>名稱</th>
+                <th>現金殖利率</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for strategy in strategy_basic() %}
+              <tr>
+                <td>{{ strategy['代號'] }}</td>
+                <td>{{ strategy['名稱'] }}</td>
+                <td>{{ "%0.2f" | format(strategy['現金殖利率'] * 100) }}%</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
-      </div>
-      <div class="strategy-detail-all">
-        <div class="strategy-detail">
-          <div class="strategy-detail-element">
-            <div class="strategy-detail-title">市值 :</div>
-            <div class="strategy-detail-content">串 data</div>
-          </div>
-          <div class="strategy-detail-element">
-            <div class="strategy-detail-title">開盤 :</div>
-            <div class="strategy-detail-content">串 data</div>
-          </div>
-          <div class="strategy-detail-element">
-            <div class="strategy-detail-title">收盤 :</div>
-            <div class="strategy-detail-content">串 data</div>
-          </div>
-          <div class="strategy-detail-element">
-            <div class="strategy-detail-title">成交價 :</div>
-            <div class="strategy-detail-content">串 data</div>
-          </div>
-        </div>
-        <div class="test-botton">
-          <button id="backtest-button-1" class="custom-button-1">回測結果</button>
-        </div>
+        <button id="backtest-button" class="link-button">回測結果</button>
       </div>
     </div>
   </div>
-  
+</div>
+
+
+<style>
+  table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+  }
+</style>

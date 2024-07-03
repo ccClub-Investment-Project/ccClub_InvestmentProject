@@ -5,3 +5,4 @@ python-dotenv
 twstock
 lxml
 beautifulsoup4
+pandas
