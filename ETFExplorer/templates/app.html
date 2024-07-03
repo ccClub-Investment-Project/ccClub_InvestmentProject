@@ -1,112 +1,168 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ETF 換股策略</title>
-    <!-- 確認沒問題 -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/common.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/navbar.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/loading-bar.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/content-section.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/columns.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/news.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/tabs.css') }}"
-    />
-    
-    <!-- 以下待確認 -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETF 換股策略</title>
+  <!-- 確認沒問題 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/loading-bar.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/content-section.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/columns.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tabs.css') }}" />
 
-  <body>
-    <div class="navbar">
-      <div class="logo">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" />
-        <span>ETFExplore</span>
-      </div>
+  <!-- 以下待確認 -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" />
+      <span>ETFExplore</span>
     </div>
+  </div>
 
-    <div class="loading-bar-container">
-      <div class="loading-bar"></div>
-    </div>
+  <div class="loading-bar-container">
+    <div class="loading-bar"></div>
+  </div>
 
-    <div class="content-section">
-        <div class="left-column">
-          <section>
-            <div class="tab-box">
-              <div class="custom-tab active" data-div-id="01" onclick="showDiv('01')">ETF換股預測</div>
-              <div class="custom-tab" data-div-id="02" onclick="showDiv('02')">定期定額回測</div>
-            </div>
-            {% include 'tabs/tab_01.html' %}
-            {% include 'tabs/tab_02.html' %}
-            {% include 'backtest_window.html' %}
-          </section>
+  <div class="content-section">
+    <div class="left-column">
+      <section>
+        <div class="tab-box">
+          <div class="custom-tab active" data-div-id="01" onclick="showDiv('01')">ETF換股預測</div>
+          <div class="custom-tab" data-div-id="02" onclick="showDiv('02')">定期定額回測</div>
         </div>
-
-        <div class="right-column">
-          <section class="news-rounded-box">
-            <h2>Latest News</h2>
-            <div id="news-container">
-              {% for news in news_list[:5] %} {% include 'news_block.html' %} {%
-              endfor %}
-            </div>
-          </section>
-        </div>
+        {% include 'tabs/tab_01.html' %}
+        {% include 'tabs/tab_02.html' %}
+        {% include 'backtest_window.html' %}
+      </section>
     </div>
 
-    <hr>
-    <footer>
-      <p>© 2024 ccip公司名稱. 版權所有.</p>
-      <p><a href="#contact">聯繫我們</a></p>
-    </footer>
+    <div class="right-column">
+      <section class="news-rounded-box">
+        <h2>Latest News</h2>
+        <div id="news-container">
+          {% for news in news_list[:5] %} {% include 'news_block.html' %} {%
+          endfor %}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <hr>
+  <footer>
+    <p>© 2024 ccip公司名稱. 版權所有.</p>
+    <p><a href="#contact">聯繫我們</a></p>
+  </footer>
 
 
-    <!-- 以下待確認 -->
-    <script src="{{ url_for('static', filename='js/show-div.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
+  <!-- 以下待確認 -->
+  <script src="{{ url_for('static', filename='js/show-div.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', (event) => {
-        var graphJSON = {{ graphJSON | safe }};
-        console.log(graphJSON);
 
-        var layout = graphJSON.layout || {};
-        layout.autosize = true;
-        layout.margin = {
-          l: 50,
-          r: 50,
-          t: 50,
-          b: 50
-        };
 
-        if (graphJSON.data && graphJSON.data.length > 0) {
-          Plotly.newPlot("graph-2", graphJSON.data, layout, { responsive: true });
-        } else {
-          console.error("Graph data is empty or invalid");
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 取得下拉式選單元素
+      var selectElement = document.getElementById("dividendRate");
+      const yieldTable = document.getElementById('yieldTable');
+
+      // 預設選擇 5%
+      selectElement.value = "5";
+
+      // 監聽下拉式選單的 change 事件
+      selectElement.addEventListener("change", function () {
+        var selectedRate = parseInt(selectElement.value); // 獲取選中的殖利率並轉為數字
+        fetch(`/update_yield?value=${selectedRate}`, {
+          method: 'GET',
+        })
+          .then(response => response.json())
+          .then(data => {
+            updateYieldTable(data);
+          })
+          .catch(error => console.error('Error:', error));
+
+        // 檢查是否大於 8%，如果是則觸發 alert
+        //if (selectedRate > 8) {
+        //  alert("已選擇大於 8% 的殖利率");
+        //}
+      });
+
+
+
+
+    });
+
+    function formatNumber(value, decimals = 2, asPercentage = true) {
+      if (asPercentage) {
+        return (value * 100).toFixed(decimals) + '%';
+      }
+      return value.toFixed(decimals);
+    }
+
+
+    function updateYieldTable(data) {
+      const table = document.getElementById('yieldTable');
+      // 清空現有表格內容
+      table.innerHTML = '';
+
+      // 創建表頭
+      let headerRow = table.insertRow();
+      for (let key in data[0]) {
+        let th = document.createElement('th');
+        th.textContent = key;
+        headerRow.appendChild(th);
+      }
+
+      // 填充數據
+      data.forEach(row => {
+        let tr = table.insertRow();
+        for (let key in row) {
+          let td = tr.insertCell();
+          if (key === '現金殖利率') {
+            td.textContent = formatNumber(row[key]);
+          } else {
+            td.textContent = row[key];
+          }
         }
       });
-    </script>
+    }
+
+
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      var graphJSON = {{ graphJSON | safe
+    }};
+    console.log(graphJSON);
+
+    var layout = graphJSON.layout || {};
+    layout.autosize = true;
+    layout.margin = {
+      l: 50,
+      r: 50,
+      t: 50,
+      b: 50
+    };
+
+    if (graphJSON.data && graphJSON.data.length > 0) {
+      Plotly.newPlot("graph-2", graphJSON.data, layout, { responsive: true });
+    } else {
+      console.error("Graph data is empty or invalid");
+    }
+      });
+  </script>
+
+
+
 </body>
 
 </html>

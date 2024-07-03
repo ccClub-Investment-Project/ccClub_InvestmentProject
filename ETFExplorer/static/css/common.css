@@ -6,6 +6,7 @@ body {
   height: 100%;
   font-family: Arial, sans-serif;
 }
+
 .chart {
   flex-grow: 1;
   padding: 10px;
@@ -20,7 +21,8 @@ body {
   margin: 0;
 }
 
-.info-container, .chart-container {
+.info-container,
+.chart-container {
   flex: 1;
   padding: 10px;
   border: 1px solid #ccc;
@@ -36,6 +38,7 @@ body {
   background-color: #ccc;
   margin: 20px 0;
 }
+
 .img {
   aspect-ratio: 1.42;
   object-fit: cover;
@@ -49,7 +52,8 @@ body {
 
 footer {
   background-color: aqua;
-  padding: 5px 20px; /* 上下 10px，左右 20px 的內縮 */
+  padding: 5px 20px;
+  /* 上下 10px，左右 20px 的內縮 */
 }
 
 
@@ -65,24 +69,28 @@ footer {
 
 /* 基本樣式 */
 div {
-  border: 1px solid #ccc; /* 邊框 */
-  border-radius: 5px; /* 圓角 */
+  border: 1px solid #ccc;
+  /* 邊框 */
+  border-radius: 5px;
+  /* 圓角 */
 }
 
 /* 第一個 div 的特定樣式 */
 div:first-child {
-  font-weight: bold; /* 加粗 */
+  font-weight: bold;
+  /* 加粗 */
 }
 
 /* 第二個 div 的特定樣式 */
 div:nth-child(2) {
-  color: #666; /* 文字顏色 */
+  color: #666;
+  /* 文字顏色 */
 }
 
 
-
+/* 排版使用 */
 * {
-  border: 1px solid #333;
+  border: 0px solid #333;
   // box-sizing: border-box;
 }
 
@@ -106,23 +114,27 @@ div:nth-child(2) {
 
 
 .strategy-detail-element {
-    display: flex;
-    flex-direction: column; /* 设置为垂直方向上的列排列 */
-    justify-content: center; /* 在容器中垂直居中 */
-    align-items: flex-start; /* 从左侧对齐 */
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  /* 设置为垂直方向上的列排列 */
+  justify-content: center;
+  /* 在容器中垂直居中 */
+  align-items: flex-start;
+  /* 从左侧对齐 */
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 
 .strategy-detail-title {
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 5px; /* 可选：增加标题与内容之间的间距 */
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+  /* 可选：增加标题与内容之间的间距 */
 }
 
 .strategy-detail-content {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 
@@ -132,6 +144,7 @@ div:nth-child(2) {
   border: 1px solid #ccc;
   padding: 10px;
 }
+
 .etf-item {
   margin-bottom: 5px;
   padding: 5px;

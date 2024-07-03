@@ -2,8 +2,7 @@
 # setup_project_root()
 
 # 定義路由和視圖函數
-from flask import render_template, redirect, url_for
-
+from flask import render_template, redirect, url_for, request, jsonify
 from datetime import datetime
 import logging, time
 from app_tools.plot_creation import create_plot
@@ -22,6 +21,14 @@ def init_routes(app, cache):
     @cache.memoize(timeout=300)
     def get_news():
         return get_news_data('台股,美股', True, 25)
+
+    @app.route('/update_yield')
+    def update_yield():
+        value = request.args.get('value', type=int)
+        # 調用 get_strategy_yield 函數，傳入選擇的值
+        updated_data = get_strategy_yield(value)
+        # 將更新後的數據轉換為 JSON 格式
+        return jsonify(updated_data)
 
 
     @app.route('/')

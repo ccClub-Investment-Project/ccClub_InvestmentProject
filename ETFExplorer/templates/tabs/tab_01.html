@@ -1,20 +1,41 @@
 <div id="01" class="custom-rounded-box">
   <h1>ETF換股預測</h1>
-  <h4>篩選條件1: </h4>
-  <h4>篩選條件2: </h4>
-  <h4>篩選條件3: </h4>
-  <h4>篩選條件4: </h4>
+  <h3>篩選條件介紹</h3>
+  <div class="filter-item">
+    <strong>篩選條件 01.</strong>
+    <p><strong>根據市值篩選股票</strong>：根據市值進行篩選，只保留市值大於等於400億元的股票。</p>
+  </div>
+
+  <div class="filter-item">
+    <strong>篩選條件 02.</strong>
+    <p><strong>根據交易量篩選股票</strong>：根據平均日成交額進行篩選，只保留平均日成交額大於等於1億元的股票。</p>
+  </div>
+
+  <div class="filter-item">
+    <strong>篩選條件 03.</strong>
+    <p><strong>根據淨利潤篩選股票</strong>：根據2023年淨利進行篩選，只保留淨利大於0元的股票。</p>
+  </div>
+
+  <div class="filter-item">
+    <strong>篩選條件 04.</strong>
+    <p><strong>根據股利發放率篩選股票</strong>：根據2020～2022年股利發放率進行篩選，保留三年中股利發放率大於0的股票。</p>
+  </div>
+
+  <div class="filter-item">
+    <strong>篩選條件 05.</strong>
+    <p><strong>根據股利收益率篩選股票</strong>：根據股利收益率進行篩選，具體篩選條件需要根據實際需求補充。</p>
+  </div>
 
   <div class="div-2">
     <div class="left-column">
       <div id="graph-1"></div>
     </div>
 
-    <div class="right-column" style="flex:2">
+    <div class="right-column" style="flex:1.2">
       <div class="info-container">
         <div>總共幾檔ETF:{{ strategy_basic_count }}</div>
         <div class="scrollable-list">
-          <table>
+          <table id="yieldTable">
             <thead>
               <tr>
                 <th>代號</th>
@@ -23,7 +44,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for strategy in strategy_basic() %}
+              {% for strategy in strategy_yield() %}
               <tr>
                 <td>{{ strategy['代號'] }}</td>
                 <td>{{ strategy['名稱'] }}</td>
@@ -33,7 +54,15 @@
             </tbody>
           </table>
         </div>
-        <button id="backtest-button" class="link-button">回測結果</button>
+        <label for="dividendRate">大於殖利率：</label>
+        <select id="dividendRate">
+          <script>
+            for (var i = 0; i <= 20; i++) {
+              document.write('<option value="' + i + '">' + i + '%</option>');
+            }
+          </script>
+          <!-- 使用 JavaScript 生成選項 -->
+        </select>
       </div>
     </div>
   </div>
@@ -43,7 +72,7 @@
 <style>
   table {
     width: 100%;
-    margin: 20px auto;
+    margin: 10px auto;
     border-collapse: collapse;
   }
 
@@ -57,5 +86,34 @@
   td {
     padding: 10px;
     text-align: left;
+  }
+</style>
+
+<style>
+  h1 {
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+  }
+
+  .filter-item {
+    margin-bottom: 20px;
+  }
+
+  .filter-item strong {
+    font-weight: bold;
+    color: #666;
+    margin-right: 10px;
+  }
+
+  .filter-item p {
+    display: inline;
+    font-size: 16px;
+  }
+
+  h3 {
+    color: #030250;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
   }
 </style>

@@ -71,5 +71,5 @@ def get_strategy_yield(min_yield=5):
 
 
 # test = get_strategy_basic(20)
-# test = get_strategy_yield(5)
-# print (test)
+# test = get_strategy_yield(1)
+# print (len(test))
