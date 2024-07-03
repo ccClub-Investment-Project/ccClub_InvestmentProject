@@ -1,6 +1,6 @@
 from consolidate2 import ETFStrategy
 
-def strategy_basic(n=20):
+def strategy_basic(n=0):
     # 物件初始化 (讀取csv -> dataframe)
     etf_strategy = ETFStrategy()
     # Step 01.根據市值篩選股票 (市值 >= 400億)
