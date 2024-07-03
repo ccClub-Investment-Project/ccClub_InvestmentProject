@@ -63,6 +63,11 @@ def get_strategy_yield(min_yield=5):
         print(f"Error fetching table data: {e}")
         return None
 
+
+
+
+# test = api_table_data("etf_performance")
+# print(test[0])
 # news = get_news_data('台股,美股',True, 25)
 # print(len(news))
 # print(news[0])

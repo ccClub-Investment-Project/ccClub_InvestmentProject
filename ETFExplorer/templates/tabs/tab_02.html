@@ -1,28 +1,25 @@
 <div id="02" class="custom-rounded-box">
   <h1>國內成分股ETF定期定額</h1>
-  
+
   <div class="div-2">
-      <div class="left-column">
-              <div id="graph-2"></div>
-      </div>
+    <div class="left-column">
+      <div id="graph-2"></div>
+    </div>
 
-      <div class="right-column">
-        <div class="info-container">
-            <div>總共幾檔ETF:{{ etf_domestic_count }}</div>
-            <div class="scrollable-list">
-                {% for etf in etf_domestic_list %}
-                <div class="etf-item">
-                    <strong>{{ etf.code }}</strong> 
-                    <strong>{{ etf.short_name }}</strong> 
-                </div>
-                {% endfor %}
-            </div>
-              <button id="backtest-button" class="link-button">回測結果</button>
+    <div class="right-column">
+      <div class="info-container">
+        <div>總共幾檔ETF:{{ etf_domestic_count }}</div>
+        <div class="scrollable-list">
+          {% for etf in etf_domestic_list %}
+          <div class="etf-item">
+            <strong>{{ etf.code }}</strong>
+            <strong>{{ etf.short_name }}</strong>
+          </div>
+          {% endfor %}
         </div>
+        <button onclick="toggleBacktestWindow()" id="backtest-button" class="link-button">回測結果</button>
       </div>
+    </div>
   </div>
-  {% include '/backtest/backtest_01.html' %}
+  {% include '/backtest/backtest_02.html' %}
 </div>
-
-
-

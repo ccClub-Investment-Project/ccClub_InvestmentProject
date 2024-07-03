@@ -41,7 +41,6 @@
         </div>
         {% include 'tabs/tab_01.html' %}
         {% include 'tabs/tab_02.html' %}
-        {% include 'backtest_window.html' %}
       </section>
     </div>
 
@@ -63,9 +62,10 @@
   </footer>
 
 
-  <!-- 以下待確認 -->
+  <!-- 以下已確認 -->
   <script src="{{ url_for('static', filename='js/show-div.js') }}"></script>
   <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/toggle-backtest-window.js') }}"></script>
 
 
   <!-- 下拉式選單 -->

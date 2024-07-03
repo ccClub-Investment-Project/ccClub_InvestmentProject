@@ -127,6 +127,8 @@ div:nth-child(2) {
   font-size: 14px;
   margin-left: 10px;
   border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .link-button:hover {
@@ -171,4 +173,12 @@ div:nth-child(2) {
   margin-bottom: 5px;
   padding: 5px;
   border-bottom: 1px solid #eee;
+}
+
+select {
+  margin-top: 10px;
+  font-size: 16px;
+  /* 可以根據需要調整字體大小 */
+  padding: 5px;
+  /* 調整內邊距，讓選單看起來更美觀 */
 }

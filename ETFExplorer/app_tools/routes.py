@@ -7,7 +7,7 @@ from datetime import datetime
 import logging, time
 from app_tools.plot_creation import create_plot1
 # 預先把資料讀進來
-from use_api.data_loader import etf_domestic_list, graphJSON1, graphJSON2 # 导入预先加载的数据
+from use_api.data_loader import etf_domestic_list, etf_performance, graphJSON1, graphJSON2 # 导入预先加载的数据
 from use_api.data_loader import refresh_data
 from use_api.data import get_news_data, api_table_data, get_strategy_basic, get_strategy_yield
 
@@ -53,6 +53,7 @@ def init_routes(app, cache):
             graphJSON1=graphJSON1,
             graphJSON2=graphJSON2,
             etf_domestic_list = etf_domestic_list,
+            etf_performance = etf_performance,
             etf_domestic_count = etf_domestic_count,
             strategy_yield_count = strategy_yield_count,
             news_list=news, 

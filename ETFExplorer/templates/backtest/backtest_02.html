@@ -1,0 +1,34 @@
+<div id="backtest-window" class="backtest-window" style="display: none">
+    <!-- 可以在這裡放置更多內容，例如表單或圖表 -->
+    <h1>ETF 定期定額 回測績效！！！(不包含股利)</h1>
+    <div>
+        <table id="performanceTable">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Stock ID</th>
+                    <th>夏普值</th>
+                    <th>最大回撤(%)</th>
+                    <th>年化報酬率(%)</th>
+                    <th>每月投資金額(元)</th>
+                    <th>累績投資金額(元)</th>
+                    <th>回測範圍(年)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for performance in etf_performance %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ performance['stock_id'] }}</td>
+                    <td>{{ performance['夏普值'] }}</td>
+                    <td>{{ performance['最大回撤(%)'] }}</td>
+                    <td>{{ performance['年化報酬率(%)'] }}</td>
+                    <td>{{ performance['每月投資金額(元)'] }}</td>
+                    <td>{{ performance['累績投資金額(元)'] }}</td>
+                    <td>{{ performance['回測範圍(年)'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
