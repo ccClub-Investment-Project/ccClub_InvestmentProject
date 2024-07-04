@@ -1,11 +1,31 @@
 import requests
-import yfinance
 import time
+import yfinance as yf
+from requests.exceptions import RequestException
+
 URL_BASE = "https://backtest-kk2m.onrender.com"
 URL_TABLE = f"{URL_BASE}/tables"
 URL_Strategy = f"{URL_BASE}/strategy"
 
 session = requests.Session()
+
+def fetch_stock_data(stock_id):
+    try:
+        # print(f"Attempting to fetch data for {stock_id}")
+        df = yf.download(stock_id, progress=False)
+        
+        if df.empty:
+            raise ValueError(f"No data retrieved for {stock_id}")
+        
+        df.reset_index(inplace=True)
+        # print(f"Successfully fetched data for {stock_id}")
+        return df
+    except RequestException as e:
+        # print(f"Network error while fetching data for {stock_id}: {e}")
+        raise ValueError(f"Network error: {e}")
+    except Exception as e:
+        # print(f"Unexpected error while fetching data for {stock_id}: {e}")
+        raise ValueError(f"Unexpected error: {e}")
 
 def get_stock_data(id, amount=6000):
     url = f"{URL_BASE}/backtest/{id}"
@@ -72,7 +92,31 @@ def get_strategy_yield(min_yield=5):
         print(f"Error fetching table data: {e}")
         return None
 
-
+def get_all_plot_data():
+    all_yield = get_strategy_yield(0)
+    all_data = {}
+    
+    for stock in all_yield:
+        code = int(stock['代號'])
+        stock_id = f"{code}.TW"
+        
+        try:
+            df = fetch_stock_data(stock_id)
+            all_data[stock_id] = df
+            # print(f"Successfully added data for {stock_id} to all_data")
+        except ValueError as e:
+            # print(f"Error with {stock_id}: {e}")
+            stock_id = f"{code}.TWO"
+            try:
+                df = fetch_stock_data(stock_id)
+                all_data[stock_id] = df
+                # print(f"Successfully added data for {stock_id} to all_data")
+            except ValueError as e:
+                pass
+                # print(f"Error with {stock_id}: {e}")
+                # print(f"Skipping stock {code}")
+                continue
+    return all_data
 
 
 # test = api_table_data("etf_performance")
