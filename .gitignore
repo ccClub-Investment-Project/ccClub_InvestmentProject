@@ -21,4 +21,12 @@ venv/
 linebot.log
 path.env
 
-.vscode/settings.json
+.vscode
+
+# 移除暫存的網站
+temp
+nina
+sola
+Samantha
+ETFExplorer/backup
+
