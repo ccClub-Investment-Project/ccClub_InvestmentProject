@@ -22,7 +22,7 @@ def get_news_data(keywords, etf, limit):
     url = f"{URL_BASE}/news"
     params = {'keywords': keywords, 'etf': etf, 'limit': limit}
     try:
-        response = session.get(url, params=params, timeout=300)
+        response = session.get(url, params=params, timeout=10)
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
