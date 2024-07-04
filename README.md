@@ -30,7 +30,10 @@ A project to realize our investment strategy
 
 # ETFLinebot (Deploy on Render)
 
+<img width="680" alt="截圖 2024-07-04 11 57 01" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/3bb66b9f-10e7-446d-8a7b-b84b72dc3dd1">
+<br>
 <img width="268" alt="截圖 2024-07-04 09 15 37" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/06aeb0f0-c79a-4dd2-af26-bfdd5cc4d630">
+
 
 > Note: Render's free plan includes periodic sleeping, causing delayed responses. We use a cron job to wake up the website and Line bot every ten minutes. If inactive, this may lead to server dormancy.
 
