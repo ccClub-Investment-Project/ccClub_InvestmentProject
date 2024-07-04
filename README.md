@@ -12,13 +12,15 @@ A project to realize our investment strategy
 * Aila
 
 # Project Structure
-(Provide details about the project structure here.)
+<img width="759" alt="截圖 2024-07-04 08 48 03" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/2d683b02-c2b5-4ca9-9ac2-20f5c68e97d3">
 
 # Deploy to Render
-(Provide details on how to deploy the project to Render here.)
+[Demo Website](https://backtest-kk2m.onrender.com/apidocs/)
+
+[Demo API](https://ccclub-investmentproject-9ika.onrender.com/)
 
 # Linebot
-(Provide details about the Linebot here.)
+<img width="268" alt="截圖 2024-07-04 09 15 37" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/06aeb0f0-c79a-4dd2-af26-bfdd5cc4d630">
 
 
 ## Development Environment (not for deploy)
