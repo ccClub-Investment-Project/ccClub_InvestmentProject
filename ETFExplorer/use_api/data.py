@@ -21,13 +21,22 @@ def get_stock_data(id, amount=6000):
 def get_news_data(keywords, etf, limit):
     url = f"{URL_BASE}/news"
     params = {'keywords': keywords, 'etf': etf, 'limit': limit}
-    try:
-        response = session.get(url, params=params, timeout=10)
-        response.raise_for_status()
-        return response.json()
-    except requests.RequestException as e:
-        print(f"Error fetching news data: {e}")
-        return []
+    max_retries = 2 
+    retries = 0
+    while retries <= max_retries:
+        try:
+            response = session.get(url, params=params, timeout=300)
+            response.raise_for_status()
+            return response.json()
+        except requests.RequestException as e:
+            print(f"Error fetching news data: {e}")
+            retries += 1
+            if retries <= max_retries:
+                print(f"Retrying ({retries}/{max_retries})...")
+                time.sleep(1)  # 等待1秒後重試
+            else:
+                print(f"Max retries exceeded. Returning empty list.")
+                return []
 
 def api_table_data(table_name):
     url = f"{URL_TABLE}/{table_name}"
