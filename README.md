@@ -55,7 +55,7 @@ A project to realize our investment strategy
 - **backtrader**
 
 ## Web Scraping and API Interaction
-- **requests** (again, already listed)
+- **requests**
 
 ## Asynchronous Task Management
 - **celery**
