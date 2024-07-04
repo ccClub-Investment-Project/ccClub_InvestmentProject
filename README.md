@@ -13,18 +13,53 @@ A project to realize our investment strategy
 # Project Structure
 <img width="759" alt="截圖 2024-07-04 08 48 03" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/2d683b02-c2b5-4ca9-9ac2-20f5c68e97d3">
 
-# Deploy to Render
+# ETFExplorer (Deploy on Render)
 [Demo Website](https://ccclub-investmentproject-9ika.onrender.com/)
 
 [Demo API](https://backtest-kk2m.onrender.com/apidocs/)
 
 > Note: Render periodically resets the SQL database, which may cause the demo to fail.
 
-# Linebot
+# ETFLinebot (Deploy on Render)
 
 <img width="268" alt="截圖 2024-07-04 09 15 37" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/06aeb0f0-c79a-4dd2-af26-bfdd5cc4d630">
 
 > Note: Render's free plan includes periodic sleeping, causing delayed responses. We use a cron job to wake up the website and Line bot every ten minutes. If inactive, this may lead to server dormancy.
+
+# APIs Used in Project
+
+## Data Collection and Processing
+- **yfinance**
+- **selenium**
+- **beautifulsoup4**
+- **requests**
+- **pandas**
+- **twstock**
+- **matplotlib**
+- **lxml**
+
+## Database Integration
+- **postgreSQL**
+- **sqlalchemy**
+- **psycopg2**
+
+## Web Frameworks and Tools
+- **flask**
+- **gunicorn**
+- **python-dotenv**
+- **flasgger**
+- **line-bot-sdk**
+- **flask_caching**
+
+## Financial and Trading Tools
+- **backtrader**
+
+## Web Scraping and API Interaction
+- **requests** (again, already listed)
+
+## Asynchronous Task Management
+- **celery**
+- **redis**
 
 ## Development Environment (not for deploy)
 ### Install Docker (Windows, Linux, macOS)
