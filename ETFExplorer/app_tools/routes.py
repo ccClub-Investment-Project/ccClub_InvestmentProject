@@ -17,7 +17,7 @@ def init_routes(app, cache):
     def test():
         return "website Running!!!"
     
-    @cache.memoize(timeout=300)
+    # @cache.memoize(timeout=300)
     def get_news():
         return get_news_data('台股,美股', True, 25)
 
