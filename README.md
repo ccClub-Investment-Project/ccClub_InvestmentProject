@@ -14,15 +14,26 @@ A project to realize our investment strategy
 <img width="759" alt="截圖 2024-07-04 08 48 03" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/2d683b02-c2b5-4ca9-9ac2-20f5c68e97d3">
 
 # ETFExplorer (Deploy on Render)
+
 [Demo Website](https://ccclub-investmentproject-9ika.onrender.com/)
 
 [Demo API](https://backtest-kk2m.onrender.com/apidocs/)
+
+<img width="1410" alt="截圖 2024-07-04 11 02 39" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/d148ddef-1ff6-4e68-8a58-ea198086a878">
+
+<img width="1408" alt="截圖 2024-07-04 11 04 49" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/15b13051-3b0a-44ca-8a09-defd3e58bb2d">
+
+
+
 
 > Note: Render periodically resets the SQL database, which may cause the demo to fail.
 
 # ETFLinebot (Deploy on Render)
 
 <img width="268" alt="截圖 2024-07-04 09 15 37" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/06aeb0f0-c79a-4dd2-af26-bfdd5cc4d630">
+<br>
+<img width="680" alt="截圖 2024-07-04 11 57 01" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/3bb66b9f-10e7-446d-8a7b-b84b72dc3dd1">
+
 
 > Note: Render's free plan includes periodic sleeping, causing delayed responses. We use a cron job to wake up the website and Line bot every ten minutes. If inactive, this may lead to server dormancy.
 
@@ -55,14 +66,14 @@ A project to realize our investment strategy
 - **backtrader**
 
 ## Web Scraping and API Interaction
-- **requests** (again, already listed)
+- **requests**
 
 ## Asynchronous Task Management
 - **celery**
 - **redis**
 
-## Development Environment (not for deploy)
-### Install Docker (Windows, Linux, macOS)
+# Development Environment (not for deploy)
+## Install Docker (Windows, Linux, macOS)
 
 Run the following command in the project directory to create containers:
 - **dev_env**: Virtual Environment: ccclub
@@ -70,14 +81,14 @@ Run the following command in the project directory to create containers:
 ```bash
 docker compose up --build -d
 ```
-### IDE: VScode
+## IDE: VScode
 1. Launch VS Code.
 2. Open the command palette:
    - **Windows/Linux**: Ctrl+Shift+P
    - **macOS**: Shift+Command+P
 3. Type and select Dev Containers: Attach to Running Container....
 4. From the list, choose your `dev_env` container.
-### IDE: Jupyter Lab Desktop
+## IDE: Jupyter Lab Desktop
 1. Copy the script from the `docker/scripts` folder to your desired location:
    - **Windows**: Copy `open_jupyterlab.bat`
    - **macOS/Linux**: Copy `open_jupyterlab.sh`
