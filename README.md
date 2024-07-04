@@ -14,9 +14,17 @@ A project to realize our investment strategy
 <img width="759" alt="截圖 2024-07-04 08 48 03" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/2d683b02-c2b5-4ca9-9ac2-20f5c68e97d3">
 
 # ETFExplorer (Deploy on Render)
+
 [Demo Website](https://ccclub-investmentproject-9ika.onrender.com/)
 
 [Demo API](https://backtest-kk2m.onrender.com/apidocs/)
+
+<img width="1410" alt="截圖 2024-07-04 11 02 39" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/d148ddef-1ff6-4e68-8a58-ea198086a878">
+
+<img width="1408" alt="截圖 2024-07-04 11 04 49" src="https://github.com/ccClub-Investment-Project/ccClub_InvestmentProject/assets/71652287/15b13051-3b0a-44ca-8a09-defd3e58bb2d">
+
+
+
 
 > Note: Render periodically resets the SQL database, which may cause the demo to fail.
 
