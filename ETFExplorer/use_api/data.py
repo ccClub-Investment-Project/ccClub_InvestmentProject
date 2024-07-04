@@ -1,6 +1,6 @@
 import requests
 import yfinance
-
+import time
 URL_BASE = "https://backtest-kk2m.onrender.com"
 URL_TABLE = f"{URL_BASE}/tables"
 URL_Strategy = f"{URL_BASE}/strategy"
