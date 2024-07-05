@@ -75,39 +75,80 @@
       var selectElement = document.getElementById("dividendRate");
       const yieldTable = document.getElementById('yieldTable');
 
-      // 預設選擇 5%
+      // 預設選擇 4%
       selectElement.value = "5";
+
+      // 創建加載中提示元素
+      const loadingMessage = document.createElement('div');
+      loadingMessage.id = 'loadingMessage';
+      loadingMessage.innerText = '加載中，請稍候...';
+      loadingMessage.style.display = 'none';
+      loadingMessage.style.position = 'fixed';
+      loadingMessage.style.top = '50%';
+      loadingMessage.style.left = '50%';
+      loadingMessage.style.transform = 'translate(-50%, -50%)';
+      loadingMessage.style.padding = '10px';
+      loadingMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+      loadingMessage.style.color = 'white';
+      loadingMessage.style.borderRadius = '5px';
+      loadingMessage.style.zIndex = '9999';
+      document.body.appendChild(loadingMessage);
 
       // 監聽下拉式選單的 change 事件
       selectElement.addEventListener("change", function () {
-        var selectedRate = parseInt(selectElement.value); // 獲取選中的殖利率並轉為數字
-        fetch(`/update_yield?value=${selectedRate}`, {
-          method: 'GET',
-        })
-          .then(response => response.json())
-          .then(data => {
-            updateYieldTable(data);
-          })
-          .catch(error => console.error('Error:', error));
+        var selectedRate = parseInt(selectElement.value);
+        const previousValue = selectElement.getAttribute('data-previous-value') || "4";
+        selectElement.setAttribute('data-previous-value', selectedRate);
 
-        // Fetch updated plot data
-        fetch(`/update_plot?value=${selectedRate}`, {
-          method: 'GET',
-        })
-          .then(response => response.json())
-          .then(graphJSON1 => {
-            updatePlot(graphJSON1);
+        const controller = new AbortController();
+        const timeoutDuration = 20000;
+        const timeoutId = setTimeout(() => controller.abort(), timeoutDuration);
+
+        loadingMessage.style.display = 'block';
+        console.log('Loading message should be visible now');
+
+        const startTime = Date.now();
+
+        Promise.all([
+          fetch(`/update_yield?value=${selectedRate}`, {
+            method: 'GET',
+            signal: controller.signal
+          }).then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+          }),
+          fetch(`/update_plot?value=${selectedRate}`, {
+            method: 'GET',
+            signal: controller.signal
+          }).then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
           })
-          .catch(error => console.error('Error:', error));
-        // 檢查是否大於 8%，如果是則觸發 alert
-        //if (selectedRate > 8) {
-        //  alert("已選擇大於 8% 的殖利率");
-        //}
+        ]).then(([yieldData, plotData]) => {
+          updateYieldTable(yieldData);
+          updatePlot(plotData);
+        }).catch(error => {
+          if (error.name === 'AbortError') {
+            console.error('Request timed out');
+            alert('Request timed out, please try again later');
+          } else {
+            console.error('Error fetching data:', error);
+            alert('Error fetching data, please try again later');
+          }
+          // 重置選擇值為之前的值
+          selectElement.value = previousValue;
+          console.log('Select value reset to:', previousValue);
+        }).finally(() => {
+          clearTimeout(timeoutId);
+          const elapsedTime = Date.now() - startTime;
+          const remainingTime = Math.max(0, 500 - elapsedTime);
+
+          setTimeout(() => {
+            loadingMessage.style.display = 'none';
+            console.log('Loading message should be hidden now');
+          }, remainingTime);
+        });
       });
-
-
-
-
     });
 
     function formatNumber(value, decimals = 2, asPercentage = true) {
@@ -116,7 +157,6 @@
       }
       return value.toFixed(decimals);
     }
-
 
     function updateYieldTable(data) {
       const table = document.getElementById('yieldTable');
