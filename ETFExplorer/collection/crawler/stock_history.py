@@ -8,7 +8,7 @@ def fetch_stock_data(stock_id):
     return df
 
 def get_history(codes):
-    all_yield = load_data("all_yield")
+    # all_yield = load_data("all_yield")
     tpex_listed = load_data("tpex_listed")
     twse_listed = load_data("twse_listed")
     # 將代號轉換為數字
@@ -29,4 +29,14 @@ def get_history(codes):
         df = fetch_stock_data(stock_id)
         all_history[stock_id] = df
         # all_yield = load_data("all_yield")
+    return all_history
+
+def get_etf_history():
+    etf_domestic_list = load_data("etf_domestic_list")
+    all_history = {}
+    for etf in etf_domestic_list:
+        code = etf['code']
+        stock_id = f"{code}.TW"
+        df = fetch_stock_data(stock_id)
+        all_history[stock_id] = df
     return all_history

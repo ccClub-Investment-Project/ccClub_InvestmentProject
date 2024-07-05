@@ -2,7 +2,7 @@ from collection.api_data import get_news_data, api_table_data, get_strategy_yiel
 
 from app_tools.pickle_handler import save_data, load_data
 from collection.crawler.stock_list import get_twse, get_tpex
-from collection.crawler.stock_history import get_history
+from collection.crawler.stock_history import get_history, get_etf_history
 
 import pandas as pd
 
@@ -30,5 +30,8 @@ def update_from_crawler():
     codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in all_yield]
     all_history = get_history(codes)
     save_data(all_history,'all_history')
+    all_etf_history = get_etf_history()
+    save_data(all_etf_history,'all_etf_history')
+
 
     print("從crawler下載完畢並存至pickle")

@@ -5,7 +5,7 @@
 from flask import render_template, redirect, url_for, request, jsonify
 from datetime import datetime
 import logging, time
-from app_tools.plot_creation import plot_chart, create_plot2
+from app_tools.plot_creation import plot_chart1, plot_chart2
 # 預先把資料讀進來
 import preload.data_loader as loader
 loader.initialize_data()
@@ -41,7 +41,7 @@ def init_routes(app, cache):
     @app.route('/update_plot')
     def update_plot():
         value = request.args.get('value', type=int)
-        future = executor.submit(plot_chart, value)
+        future = executor.submit(plot_chart1, value)
         try:
             graphJSON1 = future.result(timeout=10000)  # 10 秒超時
             return graphJSON1
@@ -61,14 +61,13 @@ def init_routes(app, cache):
         strategy_yield_count = len(get_strategy_yield(5))
 
         return render_template('app.html',
-            graphJSON1= plot_chart(5),
-            graphJSON2= create_plot2(),
+            graphJSON1= plot_chart1(5),
+            graphJSON2= plot_chart2(),
             etf_domestic_list = loader.etf_domestic_list,
             etf_performance = loader.etf_performance,
             etf_domestic_count = etf_domestic_count,
             strategy_yield_count = strategy_yield_count,
             news_list=news, 
-            # strategy_basic = get_strategy_basic,
             strategy_yield = get_strategy_yield,
             )
 
