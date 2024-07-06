@@ -37,7 +37,6 @@ def init_routes(app, cache):
         # 將更新後的數據轉換為 JSON 格式
         return jsonify(updated_data)
 
-    @cache.memoize(timeout=86400)
     @app.route('/update_plot')
     def update_plot():
         value = request.args.get('value', type=int)
