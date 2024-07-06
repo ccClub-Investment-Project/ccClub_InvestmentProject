@@ -6,7 +6,6 @@ from collection.crawler.stock_history import get_history, get_etf_history
 
 import pandas as pd
 
-
 def update_from_api():
     # 從api 更新數據 並存至pickle
     etf_domestic_list = api_table_data('etf_domestic_list')
@@ -32,6 +31,5 @@ def update_from_crawler():
     save_data(all_history,'all_history')
     all_etf_history = get_etf_history()
     save_data(all_etf_history,'all_etf_history')
-
 
     print("從crawler下載完畢並存至pickle")

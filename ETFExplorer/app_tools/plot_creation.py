@@ -7,13 +7,13 @@ import yfinance as yf
 # from collection.api_data import api_table_data, get_strategy_yield
 # from app_tools.pickle_handler import save_data, load_data
 import pandas as pd
-import preload.data_loader as loader
-loader.initialize_data()
+# import preload.data_loader as loader
+# loader.initialize_data()
 
-def fetch_stock_data(stock_id):
-    df = yf.download(stock_id)
-    df.reset_index(inplace=True)
-    return df
+# def fetch_stock_data(stock_id):
+#     df = yf.download(stock_id)
+#     df.reset_index(inplace=True)
+#     return df
 
 # def create_plot1(min_yield=5):
 #     strategy_yield_list = get_strategy_yield(min_yield)
@@ -122,7 +122,7 @@ def fetch_stock_data(stock_id):
 #     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 #     return graphJSON
 
-def plot_chart1(value=5):
+def plot_chart1(loader, value=5):
 
     # all_yield = load_data('all_yield')
     filter_yield = [item for item in loader.all_yield if item['現金殖利率'] > (value/100)]
@@ -162,7 +162,7 @@ def plot_chart1(value=5):
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-def plot_chart2():
+def plot_chart2(loader):
     # etf_domestic_list = api_table_data('etf_domestic_list')
     fig = px.line()
 

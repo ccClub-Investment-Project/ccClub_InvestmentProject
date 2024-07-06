@@ -4,7 +4,6 @@ from collection.api_data import get_news_data, api_table_data, get_strategy_yiel
 # from app_tools.plot_creation import create_plot2
 from app_tools.pickle_handler import save_data, load_data
 
-
 etf_domestic_list = None
 etf_performance = None
 twse_listed = None
