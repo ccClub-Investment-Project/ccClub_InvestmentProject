@@ -216,14 +216,13 @@
       }
     }
   </script>
-  <!-- 繪圖 -->
+  <!-- 繪圖 chart 1 -->
+  <!--
   <script>
     document.addEventListener('DOMContentLoaded', (event) => {
       var graphJSON1 = {{ graphJSON1 | safe
     }};
-    var graphJSON2 = {{ graphJSON2 | safe }};
     console.log(graphJSON1);
-    console.log(graphJSON2);
 
     var layout1 = graphJSON1.layout || {};
     layout1.autosize = true;
@@ -239,6 +238,18 @@
     } else {
       console.error("Graph data is empty or invalid");
     }
+
+    });
+  </script>
+  -->
+
+  <!-- 繪圖 chart 2 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+
+      var graphJSON2 = {{ graphJSON2 | safe
+    }};
+    console.log(graphJSON2);
 
     var layout2 = graphJSON2.layout || {};
     layout2.autosize = true;
@@ -256,8 +267,6 @@
     }
     });
   </script>
-
-
 
 </body>
 

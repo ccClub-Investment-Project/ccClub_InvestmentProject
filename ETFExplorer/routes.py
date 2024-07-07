@@ -40,15 +40,14 @@ def init_routes(app, cache):
     @app.route('/update_plot')
     def update_plot():
         value = request.args.get('value', type=int)
-        future = executor.submit(plot_chart1, loader, value)
-        try:
-            graphJSON1 = future.result(timeout=10000)  # 10 秒超時
-            return graphJSON1
-        except TimeoutError:
-            return {"error": "處理超時"}
-        # graphJSON1 = plot_chart(value)
-        # graphJSON1 = create_newplot(all_plot_data, all_yield, value)
-        # return graphJSON1
+        # future = executor.submit(plot_chart1, loader, value)
+        # try:
+            # graphJSON1 = future.result(timeout=10000)  # 10 秒超時
+            # return graphJSON1
+        # except TimeoutError:
+            # return {"error": "處理超時"}
+        graphJSON1 = plot_chart1(loader, value)
+        return graphJSON1
 
     @app.route('/')
     def index():
@@ -60,7 +59,7 @@ def init_routes(app, cache):
         strategy_yield_count = len(get_strategy_yield(5))
 
         return render_template('app.html',
-            graphJSON1= plot_chart1(loader, 5),
+            # graphJSON1= plot_chart1(loader, 5),
             graphJSON2= plot_chart2(loader),
             etf_domestic_list = loader.etf_domestic_list,
             etf_performance = loader.etf_performance,

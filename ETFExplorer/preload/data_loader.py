@@ -24,9 +24,9 @@ def initialize_data():
     global all_yield, all_history, all_etf_history
     all_yield = load_data('all_yield')
     # 此檔案太大 可能有問題？變成撈取爬蟲的方式 (原本是讀取檔案的方式)
-    # all_history = load_data('all_history')
-    codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in all_yield]
-    all_history = get_history(codes)
+    all_history = load_data('all_history')
+    # codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in all_yield]
+    # all_history = get_history(codes)
     all_etf_history = load_data('all_etf_history')
     # 即時更新
     global news
