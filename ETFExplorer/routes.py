@@ -59,8 +59,8 @@ def init_routes(app, cache):
         strategy_yield_count = len(get_strategy_yield(5))
 
         return render_template('app.html',
-            # graphJSON1= plot_chart1(loader, 5),
-            # graphJSON2= plot_chart2(loader),
+            graphJSON1= plot_chart1(loader, 5),
+            graphJSON2= plot_chart2(loader),
             etf_domestic_list = loader.etf_domestic_list,
             etf_performance = loader.etf_performance,
             etf_domestic_count = etf_domestic_count,
