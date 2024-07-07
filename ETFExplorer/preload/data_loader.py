@@ -27,7 +27,7 @@ def initialize_data():
     # all_history = load_data('all_history')
     # codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in all_yield]
     # all_history = get_history(codes)
-    all_etf_history = load_data('all_etf_history')
+    # all_etf_history = load_data('all_etf_history')
     # 即時更新
     global news
     news = get_news_data('台股,美股', True, 25)

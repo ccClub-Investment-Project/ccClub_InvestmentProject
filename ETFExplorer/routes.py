@@ -60,7 +60,7 @@ def init_routes(app, cache):
 
         return render_template('app.html',
             # graphJSON1= plot_chart1(loader, 5),
-            graphJSON2= plot_chart2(loader),
+            # graphJSON2= plot_chart2(loader),
             etf_domestic_list = loader.etf_domestic_list,
             etf_performance = loader.etf_performance,
             etf_domestic_count = etf_domestic_count,
