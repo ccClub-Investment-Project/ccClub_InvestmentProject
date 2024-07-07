@@ -122,16 +122,16 @@ import pandas as pd
 #     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 #     return graphJSON
 
-def plot_chart1(loader, value=5):
+def plot_chart1(all_yield, all_history, value=5):
 
     # all_yield = load_data('all_yield')
-    filter_yield = [item for item in loader.all_yield if item['現金殖利率'] > (value/100)]
+    filter_yield = [item for item in all_yield if item['現金殖利率'] > (value/100)]
     # codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in filter_yield]
     codes = set(int(stock['代號']) for stock in filter_yield)
 
     # all_history = load_data('all_history')
     # 根據 codes 生成新的字典
-    filtered_dict = {key: value for key, value in loader.all_history.items() if int(key.split('.')[0]) in codes}
+    filtered_dict = {key: value for key, value in all_history.items() if int(key.split('.')[0]) in codes}
     # matching_keys = [key for key in all_history.keys() if key.split('.')[0] in codes]
 
     fig = px.line()
@@ -162,11 +162,11 @@ def plot_chart1(loader, value=5):
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-def plot_chart2(loader):
+def plot_chart2(all_etf_history):
     # etf_domestic_list = api_table_data('etf_domestic_list')
     fig = px.line()
 
-    for stock_id, df in loader.all_etf_history.items():
+    for stock_id, df in all_etf_history.items():
         fig.add_scatter(x=df['Date'], y=df['Close'],
                     mode='lines', name=stock_id)
     

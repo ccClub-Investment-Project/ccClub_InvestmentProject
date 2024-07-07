@@ -97,7 +97,7 @@
       // 監聽下拉式選單的 change 事件
       selectElement.addEventListener("change", function () {
         var selectedRate = parseInt(selectElement.value);
-        const previousValue = selectElement.getAttribute('data-previous-value') || "4";
+        const previousValue = selectElement.getAttribute('data-previous-value') || "5";
         selectElement.setAttribute('data-previous-value', selectedRate);
 
         const controller = new AbortController();
@@ -141,7 +141,8 @@
         }).finally(() => {
           clearTimeout(timeoutId);
           const elapsedTime = Date.now() - startTime;
-          const remainingTime = Math.max(0, 500 - elapsedTime);
+          const minimumWaitTime = 1000;  // 最少等待時間為1秒
+          const remainingTime = Math.max(0, minimumWaitTime - elapsedTime);
 
           setTimeout(() => {
             loadingMessage.style.display = 'none';

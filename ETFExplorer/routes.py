@@ -7,8 +7,8 @@ from datetime import datetime
 import logging, time
 from app_tools.plot_creation import plot_chart1, plot_chart2
 # 預先把資料讀進來
-import preload.data_loader as loader
-loader.initialize_data()
+from preload.data_loader import all_yield,etf_domestic_list, etf_performance,all_history, all_etf_history
+# loader.initialize_data()
 
 # from preload.data_loader import etf_domestic_list, etf_performance, graphJSON1, graphJSON2 # 导入预先加载的数据
 from collection.api_data import get_news_data, get_strategy_yield
@@ -32,11 +32,12 @@ def init_routes(app, cache):
         # 調用 get_strategy_yield 函數，傳入選擇的值
         # updated_data = get_strategy_yield(value)
         # 加速顯示
-        updated_data = [item for item in loader.all_yield if item['現金殖利率'] > (value/100)]
+        updated_data = [item for item in all_yield if item['現金殖利率'] > (value/100)]
 
         # 將更新後的數據轉換為 JSON 格式
         return jsonify(updated_data)
 
+    @cache.cached(timeout=86400)
     @app.route('/update_plot')
     def update_plot():
         value = request.args.get('value', type=int)
@@ -46,7 +47,7 @@ def init_routes(app, cache):
             # return graphJSON1
         # except TimeoutError:
             # return {"error": "處理超時"}
-        graphJSON1 = plot_chart1(loader, value)
+        graphJSON1 = plot_chart1(all_yield, all_history, value)
         return graphJSON1
 
     @app.route('/')
@@ -54,15 +55,15 @@ def init_routes(app, cache):
         # 讀取資料
         news = get_news()
         # 計算ETF數量
-        etf_domestic_count = len(loader.etf_domestic_list)
+        etf_domestic_count = len(etf_domestic_list)
         # 計算策略篩選出來數量
         strategy_yield_count = len(get_strategy_yield(5))
 
         return render_template('app.html',
-            graphJSON1= plot_chart1(loader, 5),
-            graphJSON2= plot_chart2(loader),
-            etf_domestic_list = loader.etf_domestic_list,
-            etf_performance = loader.etf_performance,
+            graphJSON1= plot_chart1(all_yield, all_history, 5),
+            graphJSON2= plot_chart2(all_etf_history),
+            etf_domestic_list = etf_domestic_list,
+            etf_performance = etf_performance,
             etf_domestic_count = etf_domestic_count,
             strategy_yield_count = strategy_yield_count,
             news_list=news, 
