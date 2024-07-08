@@ -2,7 +2,7 @@
 # setup_project_root()
 
 # 定義路由和視圖函數
-from flask import render_template, redirect, url_for, request, jsonify
+from flask import render_template, redirect, url_for, request, jsonify, Blueprint
 from datetime import datetime
 import logging, time
 from app_tools.plot_creation import plot_chart1, plot_chart2
@@ -15,8 +15,11 @@ from collection.api_data import get_news_data, get_strategy_yield
 from concurrent.futures import ThreadPoolExecutor
 executor = ThreadPoolExecutor(max_workers=2)
 
+# 創建一個藍圖（Blueprint）
+main = Blueprint('main', __name__)
 
-def init_routes(app, cache):
+
+def configure_routes(app, cache):
 
     @app.route("/keep_alive")
     def test():
@@ -37,7 +40,6 @@ def init_routes(app, cache):
         # 將更新後的數據轉換為 JSON 格式
         return jsonify(updated_data)
 
-    @cache.cached(timeout=86400)
     @app.route('/update_plot')
     def update_plot():
         value = request.args.get('value', type=int)
@@ -84,3 +86,4 @@ def init_routes(app, cache):
     # 添加自定义过滤器到Jinja2环境
     app.jinja_env.filters['datetimeformat'] = datetimeformat
 
+    app.register_blueprint(main)
