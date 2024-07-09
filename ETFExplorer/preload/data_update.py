@@ -33,8 +33,8 @@ def update_from_crawler():
 
     # 保留每個 DataFrame 中的 date 和 close 欄位，並限制日期在過去 10 年內
     def filter_df(df):
-        if {'date', 'close'}.issubset(df.columns):
-            df['date'] = pd.to_datetime(df['date'])
+        if {'Date', 'Close'}.issubset(df.columns):
+            df['Date'] = pd.to_datetime(df['Date'])
             return df[(df['Date'] >= ten_years_ago)][['Date', 'Close']]
         return df
 

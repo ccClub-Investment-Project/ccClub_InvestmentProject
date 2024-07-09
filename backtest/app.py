@@ -9,9 +9,9 @@ etflinebot_path = os.path.join(project_root, 'ETFLinebot')
 print(etflinebot_path)
 sys.path.append(etflinebot_path)
 
-# etfexplorer_path = os.path.join(project_root, 'ETFExplorer')
-# print(etfexplorer_path)
-# sys.path.append(etfexplorer_path)
+etfexplorer_path = os.path.join(project_root, 'ETFExplorer')
+print(etfexplorer_path)
+sys.path.append(etfexplorer_path)
 
 import news, consolidate3
 
@@ -24,7 +24,7 @@ import os, json
 from backtest_manager import BacktestManager
 from data import get_json
 
-# from app_tools.pickle_handler import load_data
+from app_tools.pickle_handler import load_data
 
 app = Flask(__name__)
 swagger = Swagger(app)
@@ -162,7 +162,11 @@ def get_strategy_yield():
 
     return jsonify(df.to_dict(orient='records'))
 
-
+@app.route('/all_etf_history',methods=['GET'])
+def get_all_etf_history():
+    data = load_data("all_etf_history")
+    data_dict = {key: df.to_dict(orient='records') for key, df in data.items()}
+    return jsonify(data_dict)
 
 
 
