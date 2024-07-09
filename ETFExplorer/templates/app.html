@@ -101,7 +101,7 @@
         selectElement.setAttribute('data-previous-value', selectedRate);
 
         const controller = new AbortController();
-        const timeoutDuration = 20000;
+        const timeoutDuration = 30000;
         const timeoutId = setTimeout(() => controller.abort(), timeoutDuration);
 
         loadingMessage.style.display = 'block';

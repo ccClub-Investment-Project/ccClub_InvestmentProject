@@ -126,8 +126,8 @@ def plot_chart1(value=5):
     all_yield = load_data('all_yield')
     filter_yield_df = all_yield.loc[all_yield['現金殖利率'] > (value / 100)]
     filter_yield = filter_yield_df.to_dict(orient='records')
-    codes = set(str(stock['code']) for stock in filter_yield)
-    # codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in filter_yield]
+    # codes = set(str(stock['code']) for stock in filter_yield)
+    codes = [str(stock['code']) for stock in filter_yield]
 
     fig = px.line()
     all_dfs = load_data("all_history")
