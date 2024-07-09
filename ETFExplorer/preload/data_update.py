@@ -47,7 +47,7 @@ def update_from_crawler():
     all_history = get_history(codes)
     all_history_filter = {key: filter_df(df) for key, df in all_history.items()}
     all_history_code = list(all_history_filter.keys())
-    save_data(all_history_code,'all_history_code')
+    save_data(all_history_code,'all_code')
     save_data(all_history_filter,'all_history')
     # chart 2 
     all_etf_history = get_etf_history()

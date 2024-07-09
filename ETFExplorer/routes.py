@@ -42,7 +42,7 @@ def configure_routes(app, cache):
     @app.route('/update_plot')
     def update_plot():
         value = request.args.get('value', type=int)
-        graphJSON1 = plot_chart1(all_yield, all_history, value)
+        graphJSON1 = plot_chart1(value)
         return graphJSON1
 
     @app.route('/')
@@ -55,7 +55,7 @@ def configure_routes(app, cache):
         strategy_yield_count = len(get_strategy_yield(5))
 
         return render_template('app.html',
-            graphJSON1= plot_chart1(all_yield, all_history, 5),
+            graphJSON1= plot_chart1(5),
             graphJSON2= plot_chart2(),
             etf_domestic_list = etf_domestic_list,
             etf_performance = etf_performance,
