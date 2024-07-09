@@ -165,9 +165,18 @@ def get_strategy_yield():
 @app.route('/all_etf_history',methods=['GET'])
 def get_all_etf_history():
     data = load_data("all_etf_history")
-    data_dict = {key: df.to_dict(orient='records') for key, df in data.items()}
-    return jsonify(data_dict)
+    code = request.args.get('code')
 
+    if code:
+        if code in data:
+            df = data[code]
+            return jsonify(df.to_dict(orient='records'))
+        else:
+            return jsonify({"error": f"Data for {code} not found"}), 404
+    else:
+        # 如果未提供 etf_code，返回所有數據
+        data_dict = {key: df.to_dict(orient='records') for key, df in data.items()}
+        return jsonify(data_dict)
 
 
 if __name__ == "__main__":

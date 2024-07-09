@@ -12,8 +12,7 @@ from preload.data_loader import all_yield,etf_domestic_list, etf_performance,all
 
 # from preload.data_loader import etf_domestic_list, etf_performance, graphJSON1, graphJSON2 # 导入预先加载的数据
 from collection.api_data import get_news_data, get_strategy_yield
-from concurrent.futures import ThreadPoolExecutor
-executor = ThreadPoolExecutor(max_workers=2)
+
 
 # 創建一個藍圖（Blueprint）
 main = Blueprint('main', __name__)
@@ -43,12 +42,6 @@ def configure_routes(app, cache):
     @app.route('/update_plot')
     def update_plot():
         value = request.args.get('value', type=int)
-        # future = executor.submit(plot_chart1, loader, value)
-        # try:
-            # graphJSON1 = future.result(timeout=10000)  # 10 秒超時
-            # return graphJSON1
-        # except TimeoutError:
-            # return {"error": "處理超時"}
         graphJSON1 = plot_chart1(all_yield, all_history, value)
         return graphJSON1
 
