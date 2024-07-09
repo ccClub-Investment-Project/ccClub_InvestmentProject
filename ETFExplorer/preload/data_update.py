@@ -46,7 +46,8 @@ def update_from_crawler():
     codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in all_yield]
     all_history = get_history(codes)
     all_history_filter = {key: filter_df(df) for key, df in all_history.items()}
-
+    all_history_code = list(all_history_filter.keys())
+    save_data(all_history_code,'all_history_code')
     save_data(all_history_filter,'all_history')
     # chart 2 
     all_etf_history = get_etf_history()

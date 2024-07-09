@@ -9,7 +9,7 @@ import plotly.express as px
 import pandas as pd
 # import preload.data_loader as loader
 # loader.initialize_data()
-from collection.api_data import api_table_data, api_etf_history, api_etf_code
+from collection.api_data import api_table_data, api_etf_history, api_etf_code, api_code,api_history
 # def fetch_stock_data(stock_id):
 #     df = yf.download(stock_id)
 #     df.reset_index(inplace=True)
@@ -122,25 +122,36 @@ from collection.api_data import api_table_data, api_etf_history, api_etf_code
 #     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 #     return graphJSON
 
-def plot_chart1(all_yield, all_history, value=5):
+def plot_chart1(value=5):
 
-    # all_yield = load_data('all_yield')
-    filter_yield = [item for item in all_yield if item['現金殖利率'] > (value/100)]
-    # codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in filter_yield]
-    codes = set(int(stock['代號']) for stock in filter_yield)
-
-    # all_history = load_data('all_history')
-    # 根據 codes 生成新的字典
-    filtered_dict = {key: value for key, value in all_history.items() if int(key.split('.')[0]) in codes}
-    # matching_keys = [key for key in all_history.keys() if key.split('.')[0] in codes]
+    codes = api_code() 
 
     fig = px.line()
+
+    for code in codes:
+        data = api_history(code)
+        df = pd.DataFrame(data)
+
+        df['Date'] = pd.to_datetime(df['Date'], format="%a, %d %b %Y %H:%M:%S GMT")
+        fig.add_scatter(x=df['Date'], y=df['Close'],
+                mode='lines', name=code)
+    
+    # # all_yield = load_data('all_yield')
+    # filter_yield = [item for item in all_yield if item['現金殖利率'] > (value/100)]
+    # # codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in filter_yield]
+    # codes = set(int(stock['代號']) for stock in filter_yield)
+
+    # # all_history = load_data('all_history')
+    # # 根據 codes 生成新的字典
+    # filtered_dict = {key: value for key, value in all_history.items() if int(key.split('.')[0]) in codes}
+    # # matching_keys = [key for key in all_history.keys() if key.split('.')[0] in codes]
+
 
     # for stock_id, df in filtered_dict.items():
     #     fig.add_scatter(x=df['Date'], y=df['Close'],
     #                 mode='lines', name=stock_id)
-    df_combined = pd.concat([df.assign(stock_id=key) for key, df in filtered_dict.items()])
-    fig = px.line(df_combined, x='Date', y='Close', color='stock_id')
+    # df_combined = pd.concat([df.assign(stock_id=key) for key, df in filtered_dict.items()])
+    # fig = px.line(df_combined, x='Date', y='Close', color='stock_id')
 
 
     fig.update_layout(

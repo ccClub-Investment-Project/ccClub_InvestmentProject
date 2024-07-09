@@ -12,10 +12,28 @@ URL_Strategy = f"{URL_BASE}/strategy"
 session = requests.Session()
 
 
+# code: 2330.TW or 6XXX.TWO
+def api_history(code):
+    url = f"{URL_BASE}/all_history"
+    params = {'code': code}
+    try:
+        response = session.get(url,params=params, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"Error fetching table data: {e}")
+        return None
 
-
-
-
+def api_code():
+    url = f"{URL_BASE}/all_code"
+    try:
+        response = session.get(url, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"Error fetching table data: {e}")
+        return None
+    
 # code: 2330.TW or 6XXX.TWO
 def api_etf_history(code):
     url = f"{URL_BASE}/all_etf_history"

@@ -184,6 +184,28 @@ def get_all_etf_code():
     data = load_data("all_etf_code")
     return jsonify(data)
 
+
+@app.route('/all_history',methods=['GET'])
+def get_all_history():
+    data = load_data("all_history")
+    code = request.args.get('code')
+
+    if code:
+        if code in data:
+            df = data[code]
+            return jsonify(df.to_dict(orient='records'))
+        else:
+            return jsonify({"error": f"Data for {code} not found"}), 404
+    else:
+        # 如果未提供 etf_code，返回所有數據
+        data_dict = {key: df.to_dict(orient='records') for key, df in data.items()}
+        return jsonify(data_dict)
+
+@app.route('/all_code', methods=['GET'])
+def get_all_code():
+    data = load_data("all_code")
+    return jsonify(data)
+
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5555))
     app.run(host='0.0.0.0', port=port)
