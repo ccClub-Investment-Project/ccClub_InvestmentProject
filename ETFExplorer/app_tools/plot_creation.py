@@ -5,11 +5,11 @@ import plotly
 import plotly.express as px
 # import yfinance as yf
 # from collection.api_data import api_table_data, get_strategy_yield
-# from app_tools.pickle_handler import save_data, load_data
+from app_tools.pickle_handler import save_data, load_data
 import pandas as pd
 # import preload.data_loader as loader
 # loader.initialize_data()
-from collection.api_data import api_table_data, api_etf_history, api_etf_code, api_code,api_history
+from collection.api_data import api_table_data, api_etf_code, api_code
 # def fetch_stock_data(stock_id):
 #     df = yf.download(stock_id)
 #     df.reset_index(inplace=True)
@@ -123,22 +123,20 @@ from collection.api_data import api_table_data, api_etf_history, api_etf_code, a
 #     return graphJSON
 
 def plot_chart1(value=5):
-
-    codes = api_code() 
+    all_yield = load_data('all_yield')
+    filter_yield_df = all_yield.loc[all_yield['現金殖利率'] > (value / 100)]
+    filter_yield = filter_yield_df.to_dict(orient='records')
+    codes = set(str(stock['code']) for stock in filter_yield)
+    # codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in filter_yield]
 
     fig = px.line()
-
+    all_dfs = load_data("all_history")
     for code in codes:
-        data = api_history(code)
-        df = pd.DataFrame(data)
-
-        df['Date'] = pd.to_datetime(df['Date'], format="%a, %d %b %Y %H:%M:%S GMT")
+        df = all_dfs[code]
         fig.add_scatter(x=df['Date'], y=df['Close'],
                 mode='lines', name=code)
     
-    # # all_yield = load_data('all_yield')
-    # filter_yield = [item for item in all_yield if item['現金殖利率'] > (value/100)]
-    # # codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in filter_yield]
+    
     # codes = set(int(stock['代號']) for stock in filter_yield)
 
     # # all_history = load_data('all_history')
@@ -177,11 +175,10 @@ def plot_chart2():
     codes = api_etf_code()  
     fig = px.line()
 
-    for code in codes:
-        data = api_etf_history(code)
-        df = pd.DataFrame(data)
+    all_dfs = load_data("all_etf_history")
 
-        df['Date'] = pd.to_datetime(df['Date'], format="%a, %d %b %Y %H:%M:%S GMT")
+    for code in codes:
+        df = all_dfs[code]
         fig.add_scatter(x=df['Date'], y=df['Close'],
                 mode='lines', name=code)
 

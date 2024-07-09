@@ -184,7 +184,6 @@ def get_all_etf_code():
     data = load_data("all_etf_code")
     return jsonify(data)
 
-
 @app.route('/all_history',methods=['GET'])
 def get_all_history():
     data = load_data("all_history")

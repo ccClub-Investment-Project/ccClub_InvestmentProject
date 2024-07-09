@@ -34,7 +34,9 @@ def configure_routes(app, cache):
         # 調用 get_strategy_yield 函數，傳入選擇的值
         # updated_data = get_strategy_yield(value)
         # 加速顯示
-        updated_data = [item for item in all_yield if item['現金殖利率'] > (value/100)]
+        # updated_data = [item for item in all_yield if item['現金殖利率'] > (value/100)]
+        filtered_df = all_yield.loc[all_yield['現金殖利率'] > (value / 100)]
+        updated_data = filtered_df.to_dict(orient='records')
 
         # 將更新後的數據轉換為 JSON 格式
         return jsonify(updated_data)

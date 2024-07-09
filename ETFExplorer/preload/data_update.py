@@ -17,6 +17,20 @@ def update_from_api():
     save_data(etf_performance,'etf_performance')
     # 從api 更新數據 並存至pickle
     all_yield = get_strategy_yield(0)
+    all_yield = pd.DataFrame(all_yield)
+    twse_listed = load_data("twse_listed")
+    twse_codes = twse_listed['code'].tolist()
+    # 定義一個函數來轉換代號
+    def get_stock_id(code):
+        if str(code) in twse_codes:
+            return f"{code}.TW"
+        else:
+            return f"{code}.TWO"
+        
+    all_yield['code'] = all_yield['代號']
+    # 使用 apply 方法將每個代號轉換為相應的格式
+    all_yield['code'] = all_yield['code'].apply(get_stock_id)
+    # all_yield['code'] = all_yield['代號'].map(lambda x: f"{x}.{'TW' if x in twse_codes else 'TWO'}")
     save_data(all_yield,'all_yield')
     print("從api下載完畢並存至pickle")
 
@@ -37,8 +51,6 @@ def update_from_crawler():
             df['Date'] = pd.to_datetime(df['Date'])
             return df[(df['Date'] >= ten_years_ago)][['Date', 'Close']]
         return df
-
-
 
 
     # 下載前四個條件篩選的資料
