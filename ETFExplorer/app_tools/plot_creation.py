@@ -9,7 +9,7 @@ import plotly.express as px
 import pandas as pd
 # import preload.data_loader as loader
 # loader.initialize_data()
-
+from collection.api_data import api_table_data, api_etf_history, api_etf_code
 # def fetch_stock_data(stock_id):
 #     df = yf.download(stock_id)
 #     df.reset_index(inplace=True)
@@ -162,13 +162,18 @@ def plot_chart1(all_yield, all_history, value=5):
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-def plot_chart2(all_etf_history):
-    # etf_domestic_list = api_table_data('etf_domestic_list')
+def plot_chart2():
+    codes = api_etf_code()  
     fig = px.line()
 
-    for stock_id, df in all_etf_history.items():
+    for code in codes:
+        df = api_etf_history[code]
         fig.add_scatter(x=df['Date'], y=df['Close'],
-                    mode='lines', name=stock_id)
+                mode='lines', name=code)
+
+    # for stock_id, df in all_etf_history.items():
+    #     fig.add_scatter(x=df['Date'], y=df['Close'],
+    #                 mode='lines', name=stock_id)
     
     fig.update_layout(
         xaxis=dict(

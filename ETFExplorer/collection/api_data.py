@@ -3,12 +3,36 @@ import time
 import yfinance as yf
 from requests.exceptions import RequestException
 
-URL_BASE = "https://backtest-kk2m.onrender.com"
+# URL_BASE = "https://backtest-kk2m.onrender.com"
+URL_BASE = "https://backtest-2.onrender.com/"
+
 URL_TABLE = f"{URL_BASE}/tables"
 URL_Strategy = f"{URL_BASE}/strategy"
 
 session = requests.Session()
 
+# code: 2330.TW or 6XXX.TWO
+def api_etf_history(code):
+    url = f"{URL_TABLE}/all_etf_history"
+    params = {'code': code}
+    try:
+        response = session.get(url,params=params, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"Error fetching table data: {e}")
+        return None
+
+def api_etf_code():
+    url = f"{URL_TABLE}/all_etf_code"
+    try:
+        response = session.get(url, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"Error fetching table data: {e}")
+        return None
+    
 def fetch_stock_data(stock_id):
     try:
         # print(f"Attempting to fetch data for {stock_id}")

@@ -48,8 +48,11 @@ def update_from_crawler():
     all_history_filter = {key: filter_df(df) for key, df in all_history.items()}
 
     save_data(all_history_filter,'all_history')
+    # chart 2 
     all_etf_history = get_etf_history()
     all_etf_history_filter = {key: filter_df(df) for key, df in all_etf_history.items()}
+    all_etf_code = list(all_etf_history_filter.keys())
+    save_data(all_etf_code,'all_etf_code')
     save_data(all_etf_history_filter,'all_etf_history')
 
     print("從crawler下載完畢並存至pickle")

@@ -56,7 +56,7 @@ def configure_routes(app, cache):
 
         return render_template('app.html',
             graphJSON1= plot_chart1(all_yield, all_history, 5),
-            graphJSON2= plot_chart2(all_etf_history),
+            graphJSON2= plot_chart2(),
             etf_domestic_list = etf_domestic_list,
             etf_performance = etf_performance,
             etf_domestic_count = etf_domestic_count,

@@ -179,6 +179,11 @@ def get_all_etf_history():
         return jsonify(data_dict)
 
 
+@app.route('/all_etf_code', methods=['GET'])
+def get_all_etf_code():
+    data = load_data("all_etf_code")
+    return jsonify(data)
+
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5555))
     app.run(host='0.0.0.0', port=port)
