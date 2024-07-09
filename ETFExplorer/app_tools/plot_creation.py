@@ -3,7 +3,7 @@
 import json
 import plotly
 import plotly.express as px
-import yfinance as yf
+# import yfinance as yf
 # from collection.api_data import api_table_data, get_strategy_yield
 # from app_tools.pickle_handler import save_data, load_data
 import pandas as pd

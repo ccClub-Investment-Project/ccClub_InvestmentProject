@@ -11,11 +11,11 @@ twse_listed = load_data('twse_listed')
 tpex_listed = load_data('tpex_listed')
 all_yield = load_data('all_yield')
 news = get_news_data('台股,美股', True, 25)
-
-codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in all_yield]
-all_history = get_history(codes)
-
-all_etf_history = get_etf_history()
+# codes = [pd.to_numeric(stock['代號'], errors='coerce') for stock in all_yield]
+# all_history = get_history(codes)
+all_history = load_data('all_history')
+# all_etf_history = get_etf_history()
+all_etf_history = load_data('all_etf_history')
 
 # 以下還沒處理
 # graphJSON1, graphJSON2 = None, None, None

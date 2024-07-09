@@ -9,8 +9,9 @@ etflinebot_path = os.path.join(project_root, 'ETFLinebot')
 print(etflinebot_path)
 sys.path.append(etflinebot_path)
 
-# sys.path.insert(0, project_root)
-# os.chdir(project_root)
+# etfexplorer_path = os.path.join(project_root, 'ETFExplorer')
+# print(etfexplorer_path)
+# sys.path.append(etfexplorer_path)
 
 import news, consolidate3
 
@@ -22,6 +23,9 @@ import os, json
 
 from backtest_manager import BacktestManager
 from data import get_json
+
+# from app_tools.pickle_handler import load_data
+
 app = Flask(__name__)
 swagger = Swagger(app)
 
@@ -157,6 +161,9 @@ def get_strategy_yield():
         return jsonify({"message": "没有符合条件的股票。"})
 
     return jsonify(df.to_dict(orient='records'))
+
+
+
 
 
 if __name__ == "__main__":
