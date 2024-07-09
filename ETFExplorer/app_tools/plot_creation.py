@@ -167,7 +167,10 @@ def plot_chart2():
     fig = px.line()
 
     for code in codes:
-        df = api_etf_history[code]
+        data = api_etf_history(code)
+        df = pd.DataFrame(data)
+
+        df['Date'] = pd.to_datetime(df['Date'], format="%a, %d %b %Y %H:%M:%S GMT")
         fig.add_scatter(x=df['Date'], y=df['Close'],
                 mode='lines', name=code)
 
