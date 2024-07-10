@@ -132,7 +132,7 @@ def get_strategy_yield(min_yield=5):
 
     url = f"{URL_Strategy}/yield"
     try:
-        response = session.get(url, params=params, timeout=10)
+        response = session.get(url, params=params, timeout=2000)
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:

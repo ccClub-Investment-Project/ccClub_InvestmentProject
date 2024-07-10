@@ -2,7 +2,7 @@
 # setup_project_root()
 
 # 定義路由和視圖函數
-from flask import render_template, redirect, url_for, request, jsonify, Blueprint
+from flask import render_template, redirect, url_for, request, jsonify, Blueprint, make_response
 from datetime import datetime
 import logging, time
 from app_tools.plot_creation import plot_chart1, plot_chart2
@@ -31,21 +31,38 @@ def configure_routes(app, cache):
     @app.route('/update_yield')
     def update_yield():
         value = request.args.get('value', type=int)
-        # 調用 get_strategy_yield 函數，傳入選擇的值
-        # updated_data = get_strategy_yield(value)
-        # 加速顯示
-        # updated_data = [item for item in all_yield if item['現金殖利率'] > (value/100)]
         filtered_df = all_yield.loc[all_yield['現金殖利率'] > (value / 100)]
+        filtered_df = filtered_df[['代號', '名稱', '現金殖利率']]
         updated_data = filtered_df.to_dict(orient='records')
-
         # 將更新後的數據轉換為 JSON 格式
         return jsonify(updated_data)
+
 
     @app.route('/update_plot')
     def update_plot():
         value = request.args.get('value', type=int)
+
+        # 檢查是否已有快取的結果
+        cache_key = f"update_plot_{value}"
+        cached_result = cache.get(cache_key)        
+        if cached_result:
+            return cached_result
+
+        # 沒有快取結果，生成圖表
         graphJSON1 = plot_chart1(value)
-        return graphJSON1
+        if not graphJSON1:
+            return jsonify({"error": "Failed to generate plot"}), 503
+
+        # 將結果包裝成 Flask 回應
+        response = make_response(graphJSON1)
+        response.headers['Content-Type'] = 'application/json'
+
+        # 快取成功的結果
+        cache.set(cache_key, response, timeout=86400)
+        return response
+    
+        # graphJSON1 = plot_chart1(value)
+        # return graphJSON1
 
     @app.route('/')
     def index():

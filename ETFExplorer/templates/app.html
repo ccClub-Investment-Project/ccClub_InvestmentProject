@@ -94,8 +94,24 @@
       loadingMessage.style.zIndex = '9999';
       document.body.appendChild(loadingMessage);
 
-      // 監聽下拉式選單的 change 事件
-      selectElement.addEventListener("change", function () {
+      async function fetchData(url, options) {
+        const maxRetries = 3;
+        let retries = 0;
+
+        while (retries < maxRetries) {
+          try {
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+          } catch (error) {
+            retries++;
+            if (retries === maxRetries) throw error;
+            await new Promise(resolve => setTimeout(resolve, 1000 * retries));
+          }
+        }
+      }
+
+      selectElement.addEventListener("change", async function () {
         var selectedRate = parseInt(selectElement.value);
         const previousValue = selectElement.getAttribute('data-previous-value') || "5";
         selectElement.setAttribute('data-previous-value', selectedRate);
@@ -109,25 +125,21 @@
 
         const startTime = Date.now();
 
-        Promise.all([
-          fetch(`/update_yield?value=${selectedRate}`, {
-            method: 'GET',
-            signal: controller.signal
-          }).then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-          }),
-          fetch(`/update_plot?value=${selectedRate}`, {
-            method: 'GET',
-            signal: controller.signal
-          }).then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-          })
-        ]).then(([yieldData, plotData]) => {
+        try {
+          const [yieldData, plotData] = await Promise.all([
+            fetchData(`/update_yield?value=${selectedRate}`, {
+              method: 'GET',
+              signal: controller.signal
+            }),
+            fetchData(`/update_plot?value=${selectedRate}`, {
+              method: 'GET',
+              signal: controller.signal
+            })
+          ]);
+
           updateYieldTable(yieldData);
           updatePlot(plotData);
-        }).catch(error => {
+        } catch (error) {
           if (error.name === 'AbortError') {
             console.error('Request timed out');
             alert('Request timed out, please try again later');
@@ -138,7 +150,7 @@
           // 重置選擇值為之前的值
           selectElement.value = previousValue;
           console.log('Select value reset to:', previousValue);
-        }).finally(() => {
+        } finally {
           clearTimeout(timeoutId);
           const elapsedTime = Date.now() - startTime;
           const minimumWaitTime = 1000;  // 最少等待時間為1秒
@@ -148,7 +160,7 @@
             loadingMessage.style.display = 'none';
             console.log('Loading message should be hidden now');
           }, remainingTime);
-        });
+        }
       });
     });
 
