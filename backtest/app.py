@@ -9,8 +9,9 @@ etflinebot_path = os.path.join(project_root, 'ETFLinebot')
 print(etflinebot_path)
 sys.path.append(etflinebot_path)
 
-# sys.path.insert(0, project_root)
-# os.chdir(project_root)
+etfexplorer_path = os.path.join(project_root, 'ETFExplorer')
+print(etfexplorer_path)
+sys.path.append(etfexplorer_path)
 
 import news, consolidate3
 
@@ -22,6 +23,9 @@ import os, json
 
 from backtest_manager import BacktestManager
 from data import get_json
+
+from app_tools.pickle_handler import load_data
+
 app = Flask(__name__)
 swagger = Swagger(app)
 
@@ -158,6 +162,48 @@ def get_strategy_yield():
 
     return jsonify(df.to_dict(orient='records'))
 
+@app.route('/all_etf_history',methods=['GET'])
+def get_all_etf_history():
+    data = load_data("all_etf_history")
+    code = request.args.get('code')
+
+    if code:
+        if code in data:
+            df = data[code]
+            return jsonify(df.to_dict(orient='records'))
+        else:
+            return jsonify({"error": f"Data for {code} not found"}), 404
+    else:
+        # 如果未提供 etf_code，返回所有數據
+        data_dict = {key: df.to_dict(orient='records') for key, df in data.items()}
+        return jsonify(data_dict)
+
+
+@app.route('/all_etf_code', methods=['GET'])
+def get_all_etf_code():
+    data = load_data("all_etf_code")
+    return jsonify(data)
+
+@app.route('/all_history',methods=['GET'])
+def get_all_history():
+    data = load_data("all_history")
+    code = request.args.get('code')
+
+    if code:
+        if code in data:
+            df = data[code]
+            return jsonify(df.to_dict(orient='records'))
+        else:
+            return jsonify({"error": f"Data for {code} not found"}), 404
+    else:
+        # 如果未提供 etf_code，返回所有數據
+        data_dict = {key: df.to_dict(orient='records') for key, df in data.items()}
+        return jsonify(data_dict)
+
+@app.route('/all_code', methods=['GET'])
+def get_all_code():
+    data = load_data("all_code")
+    return jsonify(data)
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5555))

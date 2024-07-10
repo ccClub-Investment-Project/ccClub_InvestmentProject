@@ -75,39 +75,93 @@
       var selectElement = document.getElementById("dividendRate");
       const yieldTable = document.getElementById('yieldTable');
 
-      // 預設選擇 5%
+      // 預設選擇 4%
       selectElement.value = "5";
 
-      // 監聽下拉式選單的 change 事件
-      selectElement.addEventListener("change", function () {
-        var selectedRate = parseInt(selectElement.value); // 獲取選中的殖利率並轉為數字
-        fetch(`/update_yield?value=${selectedRate}`, {
-          method: 'GET',
-        })
-          .then(response => response.json())
-          .then(data => {
-            updateYieldTable(data);
-          })
-          .catch(error => console.error('Error:', error));
+      // 創建加載中提示元素
+      const loadingMessage = document.createElement('div');
+      loadingMessage.id = 'loadingMessage';
+      loadingMessage.innerText = '加載中，請稍候...';
+      loadingMessage.style.display = 'none';
+      loadingMessage.style.position = 'fixed';
+      loadingMessage.style.top = '50%';
+      loadingMessage.style.left = '50%';
+      loadingMessage.style.transform = 'translate(-50%, -50%)';
+      loadingMessage.style.padding = '10px';
+      loadingMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+      loadingMessage.style.color = 'white';
+      loadingMessage.style.borderRadius = '5px';
+      loadingMessage.style.zIndex = '9999';
+      document.body.appendChild(loadingMessage);
 
-        // Fetch updated plot data
-        fetch(`/update_plot?value=${selectedRate}`, {
-          method: 'GET',
-        })
-          .then(response => response.json())
-          .then(graphJSON1 => {
-            updatePlot(graphJSON1);
-          })
-          .catch(error => console.error('Error:', error));
-        // 檢查是否大於 8%，如果是則觸發 alert
-        //if (selectedRate > 8) {
-        //  alert("已選擇大於 8% 的殖利率");
-        //}
+      async function fetchData(url, options) {
+        const maxRetries = 3;
+        let retries = 0;
+
+        while (retries < maxRetries) {
+          try {
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+          } catch (error) {
+            retries++;
+            if (retries === maxRetries) throw error;
+            await new Promise(resolve => setTimeout(resolve, 1000 * retries));
+          }
+        }
+      }
+
+      selectElement.addEventListener("change", async function () {
+        var selectedRate = parseInt(selectElement.value);
+        const previousValue = selectElement.getAttribute('data-previous-value') || "5";
+        selectElement.setAttribute('data-previous-value', selectedRate);
+
+        const controller = new AbortController();
+        const timeoutDuration = 30000;
+        const timeoutId = setTimeout(() => controller.abort(), timeoutDuration);
+
+        loadingMessage.style.display = 'block';
+        console.log('Loading message should be visible now');
+
+        const startTime = Date.now();
+
+        try {
+          const [yieldData, plotData] = await Promise.all([
+            fetchData(`/update_yield?value=${selectedRate}`, {
+              method: 'GET',
+              signal: controller.signal
+            }),
+            fetchData(`/update_plot?value=${selectedRate}`, {
+              method: 'GET',
+              signal: controller.signal
+            })
+          ]);
+
+          updateYieldTable(yieldData);
+          updatePlot(plotData);
+        } catch (error) {
+          if (error.name === 'AbortError') {
+            console.error('Request timed out');
+            alert('Request timed out, please try again later');
+          } else {
+            console.error('Error fetching data:', error);
+            alert('Error fetching data, please try again later');
+          }
+          // 重置選擇值為之前的值
+          selectElement.value = previousValue;
+          console.log('Select value reset to:', previousValue);
+        } finally {
+          clearTimeout(timeoutId);
+          const elapsedTime = Date.now() - startTime;
+          const minimumWaitTime = 1000;  // 最少等待時間為1秒
+          const remainingTime = Math.max(0, minimumWaitTime - elapsedTime);
+
+          setTimeout(() => {
+            loadingMessage.style.display = 'none';
+            console.log('Loading message should be hidden now');
+          }, remainingTime);
+        }
       });
-
-
-
-
     });
 
     function formatNumber(value, decimals = 2, asPercentage = true) {
@@ -116,7 +170,6 @@
       }
       return value.toFixed(decimals);
     }
-
 
     function updateYieldTable(data) {
       const table = document.getElementById('yieldTable');
@@ -176,14 +229,13 @@
       }
     }
   </script>
-  <!-- 繪圖 -->
+  <!-- 繪圖 chart 1 -->
+
   <script>
     document.addEventListener('DOMContentLoaded', (event) => {
       var graphJSON1 = {{ graphJSON1 | safe
     }};
-    var graphJSON2 = {{ graphJSON2 | safe }};
     console.log(graphJSON1);
-    console.log(graphJSON2);
 
     var layout1 = graphJSON1.layout || {};
     layout1.autosize = true;
@@ -199,6 +251,19 @@
     } else {
       console.error("Graph data is empty or invalid");
     }
+
+    });
+  </script>
+
+
+  <!-- 繪圖 chart 2 -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+
+      var graphJSON2 = {{ graphJSON2 | safe
+    }};
+    console.log(graphJSON2);
 
     var layout2 = graphJSON2.layout || {};
     layout2.autosize = true;
@@ -216,8 +281,6 @@
     }
     });
   </script>
-
-
 
 </body>
 
