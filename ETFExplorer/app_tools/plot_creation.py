@@ -5,6 +5,7 @@ import plotly
 import plotly.express as px
 import yfinance as yf
 from use_api.data import api_table_data, get_strategy_yield
+from app_tools.preload_data import save_data, load_data
 
 
 def fetch_stock_data(stock_id):
@@ -52,7 +53,8 @@ def create_plot1(min_yield=5):
     return graphJSON
 
 def create_plot2():
-    etf_domestic_list = api_table_data('etf_domestic_list')
+    # etf_domestic_list = api_table_data('etf_domestic_list')
+    etf_domestic_list = load_data('etf_domestic_list')
     fig = px.line()
 
     for etf in etf_domestic_list:

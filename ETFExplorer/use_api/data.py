@@ -4,6 +4,7 @@ import yfinance as yf
 from requests.exceptions import RequestException
 
 URL_BASE = "https://backtest-kk2m.onrender.com"
+# URL_BASE = "https://backtest-2.onrender.com"
 URL_TABLE = f"{URL_BASE}/tables"
 URL_Strategy = f"{URL_BASE}/strategy"
 
