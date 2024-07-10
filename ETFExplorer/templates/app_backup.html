@@ -1,286 +1,109 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ETF 換股策略</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/loading-bar.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/content-section.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/backtest-window.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/columns.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/tabs.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/change-stock-time.css') }}" />
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
-
-<body>
-  <div class="navbar">
-    <div class="logo">
-      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" />
-      <span>ETFExplore</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ETF 換股策略</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/common.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/navbar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/loading-bar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/content-section.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/backtest-window.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/columns.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/tabs.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/news.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/change-stock-time.css') }}"
+    />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" />
+        <span>ETFExplore</span>
+      </div>
     </div>
-  </div>
 
-  <div class="loading-bar-container">
-    <div class="loading-bar"></div>
-  </div>
+    <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+    </div>
 
-  <div class="content-section">
-    <div class="test">
-      <article class="left-column">
-        <div class="tab-box">
-          <div class="custom-tab" onclick="showDiv('01')">ETF換股預測</div>
-          <div class="custom-tab" onclick="showDiv('02')">定期定額回測</div>
-          <div class="custom-tab" onclick="showDiv('03')">策略 3</div>
-        </div>
-        {% include 'tabs/tab_01.html' %} {% include 'tabs/tab_02.html' %} {%
-        include 'tabs/tab_03.html' %} {% include 'backtest_window.html' %}
+    <div class="content-section">
+      <div class="test">
+        <article class="left-column">
+          <div class="tab-box">
+            <div class="custom-tab" onclick="showDiv('01')">ETF換股預測</div>
+            <div class="custom-tab" onclick="showDiv('02')">定期定額回測</div>
+            <div class="custom-tab" onclick="showDiv('03')">策略 3</div>
+          </div>
+          {% include 'tabs/tab_01.html' %} {% include 'tabs/tab_02.html' %} {%
+          include 'tabs/tab_03.html' %} {% include 'backtest_window.html' %}
+        </article>
+        {% include 'change_stock_time.html' %}
+      </div>
+
+      <article class="right-column">
+        <section class="news-rounded-box">
+          <h2>Latest News</h2>
+          <div id="news-container">
+            {% for news in news_list[:5] %} {% include 'news_block.html' %} {%
+            endfor %}
+          </div>
+        </section>
       </article>
-      {% include 'change_stock_time.html' %}
     </div>
 
-    <article class="right-column">
-      <section class="news-rounded-box">
-        <h2>Latest News</h2>
-        <div id="news-container">
-          {% for news in news_list[:5] %} {% include 'news_block.html' %} {%
-          endfor %}
-        </div>
-      </section>
-    </article>
-  </div>
+    <script src="{{ url_for('static', filename='js/loading-bar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/render-graphs.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/toggle-backtest-window.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/show-div.js') }}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        var graphJSON = {{ graphJSON | safe }};
+        console.log(graphJSON);
 
-  <script src="{{ url_for('static', filename='js/loading-bar.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/render-graphs.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/toggle-backtest-window.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/show-div.js') }}"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-      var graphJSON = {{ graphJSON | safe
-    }};
-    console.log(graphJSON);
+        var layout = graphJSON.layout || {};
+        layout.autosize = true;
+        layout.margin = {
+          l: 50,
+          r: 50,
+          t: 50,
+          b: 50
+        };
 
-    var layout = graphJSON.layout || {};
-    layout.autosize = true;
-    layout.margin = {
-      l: 50,
-      r: 50,
-      t: 50,
-      b: 50
-    };
-
-    if (graphJSON.data && graphJSON.data.length > 0) {
-      Plotly.newPlot("graph", graphJSON.data, layout, { responsive: true });
-    } else {
-      console.error("Graph data is empty or invalid");
-    }
-      });
-  </script>
-</body>
-
-</html>
-
-
-
-
-// 監聽下拉式選單的 change 事件
-selectElement.addEventListener("change", function () {
-var selectedRate = parseInt(selectElement.value); // 獲取選中的殖利率並轉為數字
-fetch(`/update_yield?value=${selectedRate}`, {
-method: 'GET',
-})
-.then(response => response.json())
-.then(data => {
-updateYieldTable(data);
-})
-.catch(error => console.error('Error:', error));
-
-// Fetch updated plot data
-fetch(`/update_plot?value=${selectedRate}`, {
-method: 'GET',
-})
-.then(response => response.json())
-.then(graphJSON1 => {
-updatePlot(graphJSON1);
-})
-.catch(error => console.error('Error:', error));
-// 檢查是否大於 8%，如果是則觸發 alert
-//if (selectedRate > 8) {
-// alert("已選擇大於 8% 的殖利率");
-//}
-});
-
-
-
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // 取得下拉式選單元素
-    var selectElement = document.getElementById("dividendRate");
-    const yieldTable = document.getElementById('yieldTable');
-
-    // 預設選擇 5%
-    selectElement.value = "4";
-
-
-
-    // 新的code
-    // 監聽下拉式選單的 change 事件
-    selectElement.addEventListener("change", function () {
-      var selectedRate = parseInt(selectElement.value); // 獲取選中的殖利率並轉為數字
-      const controller = new AbortController();
-      const timeoutDuration = 20000; // 設置 20 秒超時
-      const timeoutId = setTimeout(() => controller.abort(), timeoutDuration);
-
-      // 顯示加載中提示
-      const loadingMessage = document.getElementById('loadingMessage');
-      loadingMessage.style.display = 'block';
-
-      // Fetch updated yield data
-      fetch(`/update_yield?value=${selectedRate}`, {
-        method: 'GET',
-        signal: controller.signal
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => {
-          updateYieldTable(data);
-        })
-        .catch(error => {
-          if (error.name === 'AbortError') {
-            console.error('Yield request timed out');
-            alert('Yield request timed out, please try again later');
-          } else {
-            console.error('Error fetching yield data:', error);
-            alert('Error fetching yield data, please try again later');
-          }
-        });
-
-      // Fetch updated plot data
-      fetch(`/update_plot?value=${selectedRate}`, {
-        method: 'GET',
-        signal: controller.signal
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(graphJSON1 => {
-          updatePlot(graphJSON1);
-        })
-        .catch(error => {
-          if (error.name === 'AbortError') {
-            console.error('Plot request timed out');
-            alert('Plot request timed out, please try again later');
-          } else {
-            console.error('Error fetching plot data:', error);
-            alert('Error fetching plot data, please try again later');
-          }
-        })
-        .finally(() => {
-          clearTimeout(timeoutId); // 清除超時計時器
-          loadingMessage.style.display = 'none'; // 隱藏加載中提示
-        });
-
-      // 檢查是否大於 8%，如果是則觸發 alert
-      // if (selectedRate > 8) {
-      //   alert("已選擇大於 8% 的殖利率");
-      // }
-    });
-
-    // 加載中提示元素
-    const loadingMessage = document.createElement('div');
-    loadingMessage.id = 'loadingMessage';
-    loadingMessage.innerText = '加載中，請稍候...';
-    loadingMessage.style.display = 'none';
-    loadingMessage.style.position = 'fixed';
-    loadingMessage.style.top = '50%';
-    loadingMessage.style.left = '50%';
-    loadingMessage.style.transform = 'translate(-50%, -50%)';
-    loadingMessage.style.padding = '10px';
-    loadingMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-    loadingMessage.style.color = 'white';
-    loadingMessage.style.borderRadius = '5px';
-    document.body.appendChild(loadingMessage);
-
-
-  });
-
-  function formatNumber(value, decimals = 2, asPercentage = true) {
-    if (asPercentage) {
-      return (value * 100).toFixed(decimals) + '%';
-    }
-    return value.toFixed(decimals);
-  }
-
-
-  function updateYieldTable(data) {
-    const table = document.getElementById('yieldTable');
-    const etfCountDiv = document.getElementById('how-many-etf');
-
-    // 清空現有表格內容
-    table.innerHTML = '';
-
-    // 創建表頭
-    let headerRow = table.insertRow();
-    let noHeader = document.createElement('th');
-    noHeader.textContent = 'No.';
-    headerRow.appendChild(noHeader);
-
-    for (let key in data[0]) {
-      let th = document.createElement('th');
-      th.textContent = key;
-      headerRow.appendChild(th);
-    }
-
-    // 填充數據
-    data.forEach((row, index) => {
-      let tr = table.insertRow();
-      let noCell = tr.insertCell();
-      noCell.textContent = index + 1;
-
-      for (let key in row) {
-        let td = tr.insertCell();
-        if (key === '現金殖利率') {
-          td.textContent = formatNumber(row[key]);
+        if (graphJSON.data && graphJSON.data.length > 0) {
+          Plotly.newPlot("graph", graphJSON.data, layout, { responsive: true });
         } else {
-          td.textContent = row[key];
+          console.error("Graph data is empty or invalid");
         }
-      }
-    });
-
-    // 更新總數顯示
-    etfCountDiv.textContent = '總共幾檔ETF: ' + data.length;
-  }
-
-  function updatePlot(graphJSON1) {
-    var layout = graphJSON1.layout || {};
-    console.log(graphJSON1);
-
-    layout.autosize = true;
-    layout.margin = {
-      l: 50,
-      r: 50,
-      t: 50,
-      b: 50
-    };
-
-    if (graphJSON1.data && graphJSON1.data.length > 0) {
-      Plotly.newPlot("graph-1", graphJSON1.data, layout, { responsive: true });
-    } else {
-      console.error("Graph data is empty or invalid");
-    }
-  }
-</script>
+      });
+    </script>
+  </body>
+</html>
