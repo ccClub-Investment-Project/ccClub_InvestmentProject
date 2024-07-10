@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_caching import Cache
-from routes import configure_routes
+from app_tools.routes import init_routes
 
 config = {
     "DEBUG": True,          # some Flask specific configs
@@ -10,7 +10,8 @@ config = {
 app = Flask(__name__)
 app.config.from_mapping(config)
 cache = Cache(app)
-configure_routes(app, cache)
+init_routes(app, cache)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
