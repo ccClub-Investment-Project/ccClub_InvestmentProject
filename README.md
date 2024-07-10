@@ -15,7 +15,7 @@ A project to realize our investment strategy
 
 # ETFExplorer (Deploy on Render)
 
-[Demo Website](https://ccclub-investmentproject-9ika.onrender.com/)
+[Demo Website](https://ccclub-investmentproject-test.onrender.com/)
 
 [Demo API](https://backtest-kk2m.onrender.com/apidocs/)
 
