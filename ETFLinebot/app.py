@@ -6,12 +6,13 @@ from linebot.v3 import WebhookHandler
 from linebot.v3.exceptions import InvalidSignatureError
 from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, ReplyMessageRequest, TextMessage
 from linebot.v3.webhooks import MessageEvent, TextMessageContent
-from linebot.v3.webhooks.models import MemberJoinedEvent
+from linebot.v3.webhooks.models import MemberJoinedEvent, FollowEvent
 from data import *
 from message import *
 from news2 import *
 from stock import *
-from consolidate4 import *
+from consolidate4 import main, main_n
+
 
 # Load environment variables
 load_dotenv()
@@ -47,6 +48,7 @@ def callback():
 
     return 'OK'
 
+
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
     line_bot_api = MessagingApi(ApiClient(configuration))
@@ -55,7 +57,7 @@ def handle_message(event):
     logging.info(f"Received message: {msg} from user: {user_id} with reply token: {event.reply_token}")
 
     # 默认回复消息
-    welcome_message = TextMessage(text='歡迎光臨!請先key "目錄"')
+    welcome_message = TextMessage(text='歡迎光臨！我是ETF小幫手！\n請輸入"目錄"查找功能')
     line_bot_api.reply_message(ReplyMessageRequest(reply_token=event.reply_token, messages=[welcome_message]))
 
     try:
@@ -188,7 +190,7 @@ def handle_regular_message(line_bot_api, event, msg, user_id):
         line_bot_api.reply_message(reply_message)
         user_states[user_id] = 'waiting_for_backtest'
     else:
-        welcome_message = TextMessage(text='歡迎光臨!請先key "目錄"')
+        welcome_message = TextMessage(text='歡迎光臨！我是ETF小幫手！\n請輸入"目錄"查找功能')
         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[welcome_message])
         line_bot_api.reply_message(reply_message)
 
@@ -201,14 +203,30 @@ def format_backtest_result(result):
     formatted_result = content.replace("\\n", "\n")
     return formatted_result
 
-@handler.add(MemberJoinedEvent)
-def welcome(event):
+# @handler.add(MemberJoinedEvent)
+# def welcome(event):
+#     with ApiClient(configuration) as api_client:
+#         line_bot_api = MessagingApi(api_client)
+#         uid = event.joined.members[0].user_id
+#         message = TextMessage(text='歡迎光臨!請先key "目錄"')
+#         reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
+#         line_bot_api.reply_message(reply_message)
+
+@handler.add(FollowEvent)
+def handle_follow(event):
+    # 發送歡迎訊息
+    welcome_message = '歡迎光臨！我是ETF小幫手！\n請輸入"目錄"查找功能'
+    message = TextMessage(text=welcome_message)
+    user_id = event.source.user_id
+
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
-        uid = event.joined.members[0].user_id
-        message = TextMessage(text='歡迎光臨!請先key "目錄"')
-        reply_message = ReplyMessageRequest(reply_token=event.reply_token, messages=[message])
-        line_bot_api.reply_message(reply_message)
+        push_message_request = PushMessageRequest(
+            to=user_id,
+            messages=[message]
+        )
+        line_bot_api.push_message(push_message_request)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)
